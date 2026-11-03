@@ -9,14 +9,9 @@
 <title>Topologie Générale – Chapitre 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<!-- ============================================================= -->
-<!-- AJOUT 1 : KaTeX CSS (pour les formules mathématiques)          -->
-<!-- ============================================================= -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
-/* ============================================================= */
-/* STYLES DE BASE (ton fichier original)                          */
-/* ============================================================= */
+/* ===== STYLES DE BASE ===== */
 :root{--bg:#090d1a;--panel:#111830;--line:#26305a;--txt:#dfe4f5;--mut:#8d97bd;--teal:#3fd0c9;--amber:#f2b84b;--rose:#ff7a90;--vio:#9b8cff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--txt);font:19px/1.7 Newsreader,Georgia,serif}
@@ -76,16 +71,18 @@ footer{text-align:center;color:var(--mut);padding:40px;border-top:1px solid var(
 @media(max-width:860px){.wrap{display:block}nav{display:none}body{font-size:17px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
-/* ===== UNIVERS DYNAMIQUE ===== */
+
+/* ===== EFFETS VISUELS ===== */
 @property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@property --th{syntax:'<color>';inherits:true;initial-value:#3fd0c9}
+@property --r{syntax:'<length>';inherits:false;initial-value:0px}
+:root{--th:#3fd0c9;transition:--th 1.2s ease}
 #stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-.neb{position:fixed;z-index:-1;pointer-events:none;width:70vmax;height:70vmax;border-radius:50%;animation:drift 40s ease-in-out infinite alternate;will-change:transform}
-.n1{left:-20vmax;top:-15vmax;background:radial-gradient(circle,#3fd0c92e,transparent 65%)}
-.n2{right:-25vmax;top:30vh;background:radial-gradient(circle,#9b8cff30,transparent 65%);animation-duration:55s}
-.n3{left:20vw;bottom:-35vmax;background:radial-gradient(circle,#f2b84b22,transparent 65%);animation-duration:47s;animation-delay:-12s}
+.neb{position:fixed;z-index:-1;pointer-events:none;width:70vmax;height:70vmax;border-radius:50%;animation:drift 40s ease-in-out infinite alternate;will-change:transform;background:radial-gradient(circle,color-mix(in srgb,var(--th) 20%,transparent),transparent 65%)!important}
+.n1{left:-20vmax;top:-15vmax}.n2{right:-25vmax;top:30vh;animation-duration:55s}.n3{left:20vw;bottom:-35vmax;animation-duration:47s;animation-delay:-12s}
 @keyframes drift{to{transform:translate(12vw,-8vh) scale(1.25) rotate(40deg)}}
 #glow{position:fixed;left:0;top:0;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:5;background:radial-gradient(circle,#3fd0c91c,transparent 62%);mix-blend-mode:screen}
-#bar{box-shadow:0 0 14px var(--teal),0 0 30px #3fd0c966}
+#bar{box-shadow:0 0 14px var(--th),0 0 30px #3fd0c966;background:linear-gradient(90deg,var(--th),var(--amber))}
 .hc{will-change:transform,opacity}
 .hc h1{background:linear-gradient(100deg,#fff 10%,var(--teal) 30%,var(--vio) 50%,var(--amber) 70%,#fff 90%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 9s linear infinite;filter:drop-shadow(0 0 28px #3fd0c955)}
 @keyframes shine{to{background-position:-300% 0}}
@@ -109,46 +106,18 @@ a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-off
 h2{background:linear-gradient(90deg,#fff,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
 h2::after{content:'';display:block;height:3px;width:110px;margin-top:12px;border-radius:3px;background:linear-gradient(90deg,var(--amber),var(--rose),transparent);background-size:200% 100%;animation:shine 5s linear infinite;box-shadow:0 0 16px var(--amber)}
 nav a{transition:.25s}nav a:hover{transform:translateX(5px);opacity:1}
-nav a.on{border-left-width:3px;text-shadow:0 0 14px var(--amber)}
+nav a.on{border-left-width:3px;color:var(--th);border-color:var(--th);text-shadow:0 0 14px var(--th)}
 .fig canvas{box-shadow:0 0 30px -8px var(--c),inset 0 0 40px #3fd0c911}
 .go{box-shadow:0 0 24px #3fd0c933;animation:pulse 3s ease-in-out infinite}
 @keyframes pulse{50%{box-shadow:0 0 44px #3fd0c977}}
 @media(pointer:coarse){#glow{display:none}}
 @media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important}.js .card:not(.in){opacity:1}}
 
-/* ============================================================= */
-/* AJOUTS v2 (styles pour les 7 nouvelles features)               */
-/* ============================================================= */
-@property --th{syntax:'<color>';inherits:true;initial-value:#3fd0c9}
-@property --r{syntax:'<length>';inherits:false;initial-value:0px}
-:root{--th:#3fd0c9;transition:--th 1.2s ease}
-.card.def{--c:var(--th)}
-.neb{background:radial-gradient(circle,color-mix(in srgb,var(--th) 20%,transparent),transparent 65%)!important}
-nav a.on{color:var(--th);border-color:var(--th);text-shadow:0 0 14px var(--th)}
-#bar{background:linear-gradient(90deg,var(--th),var(--amber))}
-body{transition:background .5s,color .5s}
-.katex{font-size:1.05em}
-
-/* objet 3D qui morphe */
-#c{opacity:0}
-#morph{position:fixed;z-index:1;pointer-events:none;right:6vw;top:50%;width:min(520px,60vw);aspect-ratio:1;transform:translateY(-50%);transition:all .9s cubic-bezier(.2,.8,.2,1)}
-#morph.dock{right:auto;left:24px;top:auto;bottom:24px;width:190px;transform:none;opacity:.9}
-@media(max-width:860px){#morph.dock{display:none}#morph:not(.dock){right:50%;transform:translate(50%,-50%);width:80vw;opacity:.35}}
-
-/* loader */
-#ld{position:fixed;inset:0;z-index:100;background:#090d1a;display:grid;place-items:center;cursor:pointer;
- --r:0px;-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));transition:--r 1.3s cubic-bezier(.6,0,.2,1)}
-#ld canvas{width:min(80vw,420px);aspect-ratio:1}
-#ld.out{--r:150vmax}
-
-/* barre d'outils */
-#tools{position:fixed;top:12px;right:14px;z-index:40;display:flex;gap:6px}
+/* ===== TOOLS / PALETTE / GLOSSAIRE ===== */
+#tools{position:fixed;top:12px;right:14px;z-index:40;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 #tools button{height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--txt);cursor:pointer;font:500 14px 'Space Grotesk',sans-serif}
 #tools button:hover{border-color:var(--th);color:var(--th)}
 #tools kbd{opacity:.55;font:inherit;margin-left:8px;font-size:12px}
-@media(max-width:600px){#tools kbd{display:none}}
-
-/* palette Ctrl+K */
 #pal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;background:#02041099;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 #pal.on{display:flex}
 #pal .bx{width:min(640px,92vw);background:var(--panel);border:1px solid var(--th);border-radius:16px;box-shadow:0 30px 80px -20px var(--th);overflow:hidden}
@@ -160,16 +129,12 @@ body{transition:background .5s,color .5s}
 #pal li span{color:var(--mut);font-size:13px}
 #pal .ft{padding:8px 14px;color:var(--mut);font:12px 'Space Grotesk',sans-serif;border-top:1px solid var(--line)}
 .card.flash{outline:2px solid var(--th);outline-offset:6px;box-shadow:0 0 60px var(--th)}
-
-/* glossaire */
 .gl{border-bottom:1px dotted var(--th);cursor:help}
 .gl:hover{color:var(--th)}
 #gtip{position:fixed;z-index:70;width:290px;padding:12px 14px;background:var(--panel);border:1px solid var(--th);border-radius:12px;box-shadow:0 20px 50px -15px #000;font:14px/1.45 'Space Grotesk',sans-serif;pointer-events:none;opacity:0;transform:translateY(6px);transition:.18s;color:var(--txt)}
 #gtip.on{opacity:1;transform:none}
 #gtip b{display:block;color:var(--th);margin-bottom:4px}
 #gtip svg{float:right;width:84px;height:64px;margin:0 0 4px 10px;color:var(--th)}
-
-/* mode clair */
 [data-theme=light]{--bg:#f3f5fb;--panel:#fff;--line:#cdd5ee;--txt:#1a2140;--mut:#59638a;--teal:#0b9a93;--amber:#b57300;--rose:#d1355a;--vio:#6552e0;color-scheme:light}
 [data-theme=light] .card{background:linear-gradient(135deg,#ffffffee,#eef1fbd9)}
 [data-theme=light] .card i{color:#000}
@@ -184,10 +149,8 @@ body{transition:background .5s,color .5s}
 [data-theme=light] .fig.big{background:#fff}
 [data-theme=light] .tb button{background:#fffc}
 [data-theme=light] #pal{background:#dfe4f599}
-
-/* impression / PDF */
 @media print{
- #ld,#hero,nav,#bar,#tools,#pal,#gtip,#glow,#stars,.neb,#morph,.fig,.st,footer{display:none!important}
+ #ld,#hero,nav,#bar,#tools,#pal,#gtip,#glow,#stars,.neb,#morph,.fig,.st,footer,#graph{display:none!important}
  html,body{background:#fff!important}
  body{color:#111!important;font-size:12pt}
  .wrap{display:block;max-width:none;padding:0}
@@ -200,6 +163,29 @@ body{transition:background .5s,color .5s}
  .pf p{display:block!important;background:none!important}
  .gl{border:0}
 }
+
+/* ===== LOADER / MORPH ===== */
+#c{opacity:0}
+#morph{position:fixed;z-index:1;pointer-events:none;right:6vw;top:50%;width:min(520px,60vw);aspect-ratio:1;transform:translateY(-50%);transition:all .9s cubic-bezier(.2,.8,.2,1)}
+#morph.dock{right:auto;left:24px;top:auto;bottom:24px;width:190px;transform:none;opacity:.9}
+@media(max-width:860px){#morph.dock{display:none}#morph:not(.dock){right:50%;transform:translate(50%,-50%);width:80vw;opacity:.35}}
+#ld{position:fixed;inset:0;z-index:100;background:#090d1a;display:grid;place-items:center;cursor:pointer;--r:0px;-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));transition:--r 1.3s cubic-bezier(.6,0,.2,1)}
+#ld canvas{width:min(80vw,420px);aspect-ratio:1}
+#ld.out{--r:150vmax}
+
+/* ===== GRAPHE 3D ===== */
+#graph{position:fixed;inset:0;z-index:84;display:none;background:#02040ecc;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
+#graph.on{display:flex}
+#graph .box{width:min(1200px,96vw);height:min(760px,92vh);background:radial-gradient(circle at 50% 40%,#0f1730,#040714 75%);border:1px solid var(--th);border-radius:18px;overflow:hidden;position:relative;box-shadow:0 40px 100px -30px var(--th)}
+#graph canvas{width:100%;height:100%;display:block}
+#graph .close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#0a0f20cc;color:var(--txt);cursor:pointer;font-size:18px;z-index:2}
+#graph .close:hover{border-color:var(--th);color:var(--th)}
+#graph .info{position:absolute;left:14px;bottom:14px;right:14px;background:#05081add;border:1px solid var(--th);border-radius:10px;padding:12px 16px;font:14px/1.5 'Space Grotesk',sans-serif;color:var(--txt);pointer-events:none;opacity:0;transition:.2s}
+#graph .info.on{opacity:1}
+#graph .info b{color:var(--th)}
+#graph .tip{position:absolute;top:14px;left:14px;font:12px 'Space Grotesk',sans-serif;color:var(--mut);background:#05081acc;padding:8px 12px;border-radius:8px;border:1px solid var(--line)}
+#tools #bGraph{color:var(--th)}
+#tools #bGraph:hover{background:var(--th);color:#05221f}
 </style>
 </head>
 <body>
@@ -209,7 +195,7 @@ body{transition:background .5s,color .5s}
   <div class="hc">
     <small>Cours de Topologie Générale · Semestre 5 · Réalisé par [Ton nom]</small>
     <h1>Topologie</h1>
-    <p>Chapitre 1 – Espaces topologiques. Définitions, exemples et démonstrations complètes. Bouge la souris pour tourner l’objet.</p>
+    <p>Chapitre 1 – Espaces topologiques. Définitions, exemples et démonstrations complètes.</p>
     <a class="go" href="#s1">Commencer le cours</a>
   </div>
 </header>
@@ -221,9 +207,7 @@ body{transition:background .5s,color .5s}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ============================================================= */
-/* CONTENU DU COURS (ton fichier original, intact)               */
-/* ============================================================= */
+/* ===== CONTENU DU COURS ===== */
 const C=[
 {id:'s1',h:'1.1 Définitions et exemples',items:[
 {t:'def',n:'1.1.1',ti:'Topologie',b:`<p>Soit <i>E</i> un ensemble non vide. Une <b>topologie</b> sur <i>E</i> est une famille τ de parties de <i>E</i> telle que :</p><ol type="i"><li>∅ ∈ τ et <i>E</i> ∈ τ ;</li><li>l’intersection de deux éléments de τ est dans τ ;</li><li>toute réunion (finie ou infinie) d’éléments de τ est dans τ.</li></ol><p>Les éléments de τ sont les <b>ouverts</b>. Le couple (<i>E</i>, τ) est un <b>espace topologique</b>.</p>`},
@@ -234,7 +218,7 @@ const C=[
 {t:'rem',n:'1.1.7',ti:'Remarques',b:`<ul><li>Les ouverts sont stables par réunion quelconque et intersection finie ; les fermés par intersection quelconque et réunion finie.</li><li>Dans ℝ : ]a,b[ est ouvert non fermé ; [a,b] est fermé non ouvert ; ]a,b] n’est ni l’un ni l’autre.</li><li>∅ et <i>E</i> sont à la fois ouverts et fermés.</li><li>Une intersection infinie d’ouverts n’est pas toujours ouverte : ⋂<sub>n≥1</sub> ]−1/n, 1/n[ = {0}.</li><li>Une réunion infinie de fermés n’est pas toujours fermée : ⋃<sub>n≥1</sub> [1/n, 1] = ]0, 1].</li></ul>`},
 {t:'def',n:'1.1.8',ti:'Voisinage',b:`<p>Soit x ∈ <i>E</i>. Une partie <i>U</i> est un <b>voisinage</b> de x s’il existe un ouvert <i>W</i> tel que x ∈ <i>W</i> ⊂ <i>U</i>. On note 𝒱<sub>x</sub> l’ensemble des voisinages de x.</p><p>Exemple : pour τ₁ sur {a,b}, {b} n’est pas un voisinage de b, mais <i>E</i> l’est.</p>`},
 {t:'thm',n:'1.1.11',ti:'Caractérisation des ouverts',b:`<p><i>A</i> ⊂ <i>E</i> est ouvert ⇔ <i>A</i> est un voisinage de chacun de ses points.</p>`,p:`<p><em>(⇒)</em> Évident : A est un ouvert contenant x et contenu dans A.</p><p><em>(⇐)</em> Pour tout x ∈ A, il existe un ouvert O<sub>x</sub> avec x ∈ O<sub>x</sub> ⊂ A.</p><p>Donc ⋃<sub>x∈A</sub> O<sub>x</sub> ⊂ A, et A ⊂ ⋃<sub>x∈A</sub> O<sub>x</sub> car x ∈ O<sub>x</sub>.</p><p>Ainsi A = ⋃<sub>x∈A</sub> O<sub>x</sub> est une réunion d’ouverts, donc un ouvert. <span class="qed">∎</span></p>`},
-{t:'def',n:'1.1.12',ti:'Base d’ouverts, base de voisinages',b:`<ul><li>Une famille 𝓑 ⊂ τ est une <b>base d’ouverts</b> si tout ouvert est réunion d’éléments de 𝓑.</li><li>𝓑<sub>x</sub> ⊂ 𝒱<sub>x</sub> est une <b>base de voisinages</b> de x si ∀V ∈ 𝒱<sub>x</sub>, ∃b ∈ 𝓑<sub>x</sub>, x ∈ b ⊂ V.</li></ul><p>Exemples : les singletons pour la discrète ; les ]a,b[ pour ℝ ; (]x−1/n, x+1/n[)<sub>n≥1</sub> en x. En revanche, les ]−∞,a[ et ]a,+∞[ ne forment pas une base de τ<sub>u</sub> (on n’obtient pas ]a,b[).</p>`},
+{t:'def',n:'1.1.12',ti:'Base d’ouverts, base de voisinages',b:`<ul><li>Une famille 𝓑 ⊂ τ est une <b>base d’ouverts</b> si tout ouvert est réunion d’éléments de 𝓑.</li><li>𝓑<sub>x</sub> ⊂ 𝒱<sub>x</sub> est une <b>base de voisinages</b> de x si ∀V ∈ 𝒱<sub>x</sub>, ∃b ∈ 𝓑<sub>x</sub>, x ∈ b ⊂ V.</li></ul><p>Exemples : les singletons pour la discrète ; les ]a,b[ pour ℝ ; (]x−1/n, x+1/n[)<sub>n≥1</sub> en x. En revanche, les ]−∞,a[ et ]a,+∞[ ne forment pas une base de τ<sub>u</sub>.</p>`},
 {t:'prop',n:'1.1.14',ti:'Base d’ouverts ⇔ bases de voisinages',b:`<p>𝓑 ⊂ τ est une base d’ouverts ⇔ pour tout x, 𝓑<sub>x</sub> = {b ∈ 𝓑 : x ∈ b} est une base de voisinages de x.</p>`,p:`<p><em>(⇒)</em> Soit V ∈ 𝒱<sub>x</sub> : il existe W ouvert, x ∈ W ⊂ V. Comme W = ⋃ b<sub>i</sub> (b<sub>i</sub> ∈ 𝓑), x appartient à un b<sub>i₀</sub>, d’où x ∈ b<sub>i₀</sub> ⊂ V.</p><p><em>(⇐)</em> Soit O ouvert et x ∈ O. O ∈ 𝒱<sub>x</sub>, donc il existe b<sub>x</sub> ∈ 𝓑 avec x ∈ b<sub>x</sub> ⊂ O. Alors O = ⋃<sub>x∈O</sub> b<sub>x</sub>. <span class="qed">∎</span></p>`},
 {t:'def',n:'1.1.15',ti:'Espace séparé (Hausdorff)',b:`<p>(<i>E</i>, τ) est <b>séparé</b> si pour x ≠ x′ il existe W ∈ 𝒱<sub>x</sub> et W′ ∈ 𝒱<sub>x′</sub> avec W ∩ W′ = ∅. De façon équivalente, on peut prendre W, W′ ouverts.</p><p>La topologie grossière n’est pas séparée ; la discrète et (ℝ, τ<sub>u</sub>) le sont.</p>`},
 {t:'prop',n:'1.1.18',ti:'Singletons fermés',b:`<p>Dans un espace séparé, tout singleton est fermé.</p>`,p:`<p>Soit x ∈ <i>E</i>. Montrons que {x}<sup>c</sup> est ouvert.</p><p>Soit x′ ∈ {x}<sup>c</sup>, donc x ≠ x′. Il existe des ouverts W ∋ x et W′ ∋ x′ disjoints. Alors x ∉ W′, donc W′ ⊂ {x}<sup>c</sup>.</p><p>Ainsi {x}<sup>c</sup> est un voisinage de chacun de ses points : c’est un ouvert (th. 1.1.11), et {x} est fermé. <span class="qed">∎</span></p>`}
@@ -270,7 +254,7 @@ const FM={
 '1.1.3':['axioms','Réunion et intersection d’ouverts : axiomes ii) et iii)'],
 '1.1.4':['disc','Tous les singletons ouverts ⇒ toute partie est ouverte'],
 '1.1.5':['closed','Ouvert (sans son bord) et fermé (avec son bord)'],
-'1.1.7':['nested','Ouverts emboîtés dont l’intersection est un point'],
+'1.1.7':['nested','Intervalles emboîtés ]-1/n, 1/n[ dont l’intersection est {0}'],
 '1.1.8':['nbh','x ∈ W ⊂ U : U est un voisinage de x'],
 '1.1.11':['nbh','Un ouvert est voisinage de chacun de ses points'],
 '1.1.12':['base','Un ouvert recouvert par des ouverts de la base'],
@@ -294,7 +278,7 @@ const FM={
 '1.4.8':['homeo','Déformation continue et réversible : tore ≅ tasse'],
 '1.4.9':['homeo','Un homéomorphisme échange les ouverts']};
 
-/* ---------- RENDU ---------- */
+/* ===== RENDU ===== */
 const main=document.getElementById('main'),nav=document.getElementById('nav');
 C.forEach(s=>{
   main.insertAdjacentHTML('beforeend',`<h2 id="${s.id}">${s.h}</h2>`);
@@ -305,9 +289,7 @@ C.forEach(s=>{
   });
 });
 
-/* ============================================================= */
-/* FIGURES 3D (ton fichier original)                              */
-/* ============================================================= */
+/* ===== FIGURES 3D / 2D ===== */
 const T=0x3fd0c9,A=0xf2b84b,V=0x9b8cff,Z=0xff7a90,W=0x8d97bd,V3=THREE.Vector3;
 const M=(c,o,w)=>new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:o,wireframe:!!w,depthWrite:false});
 const P=(g,x,y,z)=>(g.position.set(x,y,z),g);
@@ -316,11 +298,27 @@ const dot=(x,y,z,c,r=.09)=>P(new THREE.Mesh(new THREE.SphereGeometry(r,12,8),new
 const box=(w,h,d,x,y,z,c,o=.15)=>{const g=new THREE.Group(),b=new THREE.BoxGeometry(w,h,d);g.add(new THREE.Mesh(b,M(c,o)),new THREE.LineSegments(new THREE.EdgesGeometry(b),new THREE.LineBasicMaterial({color:c})));return P(g,x,y,z)};
 const lin=(a,c)=>new THREE.Line(new THREE.BufferGeometry().setFromPoints(a.map(p=>new V3(...p))),new THREE.LineBasicMaterial({color:c}));
 const ring=(r,x,y,z,c)=>{const a=[];for(let i=0;i<=48;i++)a.push([x+r*Math.cos(i/48*6.283),y+r*Math.sin(i/48*6.283),z]);return lin(a,c)};
+
 const SC={
 axioms:g=>g.add(box(3.4,2.4,2.4,0,0,0,W,.05),ball(.95,-.55,0,0,T),ball(.95,.55,0,0,A),ball(.4,0,0,0,Z,.6,0)),
 disc:g=>{for(let i=0;i<9;i++)g.add(dot(-2+(i%3)*.5,(Math.floor(i/3)-1)*.5,0,T,.1));g.add(ball(1,1.5,0,0,V,.2))},
 closed:g=>g.add(ball(.85,-1.2,0,0,T,.1,0),ball(.85,1.2,0,0,A,.3,1),ring(.85,1.2,0,0,A)),
-nested:g=>{[1.3,.9,.55,.3].forEach((r,i)=>g.add(ball(r,0,0,0,V,.08+i*.05,i%2?0:1)));g.add(dot(0,0,0,A,.1))},
+// FIX 1.1.7 : Intervalles 2D horizontales emboîtées
+nested:g=>{
+  const H = 0.06; // épaisseur des lignes
+  // ]-1, 1[
+  g.add(box(2.4, H, 0.05, 0, 0.9, 0, V, 0.4));
+  // ]-1/2, 1/2[
+  g.add(box(1.6, H, 0.05, 0, 0.6, 0, V, 0.4));
+  // ]-1/3, 1/3[
+  g.add(box(1.2, H, 0.05, 0, 0.3, 0, V, 0.4));
+  // ]-1/4, 1/4[
+  g.add(box(0.9, H, 0.05, 0, 0, 0, V, 0.4));
+  // Point 0
+  g.add(dot(0, -0.4, 0, A, 0.12));
+  // ligne verticale reliant les centres
+  g.add(lin([[0,0.9,0],[0,-0.4,0]], 0x26305a));
+},
 nbh:g=>g.add(ball(1.4,0,0,0,V,.08),ball(.6,.25,0,0,T,.25),dot(.25,0,0,A)),
 base:g=>{g.add(ball(1.5,0,0,0,V,.05));[[.6,.3,0],[-.6,.4,.2],[0,-.7,.3],[.7,-.4,-.2],[-.5,-.4,-.4],[0,.2,-.7],[0,.1,.8]].forEach(p=>g.add(ball(.5,...p,T,.15)))},
 haus:g=>g.add(dot(-1.3,0,0,T),dot(1.3,0,0,A),ball(.9,-1.3,0,0,T),ball(.9,1.3,0,0,A)),
@@ -331,11 +329,12 @@ prod:g=>g.add(box(1.8,1.3,.12,0,0,0,A,.2),box(1.8,.08,.08,0,-1.2,0,T,.5),box(.08
 cont:g=>g.add(ball(1.2,-1.9,0,0,V,.06),ball(.5,-1.8,.1,0,T,.3),dot(-1.8,.1,0,A),ball(1.2,1.9,0,0,V,.06),ball(.8,1.9,.1,0,Z,.2),dot(1.9,.1,0,A),lin(new THREE.QuadraticBezierCurve3(new V3(-1.8,.1,0),new V3(0,1.8,0),new V3(1.9,.1,0)).getPoints(30).map(v=>[v.x,v.y,v.z]),W)),
 homeo:g=>{const geo=new THREE.TorusGeometry(1.1,.45,24,48),o=geo.attributes.position.array.slice();g.add(new THREE.Mesh(geo,M(A,.4,1)));g.tick=t=>{const p=geo.attributes.position.array;for(let i=0;i<p.length;i+=3){const x=o[i],y=o[i+1],z=o[i+2];p[i]=x*(1+.25*Math.sin(t+y));p[i+1]=y*(1+.25*Math.cos(t+x));p[i+2]=z*(1+.3*Math.sin(t*1.3+x))}geo.attributes.position.needsUpdate=true}}
 };
+
 const ANN={
 axioms:[[0,'E (ensemble)','L’espace entier : toujours dans τ (axiome i).',[0,1.4,0]],[1,'Ouvert O₁','Un élément de τ.',[-1.2,.9,0]],[2,'Ouvert O₂','Un autre élément de τ.',[1.2,.9,0]],[3,'O₁ ∩ O₂','Axiome ii) : l’intersection de deux ouverts est un ouvert.',[0,-.5,0]]],
 disc:[[[0,8],'Singleton {x}','Topologie discrète : chaque point {x} est un ouvert.',[0,.3,0]],[9,'E (grossière)','Topologie grossière : seuls ∅ et E sont ouverts.',[0,1.15,0]]],
 closed:[[0,'Ouvert','Ne contient pas son bord : chaque point a un voisinage dedans.',[0,1,0]],[1,'Fermé','Contient son bord ; son complémentaire est ouvert.',[0,1,0]]],
-nested:[[0,'Ouvert ]−1,1[','Premier ouvert de la suite emboîtée.',[0,1.45,0]],[3,']−1/n, 1/n[','Quand n grandit, l’ouvert rétrécit.',[0,.5,0]],[4,'Point 0','L’intersection infinie vaut {0} : un fermé, pas un ouvert.',[0,-.3,0]]],
+nested:[[0,'Ouvert ]−1,1[','Premier ouvert de la suite emboîtée.',[0,1.3,0]],[2,']−1/3, 1/3[','Quand n grandit, l’ouvert rétrécit.',[0,.4,0]],[4,'Point 0','L’intersection infinie vaut {0} : un fermé, pas un ouvert.',[0,-.6,0]]],
 nbh:[[0,'U : voisinage','U contient un ouvert W autour de x.',[0,1.5,0]],[1,'W : ouvert','Ouvert avec x ∈ W ⊂ U.',[.6,.9,0]],[2,'Point x','Le point étudié.',[0,-.3,0]]],
 base:[[0,'Ouvert O','Un ouvert quelconque de τ.',[0,1.6,0]],[[1,7],'Élément de base b','O est une réunion de tels b.',[0,.7,0]]],
 haus:[[0,'Point x','Premier point.',[0,-.4,0]],[1,'Point x′','Second point, x ≠ x′.',[0,-.4,0]],[2,'Voisinage W','Voisinage de x.',[0,1.1,0]],[3,'Voisinage W′','Voisinage de x′ avec W ∩ W′ = ∅.',[0,1.1,0]]],
@@ -345,6 +344,7 @@ quot:[[0,'Carré E','Espace de départ.',[0,1.1,0]],[1,'Tore E/ℛ','Bords oppos
 prod:[[0,'u₁ × u₂','Ouvert de la topologie produit.',[0,.9,0]],[1,'u₁ ouvert de E₁','Premier facteur.',[0,-.3,0]],[2,'u₂ ouvert de E₂','Second facteur.',[-.5,0,0]]],
 cont:[[0,'E','Espace de départ.',[0,1.4,0]],[1,'U : voisinage de a','Voisinage choisi dans E.',[0,.7,0]],[2,'Point a','Le point étudié.',[0,-.3,0]],[3,'F','Espace d’arrivée.',[0,1.4,0]],[4,'V : voisinage de f(a)','Voisinage imposé dans F.',[0,1,0]],[5,'f(a)','Image du point a.',[0,-.3,0]]],
 homeo:[[0,'Tore déformé','f et f⁻¹ continues : la forme change sans couper ni recoller.',[0,1.9,0]]]};
+
 (function(){
   if(!window.THREE)return;
   const R2=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
@@ -398,7 +398,7 @@ homeo:[[0,'Tore déformé','f et f⁻¹ continues : la forme change sans couper 
   })})(0);
 })();
 
-/* démonstrations pas à pas */
+/* ===== DÉMOS PAS À PAS ===== */
 document.querySelectorAll('.pf').forEach(pf=>{
   const ps=[...pf.querySelectorAll(':scope>p')],k=ps.length;let i=1;
   const bar=document.createElement('div');bar.className='st';
@@ -409,7 +409,7 @@ document.querySelectorAll('.pf').forEach(pf=>{
   show();
 });
 
-/* tilt 3D des cartes */
+/* ===== TILT CARTES ===== */
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches)
 document.querySelectorAll('.card').forEach(c=>{
   c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
@@ -417,7 +417,7 @@ document.querySelectorAll('.card').forEach(c=>{
   c.addEventListener('mouseleave',()=>c.style.transform='');
 });
 
-/* progression + nav active */
+/* ===== PROGRESSION ===== */
 const bar=document.getElementById('bar'),links=[...nav.querySelectorAll('a')],heads=C.map(s=>document.getElementById(s.id));
 addEventListener('scroll',()=>{
   bar.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
@@ -425,7 +425,7 @@ addEventListener('scroll',()=>{
   links.forEach((a,i)=>a.classList.toggle('on',i===k));
 },{passive:true});
 
-/* ---------- SCÈNE 3D HERO (Three.js) ---------- */
+/* ===== HERO 3D ===== */
 (function(){
   const cv=document.getElementById('c');
   if(!window.THREE){return}
@@ -458,9 +458,7 @@ addEventListener('scroll',()=>{
   })(0);
 })();
 
-/* ============================================================= */
-/* AJOUTS v2 — les 7 nouvelles features                          */
-/* ============================================================= */
+/* ===== FEATURES v2 ===== */
 (function(){
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const root=document.documentElement,B=document.body;
@@ -469,7 +467,7 @@ const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const isLight=()=>root.dataset.theme==='light';
 
-/* ---------- 1. Mode clair/sombre + PDF + barre d'outils ---------- */
+/* 1. Thème */
 try{if(localStorage.getItem('th')==='light')root.dataset.theme='light'}catch(e){}
 const tools=document.createElement('div');tools.id='tools';
 tools.innerHTML='<button id="bK" title="Rechercher">🔍 Rechercher<kbd>Ctrl K</kbd></button><button id="bT" title="Clair / sombre">◐</button><button id="bP" title="Imprimer / PDF">🖨 PDF</button>';
@@ -479,17 +477,15 @@ $('#bP').onclick=()=>print();
 addEventListener('beforeprint',()=>$$('details').forEach(d=>{d._o=d.open;d.open=true}));
 addEventListener('afterprint',()=>$$('details').forEach(d=>d.open=!!d._o));
 
-/* ---------- index de recherche ---------- */
+/* 2. Ctrl+K */
 const idx=$$('.card').map(c=>{
   const tag=$('.tag',c).textContent,t=$('.tx',c).cloneNode(true);
   $$('details,.tag',t).forEach(d=>d.remove());
   const txt=t.textContent.replace(/\s+/g,' ').trim();
   return{c,tag,txt,n:norm(tag+' '+txt)};
 });
-
-/* ---------- 2. Command palette Ctrl+K ---------- */
 const pal=document.createElement('div');pal.id='pal';
-pal.innerHTML='<div class="bx"><input placeholder="Chercher une définition, un théorème… (ex : voisinage, Hausdorff)" autocomplete="off"><ul></ul><div class="ft">↑↓ naviguer · Entrée ouvrir · Échap fermer</div></div>';
+pal.innerHTML='<div class="bx"><input placeholder="Chercher une définition, un théorème…" autocomplete="off"><ul></ul><div class="ft">↑↓ naviguer · Entrée ouvrir · Échap fermer</div></div>';
 B.append(pal);
 const inp=$('input',pal),ul=$('ul',pal);let sel=0,res=[];
 const find=q=>{const k=norm(q).split(/\s+/).filter(Boolean);if(!k.length)return idx.slice(0,8);
@@ -512,7 +508,7 @@ addEventListener('keydown',e=>{
   else if(e.key==='Enter'){e.preventDefault();go(sel)}
 });
 
-/* ---------- 3. Glossaire hover ---------- */
+/* 3. Glossaire */
 const SV={
  open:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="22" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3"/><circle cx="42" cy="32" r="2.5" fill="currentColor"/></svg>',
  closed:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="22" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="2.4"/><circle cx="42" cy="32" r="2.5" fill="currentColor"/></svg>',
@@ -547,7 +543,7 @@ document.addEventListener('mouseover',e=>{
   if(r.bottom+10+gt.offsetHeight>innerHeight-10)gt.style.top=(r.top-10-gt.offsetHeight)+'px';
   gt.classList.add('on')});
 
-/* ---------- 4. KaTeX ---------- */
+/* 4. KaTeX */
 const U={'∈':'\\in ','∉':'\\notin ','⊂':'\\subset ','≥':'\\geq ','≤':'\\leq ','∪':'\\cup ','∩':'\\cap ','∖':'\\setminus ','∅':'\\varnothing ','−':'-','⋃':'\\bigcup ','⋂':'\\bigcap '};
 const tex=h=>h.replace(/<sup>(.*?)<\/sup>/g,'^{$1}').replace(/<sub>(.*?)<\/sub>/g,'_{$1}').replace(/<[^>]+>/g,'').replace(/[∈∉⊂≥≤∪∩∖∅−⋃⋂]/g,c=>U[c]);
 const K=t=>{try{return katex.renderToString(t,{throwOnError:false})}catch(e){return t}};
@@ -564,7 +560,7 @@ ks.onload=()=>$$('.tx p,.tx li').forEach(el=>{
   if(h!==o)el.innerHTML=h});
 document.head.append(ks);
 
-/* ---------- 5. Objet 3D qui morphe ---------- */
+/* 5. Morph 3D */
 const NAMES=['sphere','torus','knot','mobius'];
 const PAL=[[0x3fd0c9,0x9b8cff,0xf2b84b,0xff7a90],[0x0b9a93,0x6552e0,0xb57300,0xd1355a]];
 let morph=null,mEl=null;
@@ -599,7 +595,7 @@ if(window.THREE){
   morph={to:n=>{k=n}};
 }
 
-/* ---------- 6. Thème par section + dock ---------- */
+/* 6. Thème par section */
 const SEC=[['s1','var(--teal)'],['s2','var(--vio)'],['s3','var(--amber)'],['s4','var(--rose)']];
 const heads2=SEC.map(s=>document.getElementById(s[0]));let cur=-2;
 const onS=()=>{let k=-1;heads2.forEach((h,i)=>{if(h&&h.getBoundingClientRect().top<innerHeight*.4)k=i});
@@ -607,7 +603,7 @@ const onS=()=>{let k=-1;heads2.forEach((h,i)=>{if(h&&h.getBoundingClientRect().t
   mEl&&mEl.classList.toggle('dock',scrollY>innerHeight*.55)};
 addEventListener('scroll',onS,{passive:true});onS();
 
-/* ---------- 7. Loader τ ---------- */
+/* 7. Loader */
 (function(){
   const ld=document.createElement('div');ld.id='ld';ld.innerHTML='<canvas width="600" height="600"></canvas>';B.append(ld);
   B.style.overflow='hidden';
@@ -631,7 +627,7 @@ addEventListener('scroll',onS,{passive:true});onS();
     if(e>2600)end()})(t0);
 })();
 
-/* ---------- 8. Univers dynamique (étoiles + nébuleuses + glow) ---------- */
+/* 8. Univers */
 (function(){
   document.documentElement.classList.add('js');
   const cv=document.createElement('canvas');cv.id='stars';B.prepend(cv);
@@ -662,6 +658,151 @@ addEventListener('scroll',onS,{passive:true});onS();
   const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}}),{threshold:.06});
   document.querySelectorAll('.card').forEach(k=>io2.observe(k));
 })();
+})();
+</script>
+
+<!-- ============================================================= -->
+<!-- GRAPHE 3D (SEUL AJOUT CONSERVÉ)                               -->
+<!-- ============================================================= -->
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const B=document.body;
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* GRAPHE 3D */
+(function(){
+  if(!window.THREE)return;
+  const GRAPH=document.createElement('div');GRAPH.id='graph';
+  GRAPH.innerHTML='<div class="box"><button class="close" title="Fermer (Esc)">✕</button><div class="tip">Clique sur un nœud pour aller au théorème · Glisse pour tourner</div><div class="info"></div><canvas></canvas></div>';
+  B.append(GRAPH);
+  const cv=$('canvas',GRAPH),info=$('.info',GRAPH);
+  const NODES=[
+    {id:'1.1.1',t:'Topologie',type:'def',sec:'s1'},{id:'1.1.2',t:'Exemples',type:'ex',sec:'s1'},
+    {id:'1.1.5',t:'Fermé',type:'def',sec:'s1'},{id:'1.1.8',t:'Voisinage',type:'def',sec:'s1'},
+    {id:'1.1.11',t:'Caractérisation ouverts',type:'thm',sec:'s1'},{id:'1.1.12',t:'Base d\'ouverts',type:'def',sec:'s1'},
+    {id:'1.1.14',t:'Base ⇔ voisinages',type:'prop',sec:'s1'},{id:'1.1.15',t:'Séparé',type:'def',sec:'s1'},
+    {id:'1.1.18',t:'Singletons fermés',type:'prop',sec:'s1'},
+    {id:'1.2.1',t:'Intérieur/Adhérence',type:'def',sec:'s2'},{id:'1.2.2',t:'Exemples',type:'ex',sec:'s2'},
+    {id:'1.2.3',t:'Propriétés A°/Ā',type:'prop',sec:'s2'},{id:'1.2.4',t:'Autres propriétés',type:'prop',sec:'s2'},
+    {id:'1.3.1',t:'Topologie induite',type:'prop',sec:'s3'},{id:'1.3.4',t:'Ouvert de A pas de E',type:'ex',sec:'s3'},
+    {id:'1.3.5',t:'Voisinages A',type:'prop',sec:'s3'},{id:'1.3.6',t:'Topologie quotient',type:'def',sec:'s3'},
+    {id:'1.3.8',t:'Topologie produit',type:'def',sec:'s3'},
+    {id:'1.4.1',t:'Limite',type:'def',sec:'s4'},{id:'1.4.4',t:'Unicité limite',type:'thm',sec:'s4'},
+    {id:'1.4.5',t:'Continuité',type:'def',sec:'s4'},{id:'1.4.6',t:'Caractérisations',type:'thm',sec:'s4'},
+    {id:'1.4.7',t:'Composition',type:'prop',sec:'s4'},{id:'1.4.8',t:'Homéomorphisme',type:'def',sec:'s4'},
+    {id:'1.4.9',t:'Exercices',type:'exo',sec:'s4'}
+  ];
+  const LINKS=[
+    ['1.1.1','1.1.5'],['1.1.1','1.1.8'],['1.1.1','1.1.12'],['1.1.1','1.1.15'],
+    ['1.1.8','1.1.11'],['1.1.11','1.1.18'],['1.1.8','1.1.14'],['1.1.12','1.1.14'],
+    ['1.1.1','1.2.1'],['1.1.8','1.2.1'],['1.2.1','1.2.3'],['1.2.3','1.2.4'],
+    ['1.1.1','1.3.1'],['1.1.1','1.3.6'],['1.1.1','1.3.8'],
+    ['1.1.8','1.4.1'],['1.4.1','1.4.4'],['1.1.15','1.4.4'],['1.4.1','1.4.5'],
+    ['1.4.5','1.4.6'],['1.4.6','1.4.7'],['1.4.6','1.4.8'],['1.4.6','1.4.9'],
+    ['1.2.1','1.4.6']
+  ];
+  const S=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(50,1,0.1,200);cam.position.set(0,0,22);
+  const R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,2));
+  const nodes={};
+  const typeCol={def:0x3fd0c9,thm:0xf2b84b,prop:0x9b8cff,ex:0xff7a90,exo:0xff7a90};
+  NODES.forEach((n,i)=>{
+    const group=(n.sec==='s1'?0:n.sec==='s2'?1:n.sec==='s3'?2:3);
+    const angle=(i/NODES.length)*Math.PI*2;
+    const r=7+Math.sin(i*1.7)*1.5;
+    const x=Math.cos(angle)*r,y=Math.sin(angle)*r*0.6,z=Math.sin(angle)*r*0.5+(group-1.5)*2;
+    n.pos=new THREE.Vector3(x,y,z);
+    n.typeCol=typeCol[n.type];
+    const sphere=new THREE.Mesh(new THREE.SphereGeometry(n.type==='thm'?0.55:0.42,20,16),new THREE.MeshBasicMaterial({color:n.typeCol,transparent:true,opacity:0.85}));
+    sphere.position.copy(n.pos);
+    sphere.userData={node:n};
+    S.add(sphere);
+    n.mesh=sphere;
+    const ringG=new THREE.Mesh(new THREE.SphereGeometry(n.type==='thm'?0.75:0.6,20,16),new THREE.MeshBasicMaterial({color:n.typeCol,wireframe:true,transparent:true,opacity:0.15}));
+    ringG.position.copy(n.pos);S.add(ringG);n.ring=ringG;
+    nodes[n.id]=n;
+  });
+  const lines=[];
+  LINKS.forEach(([a,b])=>{
+    const na=nodes[a],nb=nodes[b];if(!na||!nb)return;
+    const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(6),3));
+    const mat=new THREE.LineBasicMaterial({color:0x3fd0c9,transparent:true,opacity:0.18});
+    const line=new THREE.Line(geo,mat);S.add(line);
+    lines.push({a:na,b:nb,line});
+  });
+  const n=400,p=new Float32Array(n*3);
+  for(let i=0;i<n;i++){p[i*3]=(Math.random()-0.5)*60;p[i*3+1]=(Math.random()-0.5)*40;p[i*3+2]=(Math.random()-0.5)*40}
+  const starGeo=new THREE.BufferGeometry();starGeo.setAttribute('position',new THREE.BufferAttribute(p,3));
+  S.add(new THREE.Points(starGeo,new THREE.PointsMaterial({color:0x9b8cff,size:0.06,transparent:true,opacity:0.5})));
+  let mx=0,my=0,tx=0,ty=0;
+  const ray=new THREE.Raycaster();
+  let hovered=null;
+  cv.addEventListener('mousemove',e=>{
+    const r=cv.getBoundingClientRect();
+    mx=(e.clientX-r.left)/r.width-0.5;my=(e.clientY-r.top)/r.height-0.5;
+    ray.setFromCamera({x:mx*2,y:-my*2},cam);
+    const hits=ray.intersectObjects(Object.values(nodes).map(n=>n.mesh));
+    const newHover=hits[0]?hits[0].object.userData.node:null;
+    if(newHover!==hovered){
+      hovered=newHover;
+      Object.values(nodes).forEach(n=>{n.mesh.scale.setScalar(n===hovered?1.6:1);n.ring.scale.setScalar(n===hovered?1.5:1)});
+      if(hovered){info.innerHTML=`<b>${hovered.type.toUpperCase()} ${hovered.id}</b> — ${hovered.t}`;info.classList.add('on');cv.style.cursor='pointer'}
+      else{info.classList.remove('on');cv.style.cursor='grab'}
+    }
+  });
+  cv.addEventListener('click',e=>{
+    if(!hovered)return;
+    GRAPH.classList.remove('on');
+    const card=$$('.card').find(c=>$('.tag',c)?.textContent.includes(hovered.id));
+    if(card){card.classList.add('flash');card.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>card.classList.remove('flash'),2200)}
+  });
+  const resize=()=>{const w=cv.clientWidth,h=cv.clientHeight;if(!w)return;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};
+  addEventListener('resize',resize);
+  new MutationObserver(()=>{if(GRAPH.classList.contains('on'))setTimeout(resize,50)}).observe(GRAPH,{attributes:true,attributeFilter:['class']});
+  let rotY=0;
+  (function loop(){
+    requestAnimationFrame(loop);
+    if(!GRAPH.classList.contains('on'))return;
+    tx+=(mx*2-tx)*0.05;ty+=(my*2-ty)*0.05;
+    if(!still)rotY+=0.0015;
+    const total=rotY+tx;
+    Object.values(nodes).forEach(n=>{
+      const c=Math.cos(total),s=Math.sin(total);
+      const x=n.pos.x*c-n.pos.z*s,z=n.pos.x*s+n.pos.z*c;
+      n.mesh.position.set(x,n.pos.y+ty,z);n.ring.position.set(x,n.pos.y+ty,z);
+    });
+    lines.forEach(({a,b,line})=>{
+      const p=line.geometry.attributes.position;
+      p.setXYZ(0,a.mesh.position.x,a.mesh.position.y,a.mesh.position.z);
+      p.setXYZ(1,b.mesh.position.x,b.mesh.position.y,b.mesh.position.z);
+      p.needsUpdate=true;
+    });
+    cam.position.x=Math.sin(total*0.3)*1;cam.position.y=ty*3;cam.lookAt(0,0,0);
+    R.render(S,cam);
+  })();
+  $('.close',GRAPH).onclick=()=>GRAPH.classList.remove('on');
+  GRAPH.addEventListener('click',e=>{if(e.target===GRAPH)GRAPH.classList.remove('on')});
+  addEventListener('keydown',e=>{if(e.key==='Escape')GRAPH.classList.remove('on')});
+  window._openGraph=()=>{GRAPH.classList.add('on');setTimeout(resize,60)};
+})();
+
+/* Bouton toolbar */
+(function(){
+  let tools=$('#tools');
+  if(!tools){tools=document.createElement('div');tools.id='tools';tools.style.cssText='position:fixed;top:12px;right:14px;z-index:40;display:flex;gap:6px;flex-wrap:wrap';B.append(tools)}
+  if($('#bGraph'))return;
+  const btn=document.createElement('button');btn.id='bGraph';btn.textContent='🌐 Graphe';
+  btn.style.cssText='height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);color:var(--th);cursor:pointer;font:500 14px "Space Grotesk",sans-serif';
+  btn.onclick=window._openGraph;tools.append(btn);
+})();
+
+/* Raccourci */
+addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea'))return;
+  if(e.key==='g'&&!e.ctrlKey&&!e.metaKey&&window._openGraph){window._openGraph();e.preventDefault()}
+});
 })();
 </script>
 </body>
