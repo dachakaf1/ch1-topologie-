@@ -9,7 +9,14 @@
 <title>Topologie Générale – Chapitre 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<!-- ============================================================= -->
+<!-- AJOUT 1 : KaTeX CSS (pour les formules mathématiques)          -->
+<!-- ============================================================= -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
+/* ============================================================= */
+/* STYLES DE BASE (ton fichier original)                          */
+/* ============================================================= */
 :root{--bg:#090d1a;--panel:#111830;--line:#26305a;--txt:#dfe4f5;--mut:#8d97bd;--teal:#3fd0c9;--amber:#f2b84b;--rose:#ff7a90;--vio:#9b8cff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--txt);font:19px/1.7 Newsreader,Georgia,serif}
@@ -108,6 +115,91 @@ nav a.on{border-left-width:3px;text-shadow:0 0 14px var(--amber)}
 @keyframes pulse{50%{box-shadow:0 0 44px #3fd0c977}}
 @media(pointer:coarse){#glow{display:none}}
 @media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important}.js .card:not(.in){opacity:1}}
+
+/* ============================================================= */
+/* AJOUTS v2 (styles pour les 7 nouvelles features)               */
+/* ============================================================= */
+@property --th{syntax:'<color>';inherits:true;initial-value:#3fd0c9}
+@property --r{syntax:'<length>';inherits:false;initial-value:0px}
+:root{--th:#3fd0c9;transition:--th 1.2s ease}
+.card.def{--c:var(--th)}
+.neb{background:radial-gradient(circle,color-mix(in srgb,var(--th) 20%,transparent),transparent 65%)!important}
+nav a.on{color:var(--th);border-color:var(--th);text-shadow:0 0 14px var(--th)}
+#bar{background:linear-gradient(90deg,var(--th),var(--amber))}
+body{transition:background .5s,color .5s}
+.katex{font-size:1.05em}
+
+/* objet 3D qui morphe */
+#c{opacity:0}
+#morph{position:fixed;z-index:1;pointer-events:none;right:6vw;top:50%;width:min(520px,60vw);aspect-ratio:1;transform:translateY(-50%);transition:all .9s cubic-bezier(.2,.8,.2,1)}
+#morph.dock{right:auto;left:24px;top:auto;bottom:24px;width:190px;transform:none;opacity:.9}
+@media(max-width:860px){#morph.dock{display:none}#morph:not(.dock){right:50%;transform:translate(50%,-50%);width:80vw;opacity:.35}}
+
+/* loader */
+#ld{position:fixed;inset:0;z-index:100;background:#090d1a;display:grid;place-items:center;cursor:pointer;
+ --r:0px;-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));transition:--r 1.3s cubic-bezier(.6,0,.2,1)}
+#ld canvas{width:min(80vw,420px);aspect-ratio:1}
+#ld.out{--r:150vmax}
+
+/* barre d'outils */
+#tools{position:fixed;top:12px;right:14px;z-index:40;display:flex;gap:6px}
+#tools button{height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--txt);cursor:pointer;font:500 14px 'Space Grotesk',sans-serif}
+#tools button:hover{border-color:var(--th);color:var(--th)}
+#tools kbd{opacity:.55;font:inherit;margin-left:8px;font-size:12px}
+@media(max-width:600px){#tools kbd{display:none}}
+
+/* palette Ctrl+K */
+#pal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;background:#02041099;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#pal.on{display:flex}
+#pal .bx{width:min(640px,92vw);background:var(--panel);border:1px solid var(--th);border-radius:16px;box-shadow:0 30px 80px -20px var(--th);overflow:hidden}
+#pal input{width:100%;padding:18px 20px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--txt);font:18px 'Space Grotesk',sans-serif;outline:0}
+#pal ul{list-style:none;margin:0;padding:6px;max-height:50vh;overflow:auto}
+#pal li{padding:10px 14px;border-radius:10px;cursor:pointer;font:15px/1.4 'Space Grotesk',sans-serif}
+#pal li.sel{background:color-mix(in srgb,var(--th) 18%,transparent)}
+#pal li b{display:block}
+#pal li span{color:var(--mut);font-size:13px}
+#pal .ft{padding:8px 14px;color:var(--mut);font:12px 'Space Grotesk',sans-serif;border-top:1px solid var(--line)}
+.card.flash{outline:2px solid var(--th);outline-offset:6px;box-shadow:0 0 60px var(--th)}
+
+/* glossaire */
+.gl{border-bottom:1px dotted var(--th);cursor:help}
+.gl:hover{color:var(--th)}
+#gtip{position:fixed;z-index:70;width:290px;padding:12px 14px;background:var(--panel);border:1px solid var(--th);border-radius:12px;box-shadow:0 20px 50px -15px #000;font:14px/1.45 'Space Grotesk',sans-serif;pointer-events:none;opacity:0;transform:translateY(6px);transition:.18s;color:var(--txt)}
+#gtip.on{opacity:1;transform:none}
+#gtip b{display:block;color:var(--th);margin-bottom:4px}
+#gtip svg{float:right;width:84px;height:64px;margin:0 0 4px 10px;color:var(--th)}
+
+/* mode clair */
+[data-theme=light]{--bg:#f3f5fb;--panel:#fff;--line:#cdd5ee;--txt:#1a2140;--mut:#59638a;--teal:#0b9a93;--amber:#b57300;--rose:#d1355a;--vio:#6552e0;color-scheme:light}
+[data-theme=light] .card{background:linear-gradient(135deg,#ffffffee,#eef1fbd9)}
+[data-theme=light] .card i{color:#000}
+[data-theme=light] .pf{color:#2b3358}
+[data-theme=light] h2{background:linear-gradient(90deg,#1a2140,var(--teal));-webkit-background-clip:text;background-clip:text}
+[data-theme=light] .hc h1{background:linear-gradient(100deg,#1a2140 10%,var(--teal) 30%,var(--vio) 50%,var(--amber) 70%,#1a2140 90%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text}
+[data-theme=light] #stars{opacity:.25}
+[data-theme=light] .neb{opacity:.55}
+[data-theme=light] #glow{display:none}
+[data-theme=light] .go:hover{color:#fff}
+[data-theme=light] .tip{background:#fffffff2;color:var(--txt)}
+[data-theme=light] .fig.big{background:#fff}
+[data-theme=light] .tb button{background:#fffc}
+[data-theme=light] #pal{background:#dfe4f599}
+
+/* impression / PDF */
+@media print{
+ #ld,#hero,nav,#bar,#tools,#pal,#gtip,#glow,#stars,.neb,#morph,.fig,.st,footer{display:none!important}
+ html,body{background:#fff!important}
+ body{color:#111!important;font-size:12pt}
+ .wrap{display:block;max-width:none;padding:0}
+ main{max-width:none;padding:0}
+ .card{display:block!important;background:none!important;-webkit-backdrop-filter:none;backdrop-filter:none;border:1px solid #bbb;border-left:4px solid #333;break-inside:avoid-page;opacity:1!important;animation:none!important;transform:none!important;margin:14px 0}
+ .card::before,.card::after{display:none}
+ .card *{color:#111!important;text-shadow:none!important}
+ h2{color:#111!important;-webkit-text-fill-color:#111;background:none!important;margin:24px 0 8px;break-after:avoid}
+ h2::after{display:none}
+ .pf p{display:block!important;background:none!important}
+ .gl{border:0}
+}
 </style>
 </head>
 <body>
@@ -129,8 +221,9 @@ nav a.on{border-left-width:3px;text-shadow:0 0 14px var(--amber)}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ---------- CONTENU DU COURS (modifie ici) ---------- */
-// t: def | thm | prop | ex | rem | exo ; p = démonstration (optionnelle)
+/* ============================================================= */
+/* CONTENU DU COURS (ton fichier original, intact)               */
+/* ============================================================= */
 const C=[
 {id:'s1',h:'1.1 Définitions et exemples',items:[
 {t:'def',n:'1.1.1',ti:'Topologie',b:`<p>Soit <i>E</i> un ensemble non vide. Une <b>topologie</b> sur <i>E</i> est une famille τ de parties de <i>E</i> telle que :</p><ol type="i"><li>∅ ∈ τ et <i>E</i> ∈ τ ;</li><li>l’intersection de deux éléments de τ est dans τ ;</li><li>toute réunion (finie ou infinie) d’éléments de τ est dans τ.</li></ol><p>Les éléments de τ sont les <b>ouverts</b>. Le couple (<i>E</i>, τ) est un <b>espace topologique</b>.</p>`},
@@ -200,6 +293,7 @@ const FM={
 '1.4.7':['cont','g∘f : on remonte les ouverts de H à E'],
 '1.4.8':['homeo','Déformation continue et réversible : tore ≅ tasse'],
 '1.4.9':['homeo','Un homéomorphisme échange les ouverts']};
+
 /* ---------- RENDU ---------- */
 const main=document.getElementById('main'),nav=document.getElementById('nav');
 C.forEach(s=>{
@@ -210,7 +304,10 @@ C.forEach(s=>{
     main.insertAdjacentHTML('beforeend',`<article class="card ${it.t}${f?'':' nf'}"><div class="tx"><span class="tag">${L[it.t]} ${it.n} · ${it.ti}</span>${it.b}${d}</div>${f?`<figure class="fig"><canvas width="540" height="360" data-k="${f[0]}"></canvas><figcaption>${f[1]}</figcaption></figure>`:''}</article>`);
   });
 });
-/* ---------- FIGURES 3D ---------- */
+
+/* ============================================================= */
+/* FIGURES 3D (ton fichier original)                              */
+/* ============================================================= */
 const T=0x3fd0c9,A=0xf2b84b,V=0x9b8cff,Z=0xff7a90,W=0x8d97bd,V3=THREE.Vector3;
 const M=(c,o,w)=>new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:o,wireframe:!!w,depthWrite:false});
 const P=(g,x,y,z)=>(g.position.set(x,y,z),g);
@@ -300,6 +397,7 @@ homeo:[[0,'Tore déformé','f et f⁻¹ continues : la forme change sans couper 
       c.fillStyle=hv?'#111':'#dfe4f5';c.fillText(u.n,x,y)});
   })})(0);
 })();
+
 /* démonstrations pas à pas */
 document.querySelectorAll('.pf').forEach(pf=>{
   const ps=[...pf.querySelectorAll(':scope>p')],k=ps.length;let i=1;
@@ -310,6 +408,7 @@ document.querySelectorAll('.pf').forEach(pf=>{
   bar.onclick=e=>{const a=e.target.dataset.a;if(a===undefined)return;i=a==='0'?k:Math.max(1,Math.min(k,i+ +a));show()};
   show();
 });
+
 /* tilt 3D des cartes */
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches)
 document.querySelectorAll('.card').forEach(c=>{
@@ -317,6 +416,7 @@ document.querySelectorAll('.card').forEach(c=>{
     c.style.transform=`perspective(900px) rotateY(${x*5}deg) rotateX(${-y*5}deg)`});
   c.addEventListener('mouseleave',()=>c.style.transform='');
 });
+
 /* progression + nav active */
 const bar=document.getElementById('bar'),links=[...nav.querySelectorAll('a')],heads=C.map(s=>document.getElementById(s.id));
 addEventListener('scroll',()=>{
@@ -325,7 +425,7 @@ addEventListener('scroll',()=>{
   links.forEach((a,i)=>a.classList.toggle('on',i===k));
 },{passive:true});
 
-/* ---------- SCÈNE 3D (Three.js) ---------- */
+/* ---------- SCÈNE 3D HERO (Three.js) ---------- */
 (function(){
   const cv=document.getElementById('c');
   if(!window.THREE){return}
@@ -333,11 +433,9 @@ addEventListener('scroll',()=>{
   R.setPixelRatio(Math.min(devicePixelRatio,2));
   const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);cam.position.z=7;
   const G=new THREE.Group();S.add(G);
-  // tore = l’objet emblématique de la topologie (tasse ≅ donut)
   const tor=new THREE.Mesh(new THREE.TorusGeometry(1.9,.7,28,64),new THREE.MeshBasicMaterial({color:0x3fd0c9,wireframe:true,transparent:true,opacity:.35}));
   const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.1,.22,160,16,2,3),new THREE.MeshBasicMaterial({color:0xf2b84b,wireframe:true,transparent:true,opacity:.55}));
   G.add(tor,knot);
-  // nuage de points = ouverts / voisinages
   const n=700,p=new Float32Array(n*3);
   for(let i=0;i<n;i++){const r=3+Math.random()*3,a=Math.random()*6.283,b=Math.acos(2*Math.random()-1);
     p.set([r*Math.sin(b)*Math.cos(a),r*Math.sin(b)*Math.sin(a),r*Math.cos(b)],i*3)}
@@ -359,10 +457,183 @@ addEventListener('scroll',()=>{
     R.render(S,cam);
   })(0);
 })();
-/* ===== UNIVERS DYNAMIQUE ===== */
+
+/* ============================================================= */
+/* AJOUTS v2 — les 7 nouvelles features                          */
+/* ============================================================= */
+(function(){
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const root=document.documentElement,B=document.body;
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const isLight=()=>root.dataset.theme==='light';
+
+/* ---------- 1. Mode clair/sombre + PDF + barre d'outils ---------- */
+try{if(localStorage.getItem('th')==='light')root.dataset.theme='light'}catch(e){}
+const tools=document.createElement('div');tools.id='tools';
+tools.innerHTML='<button id="bK" title="Rechercher">🔍 Rechercher<kbd>Ctrl K</kbd></button><button id="bT" title="Clair / sombre">◐</button><button id="bP" title="Imprimer / PDF">🖨 PDF</button>';
+B.append(tools);
+$('#bT').onclick=()=>{const l=isLight();l?delete root.dataset.theme:root.dataset.theme='light';try{localStorage.setItem('th',l?'dark':'light')}catch(e){}};
+$('#bP').onclick=()=>print();
+addEventListener('beforeprint',()=>$$('details').forEach(d=>{d._o=d.open;d.open=true}));
+addEventListener('afterprint',()=>$$('details').forEach(d=>d.open=!!d._o));
+
+/* ---------- index de recherche ---------- */
+const idx=$$('.card').map(c=>{
+  const tag=$('.tag',c).textContent,t=$('.tx',c).cloneNode(true);
+  $$('details,.tag',t).forEach(d=>d.remove());
+  const txt=t.textContent.replace(/\s+/g,' ').trim();
+  return{c,tag,txt,n:norm(tag+' '+txt)};
+});
+
+/* ---------- 2. Command palette Ctrl+K ---------- */
+const pal=document.createElement('div');pal.id='pal';
+pal.innerHTML='<div class="bx"><input placeholder="Chercher une définition, un théorème… (ex : voisinage, Hausdorff)" autocomplete="off"><ul></ul><div class="ft">↑↓ naviguer · Entrée ouvrir · Échap fermer</div></div>';
+B.append(pal);
+const inp=$('input',pal),ul=$('ul',pal);let sel=0,res=[];
+const find=q=>{const k=norm(q).split(/\s+/).filter(Boolean);if(!k.length)return idx.slice(0,8);
+  return idx.map(o=>{let s=0;for(const w of k){if(!o.n.includes(w))return null;s+=norm(o.tag).includes(w)?5:1}return[s,o]}).filter(Boolean).sort((a,b)=>b[0]-a[0]).slice(0,8).map(x=>x[1])};
+const draw=()=>{res=find(inp.value);sel=Math.min(sel,Math.max(0,res.length-1));
+  ul.innerHTML=res.length?res.map((o,i)=>`<li class="${i===sel?'sel':''}" data-i="${i}"><b>${esc(o.tag)}</b><span>${esc(o.txt.slice(0,90))}…</span></li>`).join(''):'<li><span>Aucun résultat</span></li>'};
+const openP=()=>{pal.classList.add('on');inp.value='';sel=0;draw();inp.focus()};
+const closeP=()=>pal.classList.remove('on');
+const go=i=>{const o=res[i];if(!o)return;closeP();o.c.classList.add('in','flash');o.c.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>o.c.classList.remove('flash'),1900)};
+$('#bK').onclick=openP;
+inp.oninput=()=>{sel=0;draw()};
+ul.onclick=e=>{const l=e.target.closest('li[data-i]');if(l)go(+l.dataset.i)};
+pal.onclick=e=>{if(e.target===pal)closeP()};
+addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.classList.contains('on')?closeP():openP();return}
+  if(!pal.classList.contains('on'))return;
+  if(e.key==='Escape')closeP();
+  else if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(res.length-1,sel+1);draw()}
+  else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);draw()}
+  else if(e.key==='Enter'){e.preventDefault();go(sel)}
+});
+
+/* ---------- 3. Glossaire hover ---------- */
+const SV={
+ open:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="22" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3"/><circle cx="42" cy="32" r="2.5" fill="currentColor"/></svg>',
+ closed:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="22" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="2.4"/><circle cx="42" cy="32" r="2.5" fill="currentColor"/></svg>',
+ nbh:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="28" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-width="1.2"/><circle cx="46" cy="30" r="13" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-dasharray="3 3"/><circle cx="46" cy="30" r="2.5" fill="currentColor"/></svg>',
+ sep:'<svg viewBox="0 0 84 64"><circle cx="22" cy="32" r="16" fill="currentColor" fill-opacity=".2" stroke="currentColor"/><circle cx="62" cy="32" r="16" fill="currentColor" fill-opacity=".2" stroke="currentColor"/><circle cx="22" cy="32" r="2.5" fill="currentColor"/><circle cx="62" cy="32" r="2.5" fill="currentColor"/></svg>',
+ homeo:'<svg viewBox="0 0 84 64"><ellipse cx="42" cy="32" rx="34" ry="22" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.6"/><ellipse cx="42" cy="32" rx="12" ry="7" fill="var(--panel)" stroke="currentColor" stroke-width="1.6"/></svg>'};
+const GL=[
+ {src:'voisinages?',t:'Voisinage',d:'U est un voisinage de x s’il existe un ouvert W tel que x ∈ W ⊂ U.',s:'nbh'},
+ {src:'ouverts?',t:'Ouvert',d:'Élément de la topologie τ. Un ouvert est voisinage de chacun de ses points.',s:'open'},
+ {src:'ferm[ée]s?',t:'Fermé',d:'Partie dont le complémentaire est ouvert : elle contient son bord.',s:'closed'},
+ {src:'adh[ée]rence|adh[ée]rent[es]?',t:'Adhérence',d:'Ā : le plus petit fermé contenant A. Un point est adhérent si tout voisinage rencontre A.',s:'closed'},
+ {src:'int[ée]rieur',t:'Intérieur',d:'A° : le plus grand ouvert contenu dans A.',s:'open'},
+ {src:'fronti[èe]re',t:'Frontière',d:'∂A = Ā ∖ A° : les points « au bord » de A.',s:'closed'},
+ {src:'topologies?',t:'Topologie',d:'Famille τ de parties de E contenant ∅ et E, stable par réunion quelconque et intersection finie.',s:'open'},
+ {src:'s[ée]par[ée]s?|Hausdorff',t:'Espace séparé',d:'Deux points distincts ont des voisinages disjoints.',s:'sep'},
+ {src:'hom[ée]omorphisme',t:'Homéomorphisme',d:'Bijection continue de réciproque continue : même forme topologique.',s:'homeo'}];
+GL.forEach(g=>g.re=new RegExp('^(?:'+g.src+')$','iu'));
+const ALL=new RegExp('(?<![\\p{L}-])(?:'+GL.map(g=>g.src).join('|')+')(?![\\p{L}])','giu');
+$$('.card').forEach(card=>{
+  const used=new Set(),nodes=[],w=document.createTreeWalker($('.tx',card),NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('.tag,summary,.st,.gl,button')?2:1});
+  while(w.nextNode())nodes.push(w.currentNode);
+  nodes.forEach(n=>{let ch=false;
+    const out=esc(n.nodeValue).replace(ALL,m=>{const gi=GL.findIndex(g=>g.re.test(m));if(gi<0||used.has(gi))return m;used.add(gi);ch=true;return`<span class="gl" data-g="${gi}">${m}</span>`});
+    if(ch){const t=document.createElement('template');t.innerHTML=out;n.replaceWith(t.content)}});
+});
+const gt=document.createElement('div');gt.id='gtip';B.append(gt);
+document.addEventListener('mouseover',e=>{
+  const s=e.target.closest&&e.target.closest('.gl');
+  if(!s){gt.classList.remove('on');return}
+  const g=GL[s.dataset.g];gt.innerHTML=SV[g.s]+'<b>'+g.t+'</b>'+g.d;
+  const r=s.getBoundingClientRect();gt.style.left=Math.min(innerWidth-300,Math.max(10,r.left))+'px';gt.style.top=(r.bottom+10)+'px';
+  if(r.bottom+10+gt.offsetHeight>innerHeight-10)gt.style.top=(r.top-10-gt.offsetHeight)+'px';
+  gt.classList.add('on')});
+
+/* ---------- 4. KaTeX ---------- */
+const U={'∈':'\\in ','∉':'\\notin ','⊂':'\\subset ','≥':'\\geq ','≤':'\\leq ','∪':'\\cup ','∩':'\\cap ','∖':'\\setminus ','∅':'\\varnothing ','−':'-','⋃':'\\bigcup ','⋂':'\\bigcap '};
+const tex=h=>h.replace(/<sup>(.*?)<\/sup>/g,'^{$1}').replace(/<sub>(.*?)<\/sub>/g,'_{$1}').replace(/<[^>]+>/g,'').replace(/[∈∉⊂≥≤∪∩∖∅−⋃⋂]/g,c=>U[c]);
+const K=t=>{try{return katex.renderToString(t,{throwOnError:false})}catch(e){return t}};
+const ks=document.createElement('script');
+ks.src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js';
+ks.onload=()=>$$('.tx p,.tx li').forEach(el=>{
+  if(el.closest('.tag,.st')||el.querySelector('.st'))return;
+  const o=el.innerHTML;
+  const h=o.replace(/<o>([\s\S]*?)<\/o>/g,(m,x)=>K('\\overline{'+tex(x)+'}'))
+    .replace(/([⋃⋂])<sub>([^<]*)<\/sub>/g,(m,s,x)=>K(tex(s)+'_{'+tex(x)+'}'))
+    .replace(/(?:<i>)?([A-FUVWf])(?:<\/i>)?<sup>(−1|c)<\/sup>/g,(m,a,b)=>K(a+'^{'+tex(b)+'}'))
+    .replace(/(?<!\w)([A-Z])°/g,(m,a)=>K(a+'^{\\circ}'))
+    .replace(/(−?)1\/n/g,(m,s)=>K((s?'-':'')+'\\frac{1}{n}'));
+  if(h!==o)el.innerHTML=h});
+document.head.append(ks);
+
+/* ---------- 5. Objet 3D qui morphe ---------- */
+const NAMES=['sphere','torus','knot','mobius'];
+const PAL=[[0x3fd0c9,0x9b8cff,0xf2b84b,0xff7a90],[0x0b9a93,0x6552e0,0xb57300,0xd1355a]];
+let morph=null,mEl=null;
+if(window.THREE){
+  const cv=mEl=document.createElement('canvas');cv.id='morph';B.append(cv);
+  const R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+  const cam=new THREE.PerspectiveCamera(45,1,.1,50);cam.position.z=6.4;
+  const V=THREE.Vector3,N=72,M2=24;
+  const geo=new THREE.PlaneGeometry(1,1,N,M2),pos=geo.attributes.position,cnt=pos.count;
+  const F={
+   sphere:(u,v)=>{const a=u*6.2832,t=v*Math.PI,r=1.9;return[r*Math.sin(t)*Math.cos(a),r*Math.cos(t),r*Math.sin(t)*Math.sin(a)]},
+   torus:(u,v)=>{const a=u*6.2832,b=v*6.2832,Rr=1.7+.65*Math.cos(b);return[Rr*Math.cos(a),.65*Math.sin(b),Rr*Math.sin(a)]},
+   knot:(u,v)=>{const c=p=>new V(Math.sin(p)+2*Math.sin(2*p),Math.cos(p)-2*Math.cos(2*p),-Math.sin(3*p)).multiplyScalar(.6),
+     a=u*6.2832,e=.01,p0=c(a-e),p1=c(a),p2=c(a+e),T2=p2.clone().sub(p0).normalize(),
+     Nn=p2.clone().add(p0).sub(p1.clone().multiplyScalar(2)).normalize(),Bn=new V().crossVectors(T2,Nn),b=v*6.2832,r=.33,
+     q=p1.clone().add(Nn.multiplyScalar(r*Math.cos(b))).add(Bn.multiplyScalar(r*Math.sin(b)));return[q.x,q.y,q.z]},
+   mobius:(u,v)=>{const a=u*6.2832,s=(v-.5)*1.3,Rr=1.7+s*Math.cos(a/2);return[Rr*Math.cos(a),s*Math.sin(a/2),Rr*Math.sin(a)]}
+  };
+  const TG={};NAMES.forEach(k=>{const a=new Float32Array(cnt*3);for(let i=0;i<cnt;i++)a.set(F[k]((i%(N+1))/N,((i/(N+1))|0)/M2),i*3);TG[k]=a});
+  pos.array.set(TG.knot);
+  const mat=new THREE.MeshBasicMaterial({color:0x3fd0c9,wireframe:true,transparent:true,opacity:.5}),mesh=new THREE.Mesh(geo,mat),S=new THREE.Scene();S.add(mesh);
+  let k=-1,mx=0,my=0;const tc=new THREE.Color();
+  addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+  (function lp(){requestAnimationFrame(lp);
+    const w=cv.clientWidth|0,h=cv.clientHeight|0;if(!w)return;
+    if(cv._w!==w){cv._w=w;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+    const tg=TG[k<0?'knot':NAMES[k]],a=pos.array;
+    for(let i=0;i<a.length;i++)a[i]+=(tg[i]-a[i])*.07;pos.needsUpdate=true;
+    tc.set(PAL[isLight()?1:0][k<0?0:k]);mat.color.lerp(tc,.06);
+    mesh.rotation.set(.5+my*.8,(still?0:performance.now()*.0004)+mx*1.5,0);
+    R.render(S,cam)})();
+  morph={to:n=>{k=n}};
+}
+
+/* ---------- 6. Thème par section + dock ---------- */
+const SEC=[['s1','var(--teal)'],['s2','var(--vio)'],['s3','var(--amber)'],['s4','var(--rose)']];
+const heads2=SEC.map(s=>document.getElementById(s[0]));let cur=-2;
+const onS=()=>{let k=-1;heads2.forEach((h,i)=>{if(h&&h.getBoundingClientRect().top<innerHeight*.4)k=i});
+  if(k!==cur){cur=k;root.style.setProperty('--th',k<0?'var(--teal)':SEC[k][1]);morph&&morph.to(k)}
+  mEl&&mEl.classList.toggle('dock',scrollY>innerHeight*.55)};
+addEventListener('scroll',onS,{passive:true});onS();
+
+/* ---------- 7. Loader τ ---------- */
+(function(){
+  const ld=document.createElement('div');ld.id='ld';ld.innerHTML='<canvas width="600" height="600"></canvas>';B.append(ld);
+  B.style.overflow='hidden';
+  let done=false;const end=()=>{if(done)return;done=true;ld.classList.add('out');setTimeout(()=>{ld.remove();B.style.overflow=''},1500)};
+  ld.onclick=end;
+  if(still){end();return}
+  const x=$('canvas',ld).getContext('2d'),o=document.createElement('canvas');o.width=o.height=200;
+  const ox=o.getContext('2d');ox.fillStyle='#fff';ox.font='bold 190px Georgia,serif';ox.textAlign='center';ox.textBaseline='middle';ox.fillText('τ',100,108);
+  const d=ox.getImageData(0,0,200,200).data,Pp=[];
+  for(let y=0;y<200;y+=3)for(let i=0;i<200;i+=3)if(d[(y*200+i)*4+3]>128){const a=Math.random()*6.2832,r=320+Math.random()*400;
+    Pp.push({tx:(i-100)*1.9,ty:(y-100)*1.9,tz:(Math.random()-.5)*50,sx:Math.cos(a)*r,sy:Math.sin(a)*r,sz:(Math.random()-.5)*500,c:i/200})}
+  const t0=performance.now();
+  (function f(t){if(done)return;requestAnimationFrame(f);
+    const e=t-t0,p=Math.min(1,e/1900),q=1-Math.pow(1-p,3),th=(1-q)*12.566+(e>2300?(e-2300)*.0001:0);
+    x.clearRect(0,0,600,600);const cs=Math.cos(th),sn=Math.sin(th);
+    Pp.forEach(a=>{const X=a.sx+(a.tx-a.sx)*q,Y=a.sy+(a.ty-a.sy)*q,Z2=a.sz+(a.tz-a.sz)*q,
+      rx=X*cs-Z2*sn,rz=X*sn+Z2*cs,s=520/(520+rz);
+      x.fillStyle=`hsl(${175-a.c*135},80%,${60+(e>1900?10:0)}%)`;x.globalAlpha=Math.min(1,.25+q);
+      x.beginPath();x.arc(300+rx*s,300+Y*s,2.3*s,0,6.2832);x.fill()});
+    x.globalAlpha=1;
+    if(e>2600)end()})(t0);
+})();
+
+/* ---------- 8. Univers dynamique (étoiles + nébuleuses + glow) ---------- */
 (function(){
   document.documentElement.classList.add('js');
-  const B=document.body,still=matchMedia('(prefers-reduced-motion:reduce)').matches;
   const cv=document.createElement('canvas');cv.id='stars';B.prepend(cv);
   ['n1','n2','n3'].forEach(k=>{const d=document.createElement('div');d.className='neb '+k;B.prepend(d)});
   const c=cv.getContext('2d');let W,H,S=[],mx=0,my=0,sh=null;
@@ -388,8 +659,9 @@ addEventListener('scroll',()=>{
   const hero=document.getElementById('hero'),hc=hero.querySelector('.hc');
   hero.insertAdjacentHTML('beforeend','<div class="mouse"><i></i></div>');
   addEventListener('scroll',()=>{const p=Math.min(1,scrollY/innerHeight);hc.style.transform=`translateY(${scrollY*.3}px) scale(${1-p*.12})`;hc.style.opacity=1-p*1.3},{passive:true});
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.06});
-  document.querySelectorAll('.card').forEach(k=>io.observe(k));
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}}),{threshold:.06});
+  document.querySelectorAll('.card').forEach(k=>io2.observe(k));
+})();
 })();
 </script>
 </body>
