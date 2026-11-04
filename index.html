@@ -202,6 +202,18 @@ nav a.on{border-left-width:3px;color:var(--th);border-color:var(--th);text-shado
 #graph .tip{position:absolute;top:14px;left:14px;font:12px 'Space Grotesk',sans-serif;color:var(--mut);background:#05081acc;padding:8px 12px;border-radius:8px;border:1px solid var(--line)}
 #tools #bGraph{color:var(--th)}
 #tools #bGraph:hover{background:var(--th);color:#05221f}
+
+/* ===== PERF PATCH ===== */
+.card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#10173a!important}
+[data-theme=light] .card{background:#fff!important}
+.neb{animation:none!important;will-change:auto}
+#glow{display:none!important}
+.hc h1{animation:none!important;filter:none!important}
+h2::after{animation:none!important;box-shadow:none!important}
+.go,.hc::before,.hc::after{animation:none!important}
+.card::before{display:none}
+#bar{box-shadow:none;width:100%!important;transform-origin:left;transform:scaleX(0)}
+:root{transition:none!important}
 </style>
 </head>
 <body>
@@ -436,7 +448,7 @@ document.querySelectorAll('.card').forEach(c=>{
 /* ===== PROGRESSION ===== */
 const bar=document.getElementById('bar'),links=[...nav.querySelectorAll('a')],heads=C.map(s=>document.getElementById(s.id));
 addEventListener('scroll',()=>{
-  bar.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+  bar.style.transform='scaleX('+(scrollY/(document.body.scrollHeight-innerHeight))+')';
   let k=-1;heads.forEach((h,i)=>{if(h.getBoundingClientRect().top<innerHeight*.4)k=i});
   links.forEach((a,i)=>a.classList.toggle('on',i===k));
 },{passive:true});
@@ -582,7 +594,7 @@ const PAL=[[0x3fd0c9,0x9b8cff,0xf2b84b,0xff7a90],[0x0b9a93,0x6552e0,0xb57300,0xd
 let morph=null,mEl=null;
 if(window.THREE){
   const cv=mEl=document.createElement('canvas');cv.id='morph';B.append(cv);
-  const R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+  const R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.setPixelRatio(1);
   const cam=new THREE.PerspectiveCamera(45,1,.1,50);cam.position.z=6.4;
   const V=THREE.Vector3,N=72,M2=24;
   const geo=new THREE.PlaneGeometry(1,1,N,M2),pos=geo.attributes.position,cnt=pos.count;
@@ -600,7 +612,9 @@ if(window.THREE){
   const mat=new THREE.MeshBasicMaterial({color:0x3fd0c9,wireframe:true,transparent:true,opacity:.5}),mesh=new THREE.Mesh(geo,mat),S=new THREE.Scene();S.add(mesh);
   let k=-1,mx=0,my=0;const tc=new THREE.Color();
   addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+  let fr=0;
   (function lp(){requestAnimationFrame(lp);
+    if(++fr%2)return;
     const w=cv.clientWidth|0,h=cv.clientHeight|0;if(!w)return;
     if(cv._w!==w){cv._w=w;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
     const tg=TG[k<0?'knot':NAMES[k]],a=pos.array;
@@ -652,7 +666,9 @@ addEventListener('scroll',onS,{passive:true});onS();
   const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;S=Array.from({length:Math.round(W*H/7000)},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.9+.1,t:Math.random()*6,h:['#fff','#9fe8e4','#ffd98a','#b9b0ff'][Math.random()*4|0]}))};
   addEventListener('resize',rs);rs();
   addEventListener('mousemove',e=>{mx=e.clientX/W-.5;my=e.clientY/H-.5});
-  (function f(t){requestAnimationFrame(f);c.clearRect(0,0,W,H);
+  (function f(t){requestAnimationFrame(f);
+    if(document.hidden||t-(f.l||0)<40)return;f.l=t;
+    c.clearRect(0,0,W,H);
     S.forEach(s=>{const x=((s.x-mx*50*s.z)%W+W)%W,y=((s.y-scrollY*.3*s.z-my*50*s.z)%H+H)%H;
       c.globalAlpha=still?.8:.4+.5*Math.sin(t*.002*s.z+s.t);c.fillStyle=s.h;c.beginPath();c.arc(x,y,s.z*1.5,0,6.283);c.fill()});
     c.globalAlpha=1;
