@@ -2,323 +2,211 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%233fd0c9'/%3E%3Cstop offset='1' stop-color='%23f2b84b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23090d1a'/%3E%3Cellipse cx='32' cy='32' rx='26' ry='11' fill='none' stroke='url(%23g)' stroke-width='3.5' transform='rotate(-28 32 32)'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='38' font-weight='700' text-anchor='middle' fill='url(%23g)'%3E%CF%84%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%233fd0c9'/%3E%3Cstop offset='1' stop-color='%23f2b84b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23090d1a'/%3E%3Cellipse cx='32' cy='32' rx='26' ry='11' fill='none' stroke='url(%23g)' stroke-width='3.5' transform='rotate(-28 32 32)'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='38' font-weight='700' text-anchor='middle' fill='url(%23g)'%3E%CF%84%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#090d1a">
-<title>Topologie Générale – Chapitre 1</title>
-
-<!-- ===== META TAGS POUR WHATSAPP / FACEBOOK / TWITTER ===== -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://ch1-topologie.vercel.app/">
-<meta property="og:title" content="Topologie Générale – Chapitre 1">
-<meta property="og:description" content="Cours complet de Topologie Générale : espaces topologiques, intérieur, adhérence, continuité et démonstrations.">
-<meta property="og:image" content="https://ch1-topologie.vercel.app/logo.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cours de Topologie Générale">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Topologie Générale – Chapitre 1">
-<meta name="twitter:description" content="Cours complet de Topologie Générale : espaces topologiques, intérieur, adhérence, continuité et démonstrations.">
-<meta name="twitter:image" content="https://ch1-topologie.vercel.app/logo.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Topologie & Espaces vectoriels normés – Cours complet</title>
 <style>
-/* ===== STYLES DE BASE ===== */
-:root{--bg:#090d1a;--panel:#111830;--line:#26305a;--txt:#dfe4f5;--mut:#8d97bd;--teal:#3fd0c9;--amber:#f2b84b;--rose:#ff7a90;--vio:#9b8cff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--txt);font:19px/1.7 Newsreader,Georgia,serif}
-h1,h2,h3,nav,.tag,button,summary{font-family:'Space Grotesk',system-ui,sans-serif}
-#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--teal),var(--amber));z-index:20}
-#hero{position:relative;height:100vh;min-height:560px;overflow:hidden;display:grid;place-items:center;text-align:center}
-#hero canvas{position:absolute;inset:0;width:100%;height:100%}
-.hc{position:relative;pointer-events:none;padding:0 20px}
-.hc small{color:var(--mut);font:500 15px 'Space Grotesk',sans-serif;letter-spacing:.04em}
-.hc h1{font-size:clamp(44px,9vw,110px);line-height:1;margin:.2em 0;letter-spacing:-.03em}
-.hc p{max-width:560px;margin:0 auto;color:var(--mut)}
-.go{pointer-events:auto;display:inline-block;margin-top:26px;padding:12px 28px;border:1px solid var(--teal);color:var(--teal);border-radius:40px;text-decoration:none;font:500 16px 'Space Grotesk',sans-serif;transition:.2s}
-.go:hover{background:var(--teal);color:#05221f}
-.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:40px;padding:0 24px}
-nav{position:sticky;top:0;align-self:start;height:100vh;padding:40px 0;overflow:auto;font-size:15px}
-nav b{display:block;color:var(--mut);font-weight:500;margin:18px 0 6px}
-nav a{display:block;color:var(--txt);text-decoration:none;padding:5px 12px;border-left:2px solid var(--line);opacity:.65}
-nav a.on{border-color:var(--amber);opacity:1;color:var(--amber)}
-main{padding:60px 0 120px;max-width:820px}
-h2{font-size:clamp(28px,4vw,40px);margin:90px 0 10px;letter-spacing:-.02em}
+:root{--bg:#090d1a;--panel:#111830;--line:#26305a;--txt:#dfe4f5;--mut:#8d97bd;--teal:#3fd0c9;--amber:#f2b84b;--rose:#ff7a90;--vio:#9b8cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f5fb;--panel:#fff;--line:#cdd5ee;--txt:#1a2140;--mut:#59638a;--teal:#0b9a93;--amber:#b57300;--rose:#d1355a;--vio:#6552e0}}
+:root[data-theme="light"]{--bg:#f3f5fb;--panel:#fff;--line:#cdd5ee;--txt:#1a2140;--mut:#59638a;--teal:#0b9a93;--amber:#b57300;--rose:#d1355a;--vio:#6552e0}
+:root[data-theme="dark"]{--bg:#090d1a;--panel:#111830;--line:#26305a;--txt:#dfe4f5;--mut:#8d97bd;--teal:#3fd0c9;--amber:#f2b84b;--rose:#ff7a90;--vio:#9b8cff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--txt);font:18px/1.7 Georgia,'Times New Roman',serif}
+h1,h2,nav,.tag,button,summary,input{font-family:system-ui,'Segoe UI',sans-serif}
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--teal),var(--amber));z-index:20}
+header{padding:70px 24px 40px;text-align:center;background:radial-gradient(circle at 50% 0,color-mix(in srgb,var(--teal) 18%,transparent),transparent 70%)}
+header{position:relative;overflow:hidden;min-height:78vh;display:grid;place-content:center}#hc{position:absolute;inset:0;width:100%;height:100%;z-index:0}header>*:not(canvas){position:relative;z-index:1}#stars{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.7}
+#sp{position:absolute;inset:0;width:100%;height:100%;z-index:0}header{background:#02030a}header h1{background:linear-gradient(100deg,#fff,#3fd0c9,#9b8cff,#f2b84b);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px #3fd0c966)}header small,header p{color:#aab5da}
+#hc{opacity:.55}
+#bT{display:none}:root:root:root{--bg:#02030a;--panel:#0b1330;--line:#26305a;--txt:#dfe4f5;--mut:#8d97bd;--teal:#3fd0c9;--amber:#f2b84b;--rose:#ff7a90;--vio:#9b8cff;color-scheme:dark}
+html{background:#02030a}body{background:transparent}
+body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 12% 18%,#3b1d6e66,transparent 55%),radial-gradient(ellipse at 88% 32%,#0e4a7a66,transparent 52%),radial-gradient(ellipse at 45% 92%,#7a1f5a55,transparent 55%),radial-gradient(ellipse at 75% 75%,#0b6b6a33,transparent 45%),#02030a}
+#stars{opacity:1}
+.card{background:color-mix(in srgb,#0b1330 80%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}footer{background:#02030acc}
+header small{color:var(--mut);font:500 15px system-ui}
+header h1{font-size:clamp(34px,7vw,72px);line-height:1.05;margin:.2em 0;letter-spacing:-.03em;background:linear-gradient(100deg,var(--txt),var(--teal),var(--vio),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{color:var(--mut);max-width:600px;margin:0 auto}
+#tools{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:30;display:flex;gap:6px}
+#tools button,#q{height:36px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:0 12px;font-size:14px;cursor:pointer}
+#q{cursor:text;width:150px}#q:focus{outline:2px solid var(--amber)}
+.wrap{display:grid;grid-template-columns:240px minmax(0,1fr);max-width:1100px;margin:0 auto;gap:36px;padding:0 20px}
+nav{position:sticky;top:0;align-self:start;height:100vh;padding:50px 0;overflow:auto;font-size:14px}
+nav a{display:block;color:var(--txt);text-decoration:none;padding:6px 12px;border-left:2px solid var(--line);opacity:.65}
+nav a.on{border-color:var(--amber);color:var(--amber);opacity:1}
+main{padding:30px 0 100px;max-width:820px}
+h2{font-size:clamp(26px,4vw,36px);margin:80px 0 10px;letter-spacing:-.02em;color:var(--teal)}
 h2:first-child{margin-top:0}
-.card{--c:var(--teal);position:relative;margin:28px 0;padding:24px 28px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px 18px 6px 18px;transform-style:preserve-3d;transition:transform .15s,box-shadow .3s;will-change:transform}
-.card:hover{box-shadow:0 24px 50px -20px var(--c)}
+.card{--c:var(--teal);margin:22px 0;padding:20px 26px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px 18px 6px 18px}
 .card.thm,.card.prop{--c:var(--amber)}.card.ex{--c:var(--vio)}.card.rem{--c:var(--mut)}.card.exo{--c:var(--rose)}
-.tag{display:inline-block;font-size:14px;font-weight:700;color:var(--c);margin-bottom:6px;transform:translateZ(30px)}
-.card p{margin:.5em 0}.card ul,.card ol{margin:.4em 0;padding-left:1.3em}
-.card i{color:#fff}
+.card.hide{display:none}
+.card.hasfig{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:8px 26px;align-items:start}.fig{margin:0;position:sticky;top:20px}.fig canvas{width:100%;aspect-ratio:3/2;display:block;border-radius:12px;background:radial-gradient(circle at 50% 40%,#1a2350,#0a0f20 75%);border:1px solid var(--line);cursor:grab;touch-action:pan-y}.fig figcaption{font:13px/1.4 system-ui;color:var(--mut);margin-top:6px}@media(max-width:860px){.card.hasfig{display:block}.fig{position:static;margin-bottom:10px}}
+.tag{display:block;font-size:14px;font-weight:700;color:var(--c);margin-bottom:4px}
+.card p{margin:.45em 0}.card ul,.card ol{margin:.4em 0;padding-left:1.3em}
+.card i{font-style:italic}
 o{border-top:1.5px solid currentColor;line-height:1}
-details{margin-top:16px;border-top:1px dashed var(--line);padding-top:10px}
-summary{cursor:pointer;color:var(--c);font-weight:500;font-size:16px;list-style:none}
-summary::before{content:'▸ ';display:inline-block;transition:transform .2s}
-details[open] summary::before{transform:rotate(90deg)}
-.pf{margin-top:10px;padding-left:16px;border-left:2px solid var(--line);color:#c8cfea}
-.pf p{margin:.35em 0}.pf em{color:var(--teal);font-style:normal;font-family:'Space Grotesk',sans-serif;font-size:15px}
+details{margin-top:14px;border-top:1px dashed var(--line);padding-top:8px}
+summary{cursor:pointer;color:var(--c);font-weight:500;font-size:15px}
+.pf{margin-top:8px;padding-left:14px;border-left:2px solid var(--line);color:color-mix(in srgb,var(--txt) 85%,transparent)}
+.pf em{color:var(--teal);font-style:normal;font-family:system-ui;font-size:14px}
 .qed{float:right;color:var(--mut)}
-.card{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:8px 28px;align-items:start}
-.card.nf{display:block}
-.fig{margin:0;position:sticky;top:20px;transform:translateZ(40px)}
-.fig canvas{width:100%;aspect-ratio:3/2;display:block;border-radius:12px;background:radial-gradient(circle at 50% 40%,#1a2350,#0a0f20 75%);border:1px solid var(--line)}
-.fig figcaption{font:13px/1.4 'Space Grotesk',sans-serif;color:var(--mut);margin-top:8px}
-.tb{position:absolute;top:8px;right:8px;display:flex;gap:4px}
-.tb button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#0a0f20cc;color:var(--txt);cursor:pointer;font-size:15px}
-.tb button:hover{border-color:var(--teal);color:var(--teal)}
-.tip{display:none;position:absolute;left:8px;right:8px;bottom:34px;background:#05081af2;border:1px solid var(--amber);border-radius:10px;padding:8px 10px;font:13px/1.4 'Space Grotesk',sans-serif;pointer-events:none}
-.tip b{display:block;color:var(--amber)}
-.fig canvas{touch-action:pan-y;cursor:grab}
-.fig.big{position:fixed;inset:2vh 2vw;z-index:60;background:#05081a;padding:14px;border-radius:18px;box-shadow:0 0 0 100vmax #000b;display:flex;flex-direction:column;align-items:center;transform:none}
-.fig.big canvas{width:min(94vw,calc(80vh*1.5))}
-.fig.big .tb{top:20px;right:20px}.fig.big .tip{bottom:60px}.fig.big figcaption{font-size:15px}
-.st{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-.st button{background:none;border:1px solid var(--line);color:var(--txt);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:14px}
-.st button:hover{border-color:var(--teal);color:var(--teal)}
-.st span{color:var(--mut);font:14px 'Space Grotesk',sans-serif;margin:0 4px}
-.pf p.cur{background:#3fd0c914;border-radius:6px;padding:4px 8px;margin-left:-8px}
-@media(max-width:860px){.card{grid-template-columns:1fr}.fig{order:-1;position:static}}
-footer{text-align:center;color:var(--mut);padding:40px;border-top:1px solid var(--line);font-size:15px}
-@media(max-width:860px){.wrap{display:block}nav{display:none}body{font-size:17px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
-a:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
-
-/* ===== EFFETS VISUELS ===== */
-@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
-@property --th{syntax:'<color>';inherits:true;initial-value:#3fd0c9}
-@property --r{syntax:'<length>';inherits:false;initial-value:0px}
-:root{--th:#3fd0c9;transition:--th 1.2s ease}
-#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-.neb{position:fixed;z-index:-1;pointer-events:none;width:70vmax;height:70vmax;border-radius:50%;animation:drift 40s ease-in-out infinite alternate;will-change:transform;background:radial-gradient(circle,color-mix(in srgb,var(--th) 20%,transparent),transparent 65%)!important}
-.n1{left:-20vmax;top:-15vmax}.n2{right:-25vmax;top:30vh;animation-duration:55s}.n3{left:20vw;bottom:-35vmax;animation-duration:47s;animation-delay:-12s}
-@keyframes drift{to{transform:translate(12vw,-8vh) scale(1.25) rotate(40deg)}}
-#glow{position:fixed;left:0;top:0;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:5;background:radial-gradient(circle,#3fd0c91c,transparent 62%);mix-blend-mode:screen}
-#bar{box-shadow:0 0 14px var(--th),0 0 30px #3fd0c966;background:linear-gradient(90deg,var(--th),var(--amber))}
-.hc{will-change:transform,opacity}
-.hc h1{background:linear-gradient(100deg,#fff 10%,var(--teal) 30%,var(--vio) 50%,var(--amber) 70%,#fff 90%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 9s linear infinite;filter:drop-shadow(0 0 28px #3fd0c955)}
-@keyframes shine{to{background-position:-300% 0}}
-.hc::before,.hc::after{content:'';position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none}
-.hc::before{width:min(78vw,720px);aspect-ratio:1;border:1px dashed #3fd0c94d;transform:translate(-50%,-50%) rotateX(72deg) rotateZ(0);animation:orb 30s linear infinite;box-shadow:0 0 40px #3fd0c91f inset}
-.hc::after{width:min(56vw,520px);aspect-ratio:1;border:1px solid #f2b84b40;transform:translate(-50%,-50%) rotateX(72deg) rotateY(25deg) rotateZ(0);animation:orb 22s linear infinite reverse}
-@keyframes orb{to{rotate:360deg}}
-.mouse{position:absolute;bottom:30px;left:50%;translate:-50% 0;width:24px;height:38px;border:2px solid var(--mut);border-radius:14px}
-.mouse i{position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--teal);animation:wheel 1.6s ease-in-out infinite}
-@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
-.card{background:linear-gradient(135deg,#141c3ccc,#0b1128b8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:visible}
-.card::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;background:conic-gradient(from var(--a),transparent 60%,var(--c) 85%,#fff 92%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:0;transition:opacity .4s;animation:spin 4s linear infinite}
-.card:hover::before{opacity:1}
-@keyframes spin{to{--a:360deg}}
-.card::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 16%,transparent),transparent 70%)}
-.card:hover::after{opacity:1}
-.js .card:not(.in){opacity:0}
-.js .card.in{animation:rise .95s cubic-bezier(.2,.8,.2,1) backwards}
-@keyframes rise{from{opacity:0;transform:perspective(900px) rotateX(16deg) translateY(60px) scale(.96)}}
-.tag{text-shadow:0 0 14px var(--c)}
-h2{background:linear-gradient(90deg,#fff,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
-h2::after{content:'';display:block;height:3px;width:110px;margin-top:12px;border-radius:3px;background:linear-gradient(90deg,var(--amber),var(--rose),transparent);background-size:200% 100%;animation:shine 5s linear infinite;box-shadow:0 0 16px var(--amber)}
-nav a{transition:.25s}nav a:hover{transform:translateX(5px);opacity:1}
-nav a.on{border-left-width:3px;color:var(--th);border-color:var(--th);text-shadow:0 0 14px var(--th)}
-.fig canvas{box-shadow:0 0 30px -8px var(--c),inset 0 0 40px #3fd0c911}
-.go{box-shadow:0 0 24px #3fd0c933;animation:pulse 3s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 44px #3fd0c977}}
-@media(pointer:coarse){#glow{display:none}}
-@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important}.js .card:not(.in){opacity:1}}
-
-/* ===== TOOLS / PALETTE / GLOSSAIRE ===== */
-#tools{position:fixed;top:12px;right:14px;z-index:40;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-#tools button{height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--txt);cursor:pointer;font:500 14px 'Space Grotesk',sans-serif}
-#tools button:hover{border-color:var(--th);color:var(--th)}
-#tools kbd{opacity:.55;font:inherit;margin-left:8px;font-size:12px}
-#pal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;background:#02041099;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-#pal.on{display:flex}
-#pal .bx{width:min(640px,92vw);background:var(--panel);border:1px solid var(--th);border-radius:16px;box-shadow:0 30px 80px -20px var(--th);overflow:hidden}
-#pal input{width:100%;padding:18px 20px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--txt);font:18px 'Space Grotesk',sans-serif;outline:0}
-#pal ul{list-style:none;margin:0;padding:6px;max-height:50vh;overflow:auto}
-#pal li{padding:10px 14px;border-radius:10px;cursor:pointer;font:15px/1.4 'Space Grotesk',sans-serif}
-#pal li.sel{background:color-mix(in srgb,var(--th) 18%,transparent)}
-#pal li b{display:block}
-#pal li span{color:var(--mut);font-size:13px}
-#pal .ft{padding:8px 14px;color:var(--mut);font:12px 'Space Grotesk',sans-serif;border-top:1px solid var(--line)}
-.card.flash{outline:2px solid var(--th);outline-offset:6px;box-shadow:0 0 60px var(--th)}
-.gl{border-bottom:1px dotted var(--th);cursor:help}
-.gl:hover{color:var(--th)}
-#gtip{position:fixed;z-index:70;width:290px;padding:12px 14px;background:var(--panel);border:1px solid var(--th);border-radius:12px;box-shadow:0 20px 50px -15px #000;font:14px/1.45 'Space Grotesk',sans-serif;pointer-events:none;opacity:0;transform:translateY(6px);transition:.18s;color:var(--txt)}
-#gtip.on{opacity:1;transform:none}
-#gtip b{display:block;color:var(--th);margin-bottom:4px}
-#gtip svg{float:right;width:84px;height:64px;margin:0 0 4px 10px;color:var(--th)}
-[data-theme=light]{--bg:#f3f5fb;--panel:#fff;--line:#cdd5ee;--txt:#1a2140;--mut:#59638a;--teal:#0b9a93;--amber:#b57300;--rose:#d1355a;--vio:#6552e0;color-scheme:light}
-[data-theme=light] .card{background:linear-gradient(135deg,#ffffffee,#eef1fbd9)}
-[data-theme=light] .card i{color:#000}
-[data-theme=light] .pf{color:#2b3358}
-[data-theme=light] h2{background:linear-gradient(90deg,#1a2140,var(--teal));-webkit-background-clip:text;background-clip:text}
-[data-theme=light] .hc h1{background:linear-gradient(100deg,#1a2140 10%,var(--teal) 30%,var(--vio) 50%,var(--amber) 70%,#1a2140 90%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text}
-[data-theme=light] #stars{opacity:.25}
-[data-theme=light] .neb{opacity:.55}
-[data-theme=light] #glow{display:none}
-[data-theme=light] .go:hover{color:#fff}
-[data-theme=light] .tip{background:#fffffff2;color:var(--txt)}
-[data-theme=light] .fig.big{background:#fff}
-[data-theme=light] .tb button{background:#fffc}
-[data-theme=light] #pal{background:#dfe4f599}
-@media print{
- #ld,#hero,nav,#bar,#tools,#pal,#gtip,#glow,#stars,.neb,#morph,.fig,.st,footer,#graph{display:none!important}
- html,body{background:#fff!important}
- body{color:#111!important;font-size:12pt}
- .wrap{display:block;max-width:none;padding:0}
- main{max-width:none;padding:0}
- .card{display:block!important;background:none!important;-webkit-backdrop-filter:none;backdrop-filter:none;border:1px solid #bbb;border-left:4px solid #333;break-inside:avoid-page;opacity:1!important;animation:none!important;transform:none!important;margin:14px 0}
- .card::before,.card::after{display:none}
- .card *{color:#111!important;text-shadow:none!important}
- h2{color:#111!important;-webkit-text-fill-color:#111;background:none!important;margin:24px 0 8px;break-after:avoid}
- h2::after{display:none}
- .pf p{display:block!important;background:none!important}
- .gl{border:0}
-}
-
-/* ===== LOADER / MORPH ===== */
-#c{opacity:0}
-#morph{position:fixed;z-index:1;pointer-events:none;right:6vw;top:50%;width:min(520px,60vw);aspect-ratio:1;transform:translateY(-50%);transition:all .9s cubic-bezier(.2,.8,.2,1)}
-#morph.dock{right:auto;left:24px;top:auto;bottom:24px;width:190px;transform:none;opacity:.9}
-@media(max-width:860px){#morph.dock{display:none}#morph:not(.dock){right:50%;transform:translate(50%,-50%);width:80vw;opacity:.35}}
-#ld{position:fixed;inset:0;z-index:100;background:#090d1a;display:grid;place-items:center;cursor:pointer;--r:0px;-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 2px));transition:--r 1.3s cubic-bezier(.6,0,.2,1)}
-#ld canvas{width:min(80vw,420px);aspect-ratio:1}
-#ld.out{--r:150vmax}
-
-/* ===== GRAPHE 3D ===== */
-#graph{position:fixed;inset:0;z-index:84;display:none;background:#02040ecc;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
-#graph.on{display:flex}
-#graph .box{width:min(1200px,96vw);height:min(760px,92vh);background:radial-gradient(circle at 50% 40%,#0f1730,#040714 75%);border:1px solid var(--th);border-radius:18px;overflow:hidden;position:relative;box-shadow:0 40px 100px -30px var(--th)}
-#graph canvas{width:100%;height:100%;display:block}
-#graph .close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#0a0f20cc;color:var(--txt);cursor:pointer;font-size:18px;z-index:2}
-#graph .close:hover{border-color:var(--th);color:var(--th)}
-#graph .info{position:absolute;left:14px;bottom:14px;right:14px;background:#05081add;border:1px solid var(--th);border-radius:10px;padding:12px 16px;font:14px/1.5 'Space Grotesk',sans-serif;color:var(--txt);pointer-events:none;opacity:0;transition:.2s}
-#graph .info.on{opacity:1}
-#graph .info b{color:var(--th)}
-#graph .tip{position:absolute;top:14px;left:14px;font:12px 'Space Grotesk',sans-serif;color:var(--mut);background:#05081acc;padding:8px 12px;border-radius:8px;border:1px solid var(--line)}
-#tools #bGraph{color:var(--th)}
-#tools #bGraph:hover{background:var(--th);color:#05221f}
-
-/* ===== PERF PATCH ===== */
-.card{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#10173a!important}
-[data-theme=light] .card{background:#fff!important}
-.neb{animation:none!important;will-change:auto}
-#glow{display:none!important}
-.hc h1{animation:none!important;filter:none!important}
-h2::after{animation:none!important;box-shadow:none!important}
-.go,.hc::before,.hc::after{animation:none!important}
-.card::before{display:none}
-#bar{box-shadow:none;width:100%!important;transform-origin:left;transform:scaleX(0)}
-:root{transition:none!important}
+.st{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.st button{background:none;border:1px solid var(--line);color:var(--txt);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:14px}.st span{color:var(--mut);font:14px system-ui}.pf p.cur{background:color-mix(in srgb,var(--teal) 10%,transparent);border-radius:6px;padding:4px 8px;margin-left:-8px}
+footer{text-align:center;color:var(--mut);padding:30px;border-top:1px solid var(--line);font-size:14px}
+@media(max-width:860px){.wrap{display:block}nav{display:none}body{font-size:17px}#q{width:110px}}
+@media print{#tools,nav,#bar{display:none}details>*{display:block}}
 </style>
 </head>
 <body>
 <div id="bar"></div>
-<header id="hero">
-  <canvas id="c"></canvas>
-  <div class="hc">
-    <small>Cours de Topologie Générale · Semestre 5 · Réalisé par [Ton nom]</small>
-    <h1>Topologie</h1>
-    <p>Chapitre 1 – Espaces topologiques. Définitions, exemples et démonstrations complètes.</p>
-    <a class="go" href="#s1">Commencer le cours</a>
-  </div>
-</header>
-<div class="wrap">
-  <nav id="nav"></nav>
-  <main id="main"></main>
-</div>
-<footer>Réalisé par [Ton nom] · Topologie Générale</footer>
-
+<div id="tools"><input id="q" placeholder="🔍 Rechercher" autocomplete="off"><button id="bT" title="Clair / sombre">◐</button></div>
+<header><canvas id="sp"></canvas><canvas id="hc"></canvas><small>Cours · Semestre 5</small><h1>Topologie & Espaces vectoriels normés</h1><p>Topologie générale, compacité, connexité, EVN, Banach, topologie de ℝⁿ, limites, continuité et calcul différentiel.</p></header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<footer>Réalisé par [Ton nom] · Topologie & Analyse</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ===== CONTENU DU COURS ===== */
 const C=[
-{id:'s1',h:'1.1 Définitions et exemples',items:[
-{t:'def',n:'1.1.1',ti:'Topologie',b:`<p>Soit <i>E</i> un ensemble non vide. Une <b>topologie</b> sur <i>E</i> est une famille τ de parties de <i>E</i> telle que :</p><ol type="i"><li>∅ ∈ τ et <i>E</i> ∈ τ ;</li><li>l’intersection de deux éléments de τ est dans τ ;</li><li>toute réunion (finie ou infinie) d’éléments de τ est dans τ.</li></ol><p>Les éléments de τ sont les <b>ouverts</b>. Le couple (<i>E</i>, τ) est un <b>espace topologique</b>.</p>`},
-{t:'ex',n:'1.1.2',ti:'Exemples fondamentaux',b:`<ul><li><b>Topologie discrète</b> τ<sub>d</sub> = 𝒫(<i>E</i>) : toute partie est ouverte.</li><li><b>Topologie grossière</b> τ<sub>g</sub> = {∅, <i>E</i>}.</li><li>Sur <i>E</i> = {a, b} : τ₁ = {∅, {a}, <i>E</i>} et τ₂ = {∅, {b}, <i>E</i>} sont des topologies.</li><li>Sur ℝ : la <b>topologie usuelle</b> τ<sub>u</sub> est formée de ∅, ℝ et des réunions quelconques d’intervalles ]a, b[.</li></ul>`},
-{t:'exo',n:'1.1.3',ti:'Exercice',b:`<p>Montrer que la famille formée de ∅, ℝ et des intervalles ]a, b[ n’est pas une topologie sur ℝ.</p>`,p:`<p><em>Idée.</em> Il faut chercher une réunion qui sort de la famille.</p><p>]0,1[ et ]2,3[ sont dans la famille, mais ]0,1[ ∪ ]2,3[ n’est ni ∅, ni ℝ, ni un intervalle. L’axiome iii) échoue.</p>`},
-{t:'exo',n:'1.1.4',ti:'Exercice',b:`<p>Une topologie sur <i>E</i> est discrète ⇔ tout singleton est ouvert.</p>`,p:`<p><em>(⇒)</em> Si τ = 𝒫(<i>E</i>), chaque {x} est une partie, donc un ouvert.</p><p><em>(⇐)</em> Soit A ⊂ <i>E</i>. Alors A = ⋃<sub>x∈A</sub> {x} est une réunion d’ouverts, donc A ∈ τ. Ainsi τ = 𝒫(<i>E</i>). <span class="qed">∎</span></p>`},
-{t:'def',n:'1.1.5',ti:'Fermé',b:`<p>Une partie <i>F</i> de <i>E</i> est un <b>fermé</b> si son complémentaire <i>F</i><sup>c</sup> est un ouvert.</p><p>Pour τ₁ = {∅, {a}, <i>E</i>}, les fermés sont ∅, {b}, <i>E</i>.</p>`},
-{t:'rem',n:'1.1.7',ti:'Remarques',b:`<ul><li>Les ouverts sont stables par réunion quelconque et intersection finie ; les fermés par intersection quelconque et réunion finie.</li><li>Dans ℝ : ]a,b[ est ouvert non fermé ; [a,b] est fermé non ouvert ; ]a,b] n’est ni l’un ni l’autre.</li><li>∅ et <i>E</i> sont à la fois ouverts et fermés.</li><li>Une intersection infinie d’ouverts n’est pas toujours ouverte : ⋂<sub>n≥1</sub> ]−1/n, 1/n[ = {0}.</li><li>Une réunion infinie de fermés n’est pas toujours fermée : ⋃<sub>n≥1</sub> [1/n, 1] = ]0, 1].</li></ul>`},
-{t:'def',n:'1.1.8',ti:'Voisinage',b:`<p>Soit x ∈ <i>E</i>. Une partie <i>U</i> est un <b>voisinage</b> de x s’il existe un ouvert <i>W</i> tel que x ∈ <i>W</i> ⊂ <i>U</i>. On note 𝒱<sub>x</sub> l’ensemble des voisinages de x.</p><p>Exemple : pour τ₁ sur {a,b}, {b} n’est pas un voisinage de b, mais <i>E</i> l’est.</p>`},
-{t:'thm',n:'1.1.11',ti:'Caractérisation des ouverts',b:`<p><i>A</i> ⊂ <i>E</i> est ouvert ⇔ <i>A</i> est un voisinage de chacun de ses points.</p>`,p:`<p><em>(⇒)</em> Évident : A est un ouvert contenant x et contenu dans A.</p><p><em>(⇐)</em> Pour tout x ∈ A, il existe un ouvert O<sub>x</sub> avec x ∈ O<sub>x</sub> ⊂ A.</p><p>Donc ⋃<sub>x∈A</sub> O<sub>x</sub> ⊂ A, et A ⊂ ⋃<sub>x∈A</sub> O<sub>x</sub> car x ∈ O<sub>x</sub>.</p><p>Ainsi A = ⋃<sub>x∈A</sub> O<sub>x</sub> est une réunion d’ouverts, donc un ouvert. <span class="qed">∎</span></p>`},
-{t:'def',n:'1.1.12',ti:'Base d’ouverts, base de voisinages',b:`<ul><li>Une famille 𝓑 ⊂ τ est une <b>base d’ouverts</b> si tout ouvert est réunion d’éléments de 𝓑.</li><li>𝓑<sub>x</sub> ⊂ 𝒱<sub>x</sub> est une <b>base de voisinages</b> de x si ∀V ∈ 𝒱<sub>x</sub>, ∃b ∈ 𝓑<sub>x</sub>, x ∈ b ⊂ V.</li></ul><p>Exemples : les singletons pour la discrète ; les ]a,b[ pour ℝ ; (]x−1/n, x+1/n[)<sub>n≥1</sub> en x. En revanche, les ]−∞,a[ et ]a,+∞[ ne forment pas une base de τ<sub>u</sub>.</p>`},
-{t:'prop',n:'1.1.14',ti:'Base d’ouverts ⇔ bases de voisinages',b:`<p>𝓑 ⊂ τ est une base d’ouverts ⇔ pour tout x, 𝓑<sub>x</sub> = {b ∈ 𝓑 : x ∈ b} est une base de voisinages de x.</p>`,p:`<p><em>(⇒)</em> Soit V ∈ 𝒱<sub>x</sub> : il existe W ouvert, x ∈ W ⊂ V. Comme W = ⋃ b<sub>i</sub> (b<sub>i</sub> ∈ 𝓑), x appartient à un b<sub>i₀</sub>, d’où x ∈ b<sub>i₀</sub> ⊂ V.</p><p><em>(⇐)</em> Soit O ouvert et x ∈ O. O ∈ 𝒱<sub>x</sub>, donc il existe b<sub>x</sub> ∈ 𝓑 avec x ∈ b<sub>x</sub> ⊂ O. Alors O = ⋃<sub>x∈O</sub> b<sub>x</sub>. <span class="qed">∎</span></p>`},
-{t:'def',n:'1.1.15',ti:'Espace séparé (Hausdorff)',b:`<p>(<i>E</i>, τ) est <b>séparé</b> si pour x ≠ x′ il existe W ∈ 𝒱<sub>x</sub> et W′ ∈ 𝒱<sub>x′</sub> avec W ∩ W′ = ∅. De façon équivalente, on peut prendre W, W′ ouverts.</p><p>La topologie grossière n’est pas séparée ; la discrète et (ℝ, τ<sub>u</sub>) le sont.</p>`},
-{t:'prop',n:'1.1.18',ti:'Singletons fermés',b:`<p>Dans un espace séparé, tout singleton est fermé.</p>`,p:`<p>Soit x ∈ <i>E</i>. Montrons que {x}<sup>c</sup> est ouvert.</p><p>Soit x′ ∈ {x}<sup>c</sup>, donc x ≠ x′. Il existe des ouverts W ∋ x et W′ ∋ x′ disjoints. Alors x ∉ W′, donc W′ ⊂ {x}<sup>c</sup>.</p><p>Ainsi {x}<sup>c</sup> est un voisinage de chacun de ses points : c’est un ouvert (th. 1.1.11), et {x} est fermé. <span class="qed">∎</span></p>`}
+{id:'s1',h:'Chap. 1 · Espaces topologiques',items:[
+{t:'def',n:'1.1',ti:'Topologie',b:`<p>Soit <i>E</i> ≠ ∅. Une <b>topologie</b> τ est une famille de parties de <i>E</i> telle que : (i) ∅, <i>E</i> ∈ τ ; (ii) l’intersection de deux éléments de τ est dans τ ; (iii) toute réunion (finie ou infinie) d’éléments de τ est dans τ. Les éléments de τ sont les <b>ouverts</b> ; (<i>E</i>,τ) est un <b>espace topologique</b>.</p>`},
+{t:'ex',n:'1.2',ti:'Exemples',b:`<ul><li><b>Discrète</b> τ<sub>d</sub> = 𝒫(<i>E</i>) ; <b>grossière</b> τ<sub>g</sub> = {∅, <i>E</i>}.</li><li>Sur {a,b} : {∅,{a},<i>E</i>} est une topologie.</li><li>Sur ℝ : topologie usuelle = réunions d’intervalles ]a,b[.</li></ul>`},
+{t:'exo',n:'1.3',ti:'Exercices',b:`<p>(1) ∅, ℝ et les ]a,b[ ne forment pas une topologie. (2) Une topologie est discrète ⇔ tout singleton est ouvert.</p>`,p:`<p>(1) ]0,1[ ∪ ]2,3[ n’est pas dans la famille : (iii) échoue.</p><p>(2) (⇐) A = ⋃<sub>x∈A</sub>{x} est réunion d’ouverts. <span class="qed">∎</span></p>`},
+{t:'def',n:'1.4',ti:'Fermé et voisinage',b:`<p>Un <b>fermé</b> est une partie dont le complémentaire est ouvert. <i>U</i> est un <b>voisinage</b> de x s’il existe un ouvert W avec x ∈ W ⊂ <i>U</i> ; on note 𝒱<sub>x</sub> l’ensemble des voisinages.</p>`},
+{t:'rem',n:'1.5',ti:'Remarques',b:`<ul><li>Ouverts : stables par réunion quelconque, intersection finie. Fermés : l’inverse.</li><li>∅ et <i>E</i> sont ouverts et fermés ; ]a,b] n’est ni l’un ni l’autre dans ℝ.</li><li>⋂ ]−1/n,1/n[ = {0} : une intersection infinie d’ouverts n’est pas ouverte.</li><li>⋃ [1/n,1] = ]0,1] : une réunion infinie de fermés n’est pas fermée.</li></ul>`},
+{t:'thm',n:'1.6',ti:'Caractérisation des ouverts',b:`<p>A est ouvert ⇔ A est voisinage de chacun de ses points.</p>`,p:`<p>(⇐) Pour x ∈ A, il existe un ouvert O<sub>x</sub> avec x ∈ O<sub>x</sub> ⊂ A.</p><p>Donc A = ⋃<sub>x∈A</sub> O<sub>x</sub>, réunion d’ouverts : A est ouvert. <span class="qed">∎</span></p>`},
+{t:'def',n:'1.7',ti:'Bases',b:`<p>𝓑 ⊂ τ est une <b>base d’ouverts</b> si tout ouvert est réunion d’éléments de 𝓑. 𝓑<sub>x</sub> ⊂ 𝒱<sub>x</sub> est une <b>base de voisinages</b> de x si ∀V ∈ 𝒱<sub>x</sub>, ∃b ∈ 𝓑<sub>x</sub>, x ∈ b ⊂ V. Exemple : (]x−1/n, x+1/n[)<sub>n≥1</sub> en x ; les ]−∞,a[, ]a,+∞[ ne forment pas une base de τ<sub>u</sub>.</p>`},
+{t:'prop',n:'1.8',ti:'Base ⇔ bases de voisinages',b:`<p>𝓑 est une base d’ouverts ⇔ pour tout x, {b ∈ 𝓑 : x ∈ b} est une base de voisinages de x.</p>`,p:`<p>(⇒) V ∈ 𝒱<sub>x</sub> ⊃ W ouvert ∋ x ; W = ⋃b<sub>i</sub>, donc x ∈ b<sub>i₀</sub> ⊂ V.</p><p>(⇐) O ouvert : pour x ∈ O il existe b<sub>x</sub> avec x ∈ b<sub>x</sub> ⊂ O, d’où O = ⋃ b<sub>x</sub>. <span class="qed">∎</span></p>`},
+{t:'def',n:'1.9',ti:'Espace séparé (Hausdorff)',b:`<p>Pour x ≠ x′ il existe des voisinages (ou des ouverts) disjoints. Grossière : non séparée ; discrète et (ℝ,τ<sub>u</sub>) : séparées.</p>`},
+{t:'prop',n:'1.10',ti:'Singletons fermés',b:`<p>Dans un espace séparé, tout singleton est fermé.</p>`,p:`<p>Soit x′ ≠ x : il existe W ∋ x et W′ ∋ x′ ouverts disjoints, donc W′ ⊂ {x}<sup>c</sup>.</p><p>{x}<sup>c</sup> est voisinage de chacun de ses points : ouvert. <span class="qed">∎</span></p>`},
+{t:'def',n:'1.11',ti:'Intérieur, adhérence, frontière',b:`<ul><li><b>Intérieur</b> A° : points a tels que A ∈ 𝒱<sub>a</sub>.</li><li><b>Adhérence</b> <o>A</o> : points a tels que ∀V ∈ 𝒱<sub>a</sub>, V ∩ A ≠ ∅.</li><li><b>Point d’accumulation</b> : ∀V, V ∩ (A∖{a}) ≠ ∅. <b>Point isolé</b> : ∃V, V ∩ A = {a}.</li><li><b>Frontière</b> ∂A = <o>A</o> ∖ A°.</li></ul><p>Exemple : ℝ, A = ]a,b] : A° = ]a,b[, <o>A</o> = [a,b].</p>`},
+{t:'prop',n:'1.12',ti:'Propriétés',b:`<ol><li>A° ⊂ A ⊂ <o>A</o> ; A° est ouvert, <o>A</o> est fermé.</li><li>A° = plus grand ouvert inclus dans A ; <o>A</o> = plus petit fermé contenant A.</li><li>(<o>A</o>)<sup>c</sup> = (A<sup>c</sup>)° ; ∂A = <o>A</o> ∩ <o>A<sup>c</sup></o>.</li><li>A ⊂ B ⇒ A° ⊂ B° et <o>A</o> ⊂ <o>B</o> ; U ouvert ⇔ U° = U ; F fermé ⇔ <o>F</o> = F.</li><li><o>A∪B</o> = <o>A</o> ∪ <o>B</o> ; (A∩B)° = A° ∩ B° ; <o>A∩B</o> ⊂ <o>A</o> ∩ <o>B</o> ; A° ∪ B° ⊂ (A∪B)°.</li></ol>`,p:`<p><em>A° ouvert.</em> a ∈ A° : ∃W ouvert, a ∈ W ⊂ A ; tout x ∈ W a A comme voisinage, donc W ⊂ A°.</p><p><em>Plus grand ouvert.</em> U ouvert ⊂ A ⇒ A voisinage de tout x ∈ U ⇒ U ⊂ A°.</p><p><em>Complémentaire.</em> x ∉ <o>A</o> ⇔ ∃V ∈ 𝒱<sub>x</sub>, V ∩ A = ∅ ⇔ x ∈ (A<sup>c</sup>)°.</p><p><em>Plus petit fermé.</em> A ⊂ F fermé ⇒ F<sup>c</sup> ⊂ A<sup>c</sup> ouvert ⇒ F<sup>c</sup> ⊂ (A<sup>c</sup>)° = (<o>A</o>)<sup>c</sup>. <span class="qed">∎</span></p>`},
+{t:'prop',n:'1.13',ti:'Topologie induite',b:`<p>Pour A ⊂ <i>E</i>, τ<sub>A</sub> = {O ∩ A : O ∈ τ} est une topologie sur A. Les ouverts de A ne sont pas toujours ouverts de <i>E</i> : dans ℝ, ]0,1] = [−1,1] ∩ ]0,+∞[ est ouvert dans [−1,1] mais pas dans ℝ. V est voisinage de a dans A ⇔ V = W ∩ A avec W ∈ 𝒱<sub>a</sub>(<i>E</i>).</p>`,p:`<p>∅ = ∅∩A, A = <i>E</i>∩A ; (O₁∩A)∩(O₂∩A) = (O₁∩O₂)∩A ; ⋃(O<sub>i</sub>∩A) = (⋃O<sub>i</sub>)∩A. <span class="qed">∎</span></p>`},
+{t:'def',n:'1.14',ti:'Topologies quotient et produit',b:`<ul><li><b>Quotient</b> : ℛ relation d’équivalence, q : <i>E</i> → <i>E</i>/ℛ ; τ̂ = {U : q<sup>−1</sup>(U) ∈ τ}.</li><li><b>Produit</b> : τ<sub>π</sub> = réunions de u₁×…×u<sub>n</sub> avec u<sub>i</sub> ∈ τ<sub>i</sub>.</li></ul>`},
+{t:'def',n:'1.15',ti:'Limite et continuité',b:`<p>f tend vers b en a si ∀V ∈ 𝒱<sub>b</sub>, ∃U ∈ 𝒱<sub>a</sub>, f(U) ⊂ V. f est <b>continue en a</b> si f tend vers f(a). Si l’arrivée est grossière, tout point est limite.</p>`},
+{t:'thm',n:'1.16',ti:'Unicité de la limite',b:`<p>Si l’espace d’arrivée est séparé, la limite est unique.</p>`,p:`<p>Deux limites b ≠ b′ : V ∩ V′ = ∅ avec V ∈ 𝒱<sub>b</sub>, V′ ∈ 𝒱<sub>b′</sub>.</p><p>Il existe U, U′ ∈ 𝒱<sub>a</sub> avec f(U) ⊂ V, f(U′) ⊂ V′, donc f(U∩U′) ⊂ V∩V′ = ∅, alors que a ∈ U∩U′ : contradiction. <span class="qed">∎</span></p>`},
+{t:'thm',n:'1.17',ti:'Caractérisations de la continuité',b:`<p>Équivalence : (a) f continue ; (b) image réciproque d’un ouvert = ouvert ; (c) image réciproque d’un fermé = fermé ; (d) ∀A, f(<o>A</o>) ⊂ <o>f(A)</o>.</p>`,p:`<p><em>a⇒d.</em> a ∈ <o>A</o>, W ∈ 𝒱<sub>f(a)</sub> : ∃U, f(U) ⊂ W ; U∩A ≠ ∅ donc W∩f(A) ≠ ∅ : f(a) ∈ <o>f(A)</o>.</p><p><em>d⇒c.</em> V fermé, W = f<sup>−1</sup>(V) : f(<o>W</o>) ⊂ <o>f(W)</o> ⊂ V, donc <o>W</o> ⊂ W.</p><p><em>c⇒b.</em> Passer au complémentaire. <em>b⇒a.</em> V ∈ 𝒱<sub>f(x₀)</sub> ⊃ W ouvert ; U = f<sup>−1</sup>(W) convient. <span class="qed">∎</span></p>`},
+{t:'prop',n:'1.18',ti:'Composition, homéomorphisme',b:`<p>La composée de deux continues est continue : (g∘f)<sup>−1</sup>(V) = f<sup>−1</sup>(g<sup>−1</sup>(V)). Un <b>homéomorphisme</b> est une bijection continue de réciproque continue. Id : (<i>E</i>,τ) → (<i>E</i>,τ′) est un homéomorphisme ⇔ τ = τ′.</p>`}
 ]},
-{id:'s2',h:'1.2 Intérieur, adhérence, frontière',items:[
-{t:'def',n:'1.2.1',ti:'Les cinq notions',b:`<p>Soit A ⊂ <i>E</i> et a ∈ <i>E</i>.</p><ul><li><b>Intérieur</b> : a est intérieur à A si A ∈ 𝒱<sub>a</sub>. On note A° l’ensemble de ces points.</li><li><b>Adhérence</b> : a est adhérent à A si ∀V ∈ 𝒱<sub>a</sub>, V ∩ A ≠ ∅. On note <o>A</o>.</li><li><b>Point d’accumulation</b> : ∀V ∈ 𝒱<sub>a</sub>, V ∩ (A∖{a}) ≠ ∅.</li><li><b>Point isolé</b> : ∃V ∈ 𝒱<sub>a</sub>, V ∩ A = {a}.</li><li><b>Frontière</b> : ∂A = <o>A</o> ∖ A°.</li></ul>`},
-{t:'ex',n:'1.2.2',ti:'Exemples',b:`<ul><li>τ₁ = {∅,{a},<i>E</i>}, A = {b} : A° = ∅, <o>A</o> = {b}, ∂A = {b}, b est isolé, aucun point d’accumulation.</li><li>Discrète, A ≠ ∅ : A° = <o>A</o> = A, ∂A = ∅, tous les points sont isolés.</li><li>ℝ usuelle, A = ]a,b] : A° = ]a,b[, <o>A</o> = [a,b], aucun point isolé.</li></ul>`},
-{t:'prop',n:'1.2.3',ti:'Propriétés de l’intérieur et de l’adhérence',b:`<ol><li>A° ⊂ A ⊂ <o>A</o>.</li><li>A° est un ouvert.</li><li>A° est le plus grand ouvert contenu dans A : A° = ⋃<sub>O⊂A</sub> O.</li><li>(<o>A</o>)<sup>c</sup> = (A<sup>c</sup>)° ; <o>A</o> est un fermé.</li><li><o>A</o> est le plus petit fermé contenant A : <o>A</o> = ⋂<sub>A⊂F</sub> F.</li></ol>`,p:`<p><em>2.</em> Soit a ∈ A° : il existe un ouvert W avec a ∈ W ⊂ A. Pour x ∈ W, A est un voisinage de x, donc x ∈ A° : W ⊂ A°. Ainsi A° est voisinage de chacun de ses points, donc ouvert.</p><p><em>3.</em> Soit U ouvert, U ⊂ A. Pour x ∈ U, A est voisinage de x, donc U ⊂ A°. Avec 1. et 2., A° est le plus grand.</p><p><em>4.</em> x ∈ (<o>A</o>)<sup>c</sup> ⇔ ∃V ∈ 𝒱<sub>x</sub>, V ∩ A = ∅ ⇔ ∃V ∈ 𝒱<sub>x</sub>, V ⊂ A<sup>c</sup> ⇔ x ∈ (A<sup>c</sup>)°. Comme (A<sup>c</sup>)° est ouvert, <o>A</o> est fermé.</p><p><em>5.</em> Soit F fermé, A ⊂ F. Alors F<sup>c</sup> est un ouvert inclus dans A<sup>c</sup>, donc F<sup>c</sup> ⊂ (A<sup>c</sup>)° = (<o>A</o>)<sup>c</sup>, c’est-à-dire <o>A</o> ⊂ F. <span class="qed">∎</span></p>`},
-{t:'prop',n:'1.2.4–1.2.6',ti:'Autres propriétés',b:`<ul><li>∂A = <o>A</o> ∩ <o>A<sup>c</sup></o>.</li><li>A ⊂ B ⇒ A° ⊂ B° et <o>A</o> ⊂ <o>B</o>.</li><li>U ouvert ⇔ U° = U ; F fermé ⇔ <o>F</o> = F.</li><li><o>A ∪ B</o> = <o>A</o> ∪ <o>B</o> ; (A ∩ B)° = A° ∩ B°.</li><li><o>A ∩ B</o> ⊂ <o>A</o> ∩ <o>B</o> ; A° ∪ B° ⊂ (A ∪ B)°.</li></ul>`,p:`<p><em>Pour ∂A.</em> ∂A = <o>A</o> ∩ (A°)<sup>c</sup>. Or (A°)<sup>c</sup> = <o>A<sup>c</sup></o> (appliquer 1.2.3 (4) à A<sup>c</sup>). D’où ∂A = <o>A</o> ∩ <o>A<sup>c</sup></o>. <span class="qed">∎</span></p>`}
+{id:'s2',h:'Chap. 2 · Espaces compacts – Espaces connexes',items:[
+{t:'def',n:'2.1',ti:'Compact',b:`<p>Un <b>recouvrement ouvert</b> de <i>E</i> est une famille d’ouverts de réunion <i>E</i>. <i>E</i> est <b>compact</b> s’il est séparé et si de tout recouvrement ouvert on peut extraire un sous-recouvrement fini (Borel-Lebesgue). ℝ n’est pas compact : (]−∞,n[)<sub>n</sub> n’a pas de sous-recouvrement fini.</p>`},
+{t:'thm',n:'2.2',ti:'Version fermés',b:`<p>E compact ⇔ pour toute famille de fermés d’intersection vide, une sous-famille finie est d’intersection vide. En particulier une suite décroissante de fermés d’intersection vide est stationnaire en ∅.</p>`,p:`<p>Passer aux complémentaires : (⋂F<sub>i</sub>)<sup>c</sup> = ⋃F<sub>i</sub><sup>c</sup>, et F<sub>i</sub> fermé ⇔ F<sub>i</sub><sup>c</sup> ouvert. <span class="qed">∎</span></p>`},
+{t:'thm',n:'2.3',ti:'Compact ⇒ fermé (espace séparé)',b:`<p>Toute partie compacte d’un espace séparé est fermée.</p>`,p:`<p>Soit x ∉ A. Pour tout y ∈ A il existe O<sub>xy</sub> ∋ x et O<sub>y</sub> ∋ y disjoints.</p><p>A ⊂ O<sub>y₁</sub> ∪ … ∪ O<sub>yₙ</sub> (compacité). O = ⋂O<sub>xy<sub>i</sub></sub> est un ouvert contenant x, disjoint de A : A<sup>c</sup> est voisinage de chacun de ses points. <span class="qed">∎</span></p>`},
+{t:'thm',n:'2.4',ti:'Fermé d’un compact',b:`<p>Tout fermé d’un espace compact est compact. Une réunion finie de compacts est compacte ; une intersection quelconque de compacts est compacte.</p>`},
+{t:'thm',n:'2.5',ti:'Image d’un compact',b:`<p>Si f est continue et A compact, f(A) est compact. Conséquence : toute continue d’un compact dans ℝ admet un max et un min. Une bijection continue d’un compact dans un séparé est un homéomorphisme. (Tychonoff) Un produit fini d’espaces séparés est compact ⇔ chaque facteur l’est.</p>`,p:`<p>Soit f(A) ⊂ ⋃U<sub>i</sub>. Alors A ⊂ ⋃f<sup>−1</sup>(U<sub>i</sub>), recouvrement ouvert : sous-recouvrement fini I₀, donc f(A) ⊂ ⋃<sub>I₀</sub>U<sub>i</sub>. <span class="qed">∎</span></p>`},
+{t:'rem',n:'2.6',ti:'Remarque',b:`<p>L’image réciproque d’un compact n’est pas toujours compacte (f constante).</p>`},
+{t:'def',n:'2.7',ti:'Localement compact',b:`<p>Séparé, et tout point possède un voisinage compact (ex : ℝ). Alors tout point a un système fondamental de voisinages compacts. <b>Compactifié d’Alexandroff</b> : <i>E</i> s’identifie au complémentaire d’un point ω (« point à l’infini ») dans un compact Ê.</p>`},
+{t:'def',n:'2.8',ti:'Connexe',b:`<p><i>E</i> est <b>connexe</b> s’il n’admet pas de partition en deux ouverts non vides.</p>`},
+{t:'thm',n:'2.9',ti:'Caractérisations',b:`<p>Équivalence : (a) E connexe ; (b) pas de partition en deux fermés ; (c) seules parties ouvertes et fermées : ∅ et E ; (d) toute continue E → {0,1} (discret) est constante.</p>`,p:`<p>a⇒b, b⇒c : si F est ouvert-fermé, E = F ∪ F<sup>c</sup>.</p><p>c⇒d : f<sup>−1</sup>({0}) est ouvert-fermé. d⇒a : sinon E = F ∪ F′ et f = 1<sub>F</sub> est continue non constante. <span class="qed">∎</span></p>`},
+{t:'thm',n:'2.10',ti:'Image d’un connexe',b:`<p>L’image d’un connexe par une continue est connexe ; un quotient d’un connexe est connexe. ℝ est connexe.</p>`,p:`<p>Si f(E) = A ⊔ B (ouverts), alors E = f<sup>−1</sup>(A) ⊔ f<sup>−1</sup>(B), partition en deux ouverts : contradiction. <span class="qed">∎</span></p>`},
+{t:'def',n:'2.11',ti:'Connexe par arcs',b:`<p>Un <b>chemin</b> de a à b est une application continue f : [α,β] → E avec f(α)=a, f(β)=b. <i>E</i> est <b>connexe par arcs</b> si deux points quelconques sont joints par un chemin. Alors E est connexe (la réciproque est fausse). ℝⁿ, les segments et les pavés sont connexes par arcs ; l’image continue d’un connexe par arcs l’est aussi (h = f∘g).</p>`}
 ]},
-{id:'s3',h:'1.3 Topologie induite, quotient, produit',items:[
-{t:'prop',n:'1.3.1',ti:'Topologie induite',b:`<p>Soit A ⊂ <i>E</i>. La famille τ<sub>A</sub> = {O ∩ A : O ∈ τ} est une topologie sur A, appelée <b>topologie induite</b>. (A, τ<sub>A</sub>) est un <b>sous-espace</b>.</p>`,p:`<p>∅ = ∅ ∩ A et A = <i>E</i> ∩ A.</p><p>Si U = O₁ ∩ A et V = O₂ ∩ A, alors U ∩ V = (O₁ ∩ O₂) ∩ A avec O₁ ∩ O₂ ∈ τ.</p><p>Si u<sub>i</sub> = O<sub>i</sub> ∩ A, alors ⋃ u<sub>i</sub> = (⋃ O<sub>i</sub>) ∩ A avec ⋃ O<sub>i</sub> ∈ τ. <span class="qed">∎</span></p>`},
-{t:'ex',n:'1.3.4',ti:'Un ouvert de A pas ouvert de E',b:`<p>Dans ℝ, A = [−1, 1]. L’ensemble ]0,1] = A ∩ ]0,+∞[ est ouvert dans A, mais ni ouvert ni fermé dans ℝ. En général, les ouverts de τ<sub>A</sub> ne sont pas des ouverts de (<i>E</i>, τ).</p>`},
-{t:'prop',n:'1.3.5',ti:'Voisinages dans un sous-espace',b:`<p>Pour a ∈ A : V est un voisinage de a dans A ⇔ V = W ∩ A avec W voisinage de a dans <i>E</i>.</p>`,p:`<p><em>(⇒)</em> V voisinage de a dans A : il existe U ∈ τ<sub>A</sub>, a ∈ U ⊂ V, avec U = W ∩ A, W ouvert de <i>E</i>. Posons O = W ∪ V : c’est un voisinage de a dans <i>E</i>, et O ∩ A = (W ∩ A) ∪ (V ∩ A) = U ∪ V = V.</p><p><em>(⇐)</em> Si W ∈ 𝒱<sub>a</sub>, il existe U ouvert avec a ∈ U ⊂ W. Alors a ∈ U ∩ A ⊂ W ∩ A, et U ∩ A ∈ τ<sub>A</sub>. Donc W ∩ A est un voisinage de a dans A. <span class="qed">∎</span></p>`},
-{t:'def',n:'1.3.6',ti:'Topologie quotient',b:`<p>Soit ℛ une relation d’équivalence sur <i>E</i>, <i>Ê</i> = <i>E</i>/ℛ et q : <i>E</i> → <i>Ê</i>, x ↦ [x] la surjection canonique. La famille <b>τ̂ = {U ⊂ <i>Ê</i> : q<sup>−1</sup>(U) ∈ τ}</b> est une topologie sur <i>Ê</i> : c’est la <b>topologie quotient</b>.</p>`},
-{t:'def',n:'1.3.8',ti:'Topologie produit',b:`<p>Soit (<i>E<sub>i</sub></i>, τ<sub>i</sub>)<sub>1≤i≤n</sub> et <i>E</i> = <i>E</i>₁ × … × <i>E<sub>n</sub></i>. La famille τ<sub>π</sub> des réunions de produits u₁ × … × u<sub>n</sub> avec u<sub>i</sub> ∈ τ<sub>i</sub> est une topologie sur <i>E</i> : la <b>topologie produit</b>.</p>`}
+{id:'s3',h:'Chap. 3 · Espaces vectoriels normés et Banach',items:[
+{t:'def',n:'3.1',ti:'Norme',b:`<p>Soit <i>E</i> un 𝕂-ev (𝕂 = ℝ ou ℂ). Une <b>norme</b> est ‖·‖ : <i>E</i> → ℝ₊ telle que : (i) ‖x‖ = 0 ⇔ x = 0 ; (ii) ‖λx‖ = |λ|‖x‖ ; (iii) ‖x+y‖ ≤ ‖x‖+‖y‖. Un <b>evn</b> est un couple (<i>E</i>,‖·‖). Remarque : si (i) est remplacée par p(0)=0, c’est une semi-norme.</p>`},
+{t:'prop',n:'3.2',ti:'Inégalité triangulaire renversée',b:`<p>∀x,y : |‖x‖ − ‖y‖| ≤ ‖x−y‖.</p>`,p:`<p>x = (x−y)+y donne ‖x‖−‖y‖ ≤ ‖x−y‖.</p><p>En échangeant x et y : ‖y‖−‖x‖ ≤ ‖y−x‖ = ‖x−y‖. <span class="qed">∎</span></p>`},
+{t:'ex',n:'3.3',ti:'Normes usuelles',b:`<ul><li>Sur ℝⁿ : ‖x‖₁ = Σ|x<sub>i</sub>|, ‖x‖₂ = (Σx<sub>i</sub>²)<sup>1/2</sup> (euclidienne), ‖x‖<sub>∞</sub> = sup|x<sub>i</sub>|.</li><li>Sur 𝒞([a,b]) : ‖f‖<sub>∞</sub> = sup|f|, ‖f‖₁ = ∫|f|, ‖f‖₂ = (∫f²)<sup>1/2</sup>, ‖f‖<sub>α</sub> = (∫|f|<sup>α</sup>)<sup>1/α</sup> (Minkowski).</li><li>Suites : ℓ¹, ℓ², ℓ<sup>∞</sup>, c₀.</li></ul>`,p:`<p><em>‖·‖₁ sur ℝⁿ.</em> ‖x‖₁ = 0 ⇔ tous les |x<sub>i</sub>| = 0 ⇔ x = 0. |x<sub>i</sub>+y<sub>i</sub>| ≤ |x<sub>i</sub>|+|y<sub>i</sub>|, on somme. ‖λx‖₁ = |λ|‖x‖₁.</p><p><em>‖·‖₁ sur 𝒞([0,1]).</em> ∫|f| = 0 avec f continue ⇒ |f| = 0 partout ⇒ f = 0. <span class="qed">∎</span></p>`},
+{t:'prop',n:'3.4',ti:'Distance associée',b:`<p>Une <b>distance</b> d vérifie : d(x,y)=0 ⇔ x=y ; symétrie ; d(x,y) ≤ d(x,z)+d(z,y). Toute norme définit d(x,y) = ‖x−y‖, invariante par translation, avec d(λx,λy) = |λ|d(x,y).</p>`},
+{t:'def',n:'3.5',ti:'Normes équivalentes',b:`<p>N₁ et N₂ sont <b>équivalentes</b> s’il existe α, β > 0 avec αN₁ ≤ N₂ ≤ βN₁. Exemple : ‖x‖<sub>∞</sub> ≤ ‖x‖₁ ≤ n‖x‖<sub>∞</sub> sur ℝⁿ.</p>`},
+{t:'thm',n:'3.6',ti:'Dimension finie',b:`<p>Sur un ev de dimension finie, toutes les normes sont équivalentes. Donc tout evn de dimension n est homéomorphe à 𝕂ⁿ, ses compacts sont les fermés bornés, et il est complet.</p>`,p:`<p>Base (e<sub>k</sub>), p(x) = Σ|a<sub>k</sub>|. Alors ‖x‖ ≤ b·p(x) avec b = max‖e<sub>k</sub>‖, donc ‖·‖ est continue pour p.</p><p>La sphère M = {Σ|α<sub>k</sub>| = 1} est compacte dans ℝⁿ ; son image K = {p = 1} est compacte, donc ‖·‖ atteint un minimum a > 0 sur K.</p><p>Par homogénéité : a·p(x) ≤ ‖x‖ ≤ b·p(x). <span class="qed">∎</span></p>`},
+{t:'def',n:'3.7',ti:'Boules et sphères',b:`<p>B(a,r) = {x : ‖x−a‖ < r} (ouverte), B<sub>F</sub>(a,r) = {‖x−a‖ ≤ r} (fermée), S(a,r) = {‖x−a‖ = r}. Dans ℝ : ]a−r,a+r[, [a−r,a+r], {a−r,a+r}. Dans ℝ² : boule unité = disque pour ‖·‖₂, losange pour ‖·‖₁, carré pour ‖·‖<sub>∞</sub>. Une partie est <b>bornée</b> si elle est incluse dans une boule.</p>`},
+{t:'thm',n:'3.8',ti:'Topologie de la norme',b:`<p>A est ouvert ⇔ A = ∅ ou ∀a ∈ A, ∃r>0, B(a,r) ⊂ A. Les boules ouvertes sont ouvertes et forment une base ; (B(a,1/n)) est une base de voisinages de a. Cette topologie est séparée : B(x,r) ∩ B(y,r) = ∅ pour r = ‖x−y‖/2.</p>`,p:`<p>Intersection : B(x,r₁) ⊂ A, B(x,r₂) ⊂ B ⇒ B(x,min(r₁,r₂)) ⊂ A∩B. Réunion : x ∈ A<sub>i₀</sub> ⇒ B(x,r) ⊂ A<sub>i₀</sub> ⊂ ⋃A<sub>i</sub>. <span class="qed">∎</span></p>`},
+{t:'prop',n:'3.9',ti:'Suites',b:`<p>a<sub>n</sub> → a ⇔ ‖a<sub>n</sub>−a‖ → 0. La limite est unique, une suite convergente est bornée, ses sous-suites ont la même limite, et ‖a<sub>n</sub>‖ → ‖a‖.</p>`},
+{t:'thm',n:'3.10',ti:'Caractérisation séquentielle',b:`<p>a ∈ <o>A</o> ⇔ il existe une suite de A qui converge vers a. Donc A fermé ⇔ A contient les limites de ses suites convergentes. K est compact ⇔ de toute suite de K on extrait une sous-suite convergeant dans K ; un compact est fermé borné.</p>`,p:`<p>(⇒) B(x,1/n)∩A ≠ ∅ : choisir x<sub>n</sub> dedans, ‖x<sub>n</sub>−x‖ < 1/n.</p><p>(⇐) x<sub>n</sub> → x : pour tout ε, x<sub>n</sub> ∈ B(x,ε)∩A pour n grand. <span class="qed">∎</span></p>`},
+{t:'prop',n:'3.11',ti:'Continuité',b:`<p>f est continue en x₀ ⇔ ∀ε ∃r (‖x−x₀‖<r ⇒ ‖f(x)−f(x₀)‖′<ε) ⇔ pour toute suite x<sub>n</sub> → x₀, f(x<sub>n</sub>) → f(x₀). Uniformément continue : r indépendant de x. Lipschitzienne ⇒ uniformément continue ⇒ continue. x ↦ ‖x‖ est 1-lipschitzienne ; x ↦ u+x et x ↦ λx (λ≠0) sont des homéomorphismes.</p>`},
+{t:'thm',n:'3.12',ti:'Riesz',b:`<p>Un evn est de dimension finie ⇔ il est localement compact ⇔ sa boule unité fermée est compacte.</p>`},
+{t:'thm',n:'3.13',ti:'Critère de continuité linéaire',b:`<p>Pour f linéaire, équivalence : (a) continue en 0 ; (b) ∃M, ∀x ∈ B(0,1), ‖f(x)‖′ ≤ M ; (c) ∃M, ∀x, ‖f(x)‖′ ≤ M‖x‖ ; (d) uniformément continue. En dimension finie, toute application linéaire est lipschitzienne.</p>`,p:`<p>a⇒b : pour ε=1, ∃r, ‖y‖<r ⇒ ‖f(y)‖′<1. Pour x ∈ B(0,1), y = rx donne ‖f(x)‖′ ≤ 1/r.</p><p>b⇒c : appliquer b à x/‖x‖. c⇒d : f est M-lipschitzienne. d⇒a : évident. <span class="qed">∎</span></p>`},
+{t:'ex',n:'3.14',ti:'Linéaire non continue',b:`<p>E = 𝒞^∞([0,2π]) avec ‖·‖<sub>∞</sub>, φ(f) = f′. Pour f<sub>n</sub> = sin(nx)/√n : ‖f<sub>n</sub>‖ = 1/√n → 0 mais ‖φ(f<sub>n</sub>)‖ = √n → ∞ : φ n’est pas continue.</p>`},
+{t:'def',n:'3.15',ti:'Suites de Cauchy, Banach',b:`<p>(x<sub>n</sub>) est de Cauchy si ∀ε ∃n₀, n,m ≥ n₀ ⇒ ‖x<sub>n</sub>−x<sub>m</sub>‖ ≤ ε. <i>E</i> est <b>complet</b> si toute suite de Cauchy converge ; un <b>espace de Banach</b> est un evn complet. Exemples : ℝ, ℂ, 𝕂ⁿ, (𝒞([a,b]),‖·‖<sub>∞</sub>). En revanche (𝒞([a,b]),‖·‖<sub>α</sub>) n’est pas complet. Un produit fini de Banach est Banach ; un evn isométrique à un Banach est Banach.</p>`}
 ]},
-{id:'s4',h:'1.4 Applications continues',items:[
-{t:'def',n:'1.4.1',ti:'Limite',b:`<p>f : <i>E</i> → <i>F</i> <b>tend vers</b> b quand x → a si pour tout voisinage V de b, il existe un voisinage U de a avec f(U) ⊂ V. Si <i>F</i> n’est pas séparé, il peut y avoir plusieurs limites : dans le grossier, tout point est limite.</p>`},
-{t:'thm',n:'1.4.4',ti:'Unicité de la limite',b:`<p>Si <i>F</i> est séparé et si f admet une limite en a, alors cette limite est unique.</p>`,p:`<p>Supposons deux limites b ≠ b′. Par séparation, il existe V ∈ 𝒱<sub>b</sub>, V′ ∈ 𝒱<sub>b′</sub> avec V ∩ V′ = ∅.</p><p>Il existe U, U′ ∈ 𝒱<sub>a</sub> avec f(U) ⊂ V et f(U′) ⊂ V′. Alors U ∩ U′ ∈ 𝒱<sub>a</sub> et f(U ∩ U′) ⊂ V ∩ V′ = ∅.</p><p>Or a ∈ U ∩ U′, donc f(a) ∈ f(U ∩ U′) : contradiction. <span class="qed">∎</span></p>`},
-{t:'def',n:'1.4.5',ti:'Continuité',b:`<p>f est <b>continue en a</b> si f tend vers f(a) quand x → a. Elle est continue sur A ⊂ <i>E</i> si elle l’est en tout point de A, et <b>continue</b> si elle l’est sur <i>E</i>.</p>`},
-{t:'thm',n:'1.4.6',ti:'Caractérisations de la continuité',b:`<p>Pour f : (<i>E</i>, τ) → (<i>F</i>, τ′), il y a équivalence entre :</p><ol type="a"><li>f est continue ;</li><li>l’image réciproque de tout ouvert de <i>F</i> est un ouvert ;</li><li>l’image réciproque de tout fermé de <i>F</i> est un fermé ;</li><li>∀A ⊂ <i>E</i>, f(<o>A</o>) ⊂ <o>f(A)</o>.</li></ol>`,p:`<p><em>a ⇒ d.</em> Soit a ∈ <o>A</o> et W ∈ 𝒱<sub>f(a)</sub>. Par continuité, ∃U ∈ 𝒱<sub>a</sub>, f(U) ⊂ W. Comme a est adhérent à A, U ∩ A ≠ ∅, donc f(U ∩ A) ≠ ∅ et f(U ∩ A) ⊂ W ∩ f(A). Donc W ∩ f(A) ≠ ∅ : f(a) ∈ <o>f(A)</o>.</p><p><em>d ⇒ c.</em> Soit V fermé de <i>F</i>, W = f<sup>−1</sup>(V). Alors f(W) ⊂ V, donc <o>f(W)</o> ⊂ <o>V</o> = V. Pour x ∈ <o>W</o> : f(x) ∈ f(<o>W</o>) ⊂ <o>f(W)</o> ⊂ V, donc x ∈ W. Ainsi <o>W</o> = W : W est fermé.</p><p><em>c ⇒ b.</em> Soit U ouvert de <i>F</i> : U<sup>c</sup> est fermé, donc f<sup>−1</sup>(U<sup>c</sup>) = (f<sup>−1</sup>(U))<sup>c</sup> est fermé, et f<sup>−1</sup>(U) est ouvert.</p><p><em>b ⇒ a.</em> Soit x₀ ∈ <i>E</i> et V ∈ 𝒱<sub>f(x₀)</sub> : il existe W ouvert, f(x₀) ∈ W ⊂ V. Posons U = f<sup>−1</sup>(W) : ouvert contenant x₀, et f(U) ⊂ W ⊂ V. Donc f est continue en x₀. <span class="qed">∎</span></p>`},
-{t:'prop',n:'1.4.7',ti:'Composition',b:`<p>La composée de deux applications continues est continue.</p>`,p:`<p>Soit f : <i>E</i> → <i>F</i> et g : <i>F</i> → <i>H</i> continues, V ouvert de <i>H</i>. Alors (g∘f)<sup>−1</sup>(V) = f<sup>−1</sup>(g<sup>−1</sup>(V)). g<sup>−1</sup>(V) est ouvert, puis f<sup>−1</sup>(g<sup>−1</sup>(V)) aussi. On conclut par 1.4.6 (b). <span class="qed">∎</span></p>`},
-{t:'def',n:'1.4.8',ti:'Homéomorphisme',b:`<p>f : <i>E</i> → <i>F</i> est un <b>homéomorphisme</b> si elle est bijective, continue, et de réciproque f<sup>−1</sup> continue. <i>E</i> et <i>F</i> sont <b>homéomorphes</b> s’il existe un homéomorphisme de <i>E</i> dans <i>F</i>.</p>`},
-{t:'exo',n:'1.4.9',ti:'Exercices',b:`<ol><li>Id : (<i>E</i>, τ) → (<i>E</i>, τ′) est un homéomorphisme ⇔ τ = τ′.</li><li>f : (<i>E</i>, τ) → (<i>F</i>, τ′) est un homéomorphisme ⇔ U ↦ f(U) est une bijection de τ sur τ′.</li></ol>`,p:`<p><em>1.</em> Id continue ⇔ τ′ ⊂ τ (image réciproque d’un ouvert de τ′ = lui-même). Id<sup>−1</sup> = Id continue ⇔ τ ⊂ τ′. Donc homéomorphisme ⇔ τ = τ′.</p><p><em>2.</em> Si f est un homéomorphisme, U ↦ f(U) = (f<sup>−1</sup>)<sup>−1</sup>(U) envoie τ dans τ′, et V ↦ f<sup>−1</sup>(V) est son inverse. Réciproquement, si cette application est bijective de τ sur τ′, alors f est bijective (cas U = <i>E</i>, etc.), f<sup>−1</sup> est continue car (f<sup>−1</sup>)<sup>−1</sup>(U) = f(U) ∈ τ′, et f est continue car tout V ∈ τ′ s’écrit f(U), donc f<sup>−1</sup>(V) = U ∈ τ. <span class="qed">∎</span></p>`}
+{id:'s4',h:'Chap. 4 · Topologie de ℝⁿ (boules, ouverts, suites, compacité)',items:[
+{t:'def',n:'4.1',ti:'Ouvert de ℝⁿ',b:`<p>Ω ⊂ ℝⁿ est ouvert ⇔ ∀x ∈ Ω, ∃r>0, B(x,r) ⊂ Ω. Les trois normes usuelles étant équivalentes, on peut utiliser n’importe laquelle. Exemples : ]1,3[×]2,5[ est ouvert dans ℝ² ; ]−1,1]×[2,4[ ne l’est pas.</p>`},
+{t:'prop',n:'4.2',ti:'Propriétés des ouverts',b:`<p>(i) Toute boule ouverte est ouverte ; (ii) ∅ et ℝⁿ sont ouverts ; (iii) une intersection finie d’ouverts est ouverte ; (iv) une réunion quelconque d’ouverts est ouverte. Une partie est ouverte ⇔ c’est une réunion de boules ouvertes.</p>`,p:`<p><em>(i)</em> x ∈ B(a,r), e = r−‖x−a‖ > 0. Si y ∈ B(x,e) : ‖y−a‖ ≤ ‖y−x‖+‖x−a‖ < r, donc B(x,e) ⊂ B(a,r).</p><p><em>(iii)</em> x ∈ ⋂O<sub>i</sub> : B(x,r<sub>i</sub>) ⊂ O<sub>i</sub> ; r = min r<sub>i</sub> > 0 convient.</p><p><em>(iv)</em> x ∈ O<sub>i₀</sub> ⇒ B(x,r) ⊂ O<sub>i₀</sub> ⊂ ⋃O<sub>i</sub>. <span class="qed">∎</span></p>`},
+{t:'prop',n:'4.3',ti:'Fermés et bornés',b:`<p>F est fermé ⇔ F<sup>c</sup> ouvert. Toute boule fermée est fermée ; ∅, ℝⁿ sont fermés ; réunion finie et intersection quelconque de fermés sont fermées. X est <b>borné</b> si ∃A>0, ∀x ∈ X, ‖x‖₂ ≤ A.</p>`},
+{t:'def',n:'4.4',ti:'Convergence dans ℝⁿ',b:`<p>x<sub>m</sub> → ℓ si ‖x<sub>m</sub>−ℓ‖<sub>∞</sub> → 0. La limite est unique. x<sub>m</sub> → ℓ ⇔ chaque coordonnée x<sub>m</sub><sup>i</sup> → ℓ<sup>i</sup>.</p>`,p:`<p>Si ℓ ≠ ℓ′ sont deux limites, pour ε = ‖ℓ−ℓ′‖ et m grand : ‖ℓ−ℓ′‖ ≤ ‖ℓ−x<sub>m</sub>‖+‖x<sub>m</sub>−ℓ′‖ < ε/2 : absurde. <span class="qed">∎</span></p>`},
+{t:'prop',n:'4.5',ti:'Fermé ⇔ F = F̄',b:`<p>x est adhérent à A ⇔ x est limite d’une suite de A. Donc F est fermé ⇔ F = <o>F</o>.</p>`,p:`<p>(⇒) F ⊂ <o>F</o> (suite constante). Si x ∈ <o>F</o> ∖ F, x ∈ F<sup>c</sup> ouvert : B(x,r) ⊂ F<sup>c</sup>, mais x<sub>m</sub> ∈ F tend vers x : contradiction.</p><p>(⇐) Si F<sup>c</sup> n’est pas ouvert : ∃x ∈ F<sup>c</sup> avec B(x,1/m) ∩ F ≠ ∅ pour tout m ; x<sub>m</sub> → x, x ∈ <o>F</o> = F : absurde. <span class="qed">∎</span></p>`},
+{t:'ex',n:'4.6',ti:'Densité, accumulation',b:`<p>A est <b>dense</b> si <o>A</o> = ℝⁿ (ex : ℚ dense dans ℝ). x est point d’accumulation de A si c’est limite d’une suite de points de A tous différents de x. Exemple : <o>]0,1[</o> = [0,1].</p>`},
+{t:'prop',n:'4.7',ti:'Suites de Cauchy',b:`<p>Toute suite de Cauchy est bornée ; toute suite convergente est de Cauchy. ℝⁿ est complet.</p>`,p:`<p>ε=1 : ∀p ≥ N, ‖x<sub>p</sub>−x<sub>N</sub>‖ ≤ 1. Avec M = max(1, ‖x<sub>0</sub>−x<sub>N</sub>‖, …, ‖x<sub>N−1</sub>−x<sub>N</sub>‖), x<sub>m</sub> ∈ B(x<sub>N</sub>,M+1).</p><p>Complétude : chaque coordonnée est de Cauchy dans ℝ, donc converge ; on regroupe les limites. <span class="qed">∎</span></p>`},
+{t:'def',n:'4.8',ti:'Sous-suite extraite',b:`<p>(y<sub>m</sub>) = (x<sub>φ(m)</sub>) avec φ : ℕ → ℕ strictement croissante (donc φ(m) ≥ m). Si x<sub>m</sub> → ℓ, toute sous-suite converge vers ℓ.</p>`},
+{t:'thm',n:'4.9',ti:'Bolzano-Weierstrass',b:`<p>Toute suite bornée de ℝⁿ admet une sous-suite convergente.</p>`,p:`<p>n = 1 : connu. Sinon (x<sub>m</sub><sup>1</sup>) est bornée dans ℝ : on extrait φ₁ avec (x<sup>1</sup><sub>φ₁(m)</sub>) convergente.</p><p>(x<sup>2</sup><sub>φ₁(m)</sub>) est bornée : on extrait φ₂, etc. Avec φ = φ₁∘…∘φ<sub>n</sub>, toutes les coordonnées de (x<sub>φ(m)</sub>) convergent. <span class="qed">∎</span></p>`},
+{t:'thm',n:'4.10',ti:'Compacts de ℝⁿ',b:`<p>A ⊂ ℝⁿ est compacte ⇔ A est fermée et bornée. Si A est ouvert ⇔ A voisinage de chacun de ses points ; x<sub>p</sub> → a ⇔ ∀V<sub>a</sub>, ∃N, p ≥ N ⇒ x<sub>p</sub> ∈ V<sub>a</sub>.</p>`,p:`<p>(⇒) Fermé : x ∈ <o>A</o>, x<sub>m</sub> → x ; sous-suite → y ∈ A ; unicité : x = y ∈ A. Borné : sinon ‖x<sub>m</sub>‖ > m, aucune sous-suite ne converge.</p><p>(⇐) Suite de A bornée : Bolzano-Weierstrass, la limite est dans A car A est fermée. <span class="qed">∎</span></p>`}
+]},
+{id:'s5',h:'Chap. 5 · Limite et continuité dans ℝⁿ',items:[
+{t:'def',n:'5.1',ti:'Limite',b:`<p>A ⊂ ℝⁿ, a ∈ <o>A</o>, f : A → ℝᵐ. f a pour limite ℓ en a si ∀ε>0, ∃η>0, ∀x ∈ A, ‖x−a‖<η ⇒ ‖f(x)−ℓ‖<ε. Équivalent : ∀V<sub>ℓ</sub>, ∃V<sub>a</sub>, f(A∩V<sub>a</sub>) ⊂ V<sub>ℓ</sub>. Pour n=m=1, c’est la définition classique ; version « x → +∞ » : ∀ε ∃B, ‖x‖>B ⇒ ‖f(x)−ℓ‖<ε.</p>`},
+{t:'thm',n:'5.2',ti:'Propriétés des limites',b:`<ul><li>Unicité de la limite.</li><li>Une limite finie en a ⇒ f bornée au voisinage de a.</li><li><b>Caractérisation séquentielle</b> : f → ℓ ⇔ pour toute suite x<sub>p</sub> → a, f(x<sub>p</sub>) → ℓ.</li><li>f=(f₁,…,f<sub>m</sub>) → ℓ ⇔ chaque f<sub>i</sub> → ℓ<sub>i</sub>.</li><li><b>Gendarmes</b> : f ≤ g ≤ h localement, f,h → ℓ ⇒ g → ℓ.</li><li><b>Composition</b> : f → b et g → ℓ en b ⇒ g∘f → ℓ.</li><li>Somme, produit h·g (h→0, g bornée ⇒ hg→0), ‖f‖ → ‖ℓ‖.</li></ul>`},
+{t:'def',n:'5.3',ti:'Continuité',b:`<p>f est continue en a ∈ A ⇔ lim f = f(a) ⇔ ∀ε ∃η, ‖x−a‖<η ⇒ ‖f(x)−f(a)‖<ε ⇔ pour toute suite x<sub>p</sub> → a, f(x<sub>p</sub>) → f(a). f=(f₁,…,f<sub>m</sub>) est continue ⇔ chaque f<sub>i</sub> l’est (π<sub>j</sub>∘f). La restriction d’une continue est continue.</p>`},
+{t:'prop',n:'5.4',ti:'Opérations',b:`<p>La composée de continues est continue ; si f,g continues : f+g, h·f, ‖f‖, 1/f (si f(a) ≠ 0) le sont. Les projections π<sub>k</sub> et toute fonction polynomiale en plusieurs variables sont continues.</p>`},
+{t:'thm',n:'5.5',ti:'Continuité et topologie',b:`<p>f : ℝⁿ → ℝᵐ est continue ⇔ l’image réciproque de tout ouvert est ouverte ⇔ l’image réciproque de tout fermé est fermée. Rappel : f<sup>−1</sup>(A∪B) = f<sup>−1</sup>(A)∪f<sup>−1</sup>(B), f<sup>−1</sup>(A∩B) = f<sup>−1</sup>(A)∩f<sup>−1</sup>(B), f<sup>−1</sup>(A<sup>c</sup>) = (f<sup>−1</sup>(A))<sup>c</sup>.</p>`},
+{t:'rem',n:'5.6',ti:'Images directes',b:`<p>L’image directe d’un ouvert (ou d’un fermé) n’est pas forcément ouverte (ou fermée) : x ↦ 0 envoie ℝ sur {0} ; exp envoie ℝ (fermé) sur ]0,+∞[.</p>`},
+{t:'def',n:'5.7',ti:'Continuité partielle',b:`<p>Pour f : X ⊂ ℝ² → ℝ : f(·,b) : x ↦ f(x,b) et f(a,·) : y ↦ f(a,y) sont les <b>applications partielles</b>. Si f est continue en (a,b), les applications partielles sont continues. La réciproque est fausse.</p>`},
+{t:'def',n:'5.8',ti:'Continuité uniforme',b:`<p>f est uniformément continue sur X si ∀ε ∃η, ∀x,y ∈ X, ‖x−y‖<η ⇒ ‖f(x)−f(y)‖<ε. Alors f est continue ; la réciproque est fausse : x ↦ x² est continue sur ℝ mais pas uniformément.</p>`},
+{t:'thm',n:'5.9',ti:'Continuité et compacité',b:`<p>L’image d’un compact par une continue est compacte (fermée bornée). Si X est compact non vide et f : X → ℝ continue, f est bornée et atteint ses bornes. <b>Heine</b> : f continue sur un compact X ⇒ f uniformément continue.</p>`},
+{t:'thm',n:'5.10',ti:'Applications linéaires continues',b:`<p>f ∈ ℒ(ℝⁿ,ℝᵐ) est continue. La formule |||f||| = sup<sub>x≠0</sub> ‖f(x)‖<sub>m</sub>/‖x‖<sub>n</sub> définit une norme sur ℒ(ℝⁿ,ℝᵐ), avec ‖f(x)‖ ≤ |||f|||·‖x‖, |||Id||| = 1 et |||f∘g||| ≤ |||f|||·|||g|||.</p>`},
+{t:'def',n:'5.11',ti:'Convexité et arcs',b:`<p>X est <b>convexe</b> si ∀a,b ∈ X, [a,b] = {ta+(1−t)b : t∈[0,1]} ⊂ X. Toute partie convexe de ℝⁿ est connexe par arcs. Les connexes par arcs de ℝ sont les intervalles. Si A est connexe par arcs et f continue, f(A) est connexe par arcs.</p>`},
+{t:'thm',n:'5.12',ti:'Valeurs intermédiaires',b:`<p>Si A ⊂ ℝⁿ est connexe par arcs et f : A → ℝ continue, f prend toutes les valeurs comprises entre deux valeurs qu’elle atteint.</p>`}
+]},
+{id:'s6',h:'Chap. 6 · Calcul différentiel dans ℝⁿ',items:[
+{t:'def',n:'6.1',ti:'Dérivées directionnelle et partielle',b:`<p>U ouvert de ℝⁿ, f : U → ℝᵐ, a ∈ U, v ≠ 0. f admet une dérivée en a suivant v si D<sub>v</sub>f(a) = lim<sub>t→0</sub> (f(a+tv)−f(a))/t existe. Pour v = e<sub>j</sub> (base canonique) on obtient la <b>dérivée partielle</b> ∂f/∂x<sub>j</sub>(a). Elle existe ⇔ celles des composantes f₁,…,f<sub>m</sub> existent, et ∂f/∂x<sub>j</sub> = (∂f₁/∂x<sub>j</sub>,…,∂f<sub>m</sub>/∂x<sub>j</sub>). Exemple : f(x,y) = (x²,3x²y) : ∂f/∂x = (2x,6xy), ∂f/∂y = (0,3x²).</p>`},
+{t:'def',n:'6.2',ti:'Classe C¹',b:`<p>f est de classe C¹ sur U si elle admet des dérivées partielles premières en tout point, toutes continues sur U.</p>`},
+{t:'prop',n:'6.3',ti:'Développement limité d’ordre 1',b:`<p>Si f est C¹, ∃ε telle que f(a+h) = f(a) + Σ<sub>j</sub> h<sub>j</sub>∂f/∂x<sub>j</sub>(a) + ‖h‖ε(h) avec ε(h) → 0 quand h → 0. En particulier f est continue sur U.</p>`,p:`<p>Avec x = a+h : f(x)−f(a) = Σh<sub>j</sub>∂<sub>j</sub>f(a) + ε(h)‖h‖ → 0 quand x → a. <span class="qed">∎</span></p>`},
+{t:'def',n:'6.4',ti:'Différentielle, jacobienne',b:`<p>La <b>différentielle</b> d<sub>a</sub>f : h ↦ Σh<sub>j</sub>∂f/∂x<sub>j</sub>(a) = Σ ∂f/∂x<sub>j</sub>(a)dx<sub>j</sub>. La <b>matrice jacobienne</b> J(f)(a) = (∂f<sub>i</sub>/∂x<sub>j</sub>(a))<sub>i,j</sub> est la matrice de d<sub>a</sub>f dans les bases canoniques ; si n = m, la <b>jacobien</b> est son déterminant. Pour φ linéaire : d<sub>a</sub>φ = φ.</p>`},
+{t:'thm',n:'6.5',ti:'Opérations sur les fonctions C¹',b:`<p>Si f est C¹ sur U, g C¹ sur V et f(U) ⊂ V, alors g∘f est C¹ et J(g∘f)(a) = J(g)(f(a))×J(f)(a). Si h, f, g sont C¹, alors hf et f+g le sont.</p>`},
+{t:'def',n:'6.6',ti:'Différentiabilité',b:`<p>f est <b>différentiable en a</b> s’il existe L<sub>a</sub> ∈ ℒ(ℝⁿ,ℝᵐ) avec f(a+h) = f(a)+L<sub>a</sub>(h)+o(‖h‖). L<sub>a</sub> est unique : c’est d<sub>a</sub>f.</p>`,p:`<p>Si L, M conviennent, (L−M)(h) = o(‖h‖). Pour v ≠ 0 et t → 0 : (L−M)(tv) = t(L−M)(v) = o(|t|), donc (L−M)(v) = 0. <span class="qed">∎</span></p>`},
+{t:'thm',n:'6.7',ti:'Conséquences de la différentiabilité',b:`<ul><li>f différentiable en a ⇒ f continue en a.</li><li>Alors f admet une dérivée suivant tout v, et D<sub>v</sub>f(a) = d<sub>a</sub>f(v).</li><li>En particulier, d<sub>a</sub>f(h) = Σh<sub>j</sub>∂f/∂x<sub>j</sub>(a).</li><li>La réciproque est fausse : f(x,y) = 0 si xy ≠ 0, 1 si xy = 0 a des dérivées partielles en (0,0), mais n’y est pas continue.</li><li>Si les dérivées partielles existent et sont continues en a, f est différentiable en a.</li><li>Composition : d<sub>a</sub>(g∘f) = d<sub>f(a)</sub>g ∘ d<sub>a</sub>f.</li></ul>`,p:`<p>f(a+tv) = f(a)+t·d<sub>a</sub>f(v)+o(‖tv‖), d’où (f(a+tv)−f(a))/t = d<sub>a</sub>f(v)+o(1) quand t → 0. <span class="qed">∎</span></p>`},
+{t:'thm',n:'6.8',ti:'Inégalité des accroissements finis',b:`<p>U ouvert, [a,b] ⊂ U, f : U → ℝ de classe C¹ avec Σ<sub>j</sub>|∂f/∂x<sub>j</sub>(x)| ≤ M sur [a,b]. Alors |f(b)−f(a)| ≤ M‖b−a‖<sub>∞</sub>. Corollaire : si U est ouvert connexe par arcs, f C¹ est constante ⇔ toutes ses dérivées partielles sont nulles. (Admis)</p>`},
+{t:'def',n:'6.9',ti:'C¹-difféomorphisme',b:`<p>Φ : U → V est un <b>C¹-difféomorphisme</b> si Φ est C¹, bijective et Φ<sup>−1</sup> est C¹. Alors n = m et d<sub>a</sub>Φ est un isomorphisme, avec (d<sub>a</sub>Φ)<sup>−1</sup> = d<sub>Φ(a)</sub>(Φ<sup>−1</sup>). La composée de deux difféomorphismes en est un.</p>`,p:`<p>Id<sub>U</sub> = Φ<sup>−1</sup>∘Φ donc Id = d<sub>Φ(a)</sub>(Φ<sup>−1</sup>)∘d<sub>a</sub>Φ : d<sub>a</sub>Φ est un isomorphisme, d’où n = m. <span class="qed">∎</span></p>`},
+{t:'thm',n:'6.10',ti:'Inversion locale',b:`<p>Φ : U → ℝⁿ de classe C¹, a ∈ U. Si det J(Φ)(a) ≠ 0 (d<sub>a</sub>Φ isomorphisme), il existe un voisinage V<sub>a</sub> tel que Φ soit un C¹-difféomorphisme de V<sub>a</sub> sur Φ(V<sub>a</sub>). Corollaire : si Φ est C¹, bijective, avec d<sub>a</sub>Φ isomorphisme pour tout a, c’est un difféomorphisme. Exemple : les coordonnées polaires (r,θ) ↦ (r cos θ, r sin θ) de ]0,+∞[×]−π,π[ dans ℝ²∖{(0,0)}. (Admis)</p>`},
+{t:'thm',n:'6.11',ti:'Dérivées successives, Schwarz',b:`<p>Les dérivées partielles d’ordre p se définissent par récurrence : ∂<sup>p</sup>f/∂x<sub>i<sub>p</sub></sub>…∂x<sub>i₁</sub>. L’ordre compte a priori : ∂²f/∂x∂y ≠ ∂²f/∂y∂x. <b>Schwarz</b> : si f est C¹, si ∂²f/∂x<sub>i</sub>∂x<sub>j</sub> et ∂²f/∂x<sub>j</sub>∂x<sub>i</sub> existent sur U et sont continues en a, elles sont égales en a. Si f est C<sup>k</sup>, l’ordre de dérivation n’importe pas (toute permutation σ).</p><p>Exemple : f(x,y) = x<sup>y</sup> : ∂²f/∂y∂x = ∂²f/∂x∂y = x<sup>y−1</sup>(1+y ln x).</p>`}
+]},
+{id:'s7',h:'Annexe · Démonstrations détaillées pas à pas',items:[
+{t:'thm',n:'7.1',ti:'Continuité : les 4 équivalences (détail complet)',b:`<p>f : (<i>E</i>,τ) → (<i>F</i>,τ′). Équivalence : (a) f continue ; (b) f<sup>−1</sup>(ouvert) ouvert ; (c) f<sup>−1</sup>(fermé) fermé ; (d) ∀A ⊂ <i>E</i>, f(<o>A</o>) ⊂ <o>f(A)</o>.</p>`,p:`<p><em>Plan.</em> On montre a⇒d, d⇒c, c⇒b, b⇒a : la boucle prouve l’équivalence des quatre.</p><p><em>a⇒d (1).</em> Soit A ⊂ <i>E</i>. Il faut prouver : tout point de f(<o>A</o>) est adhérent à f(A). Prenons y ∈ f(<o>A</o>) : y = f(a) avec a ∈ <o>A</o>.</p><p><em>a⇒d (2).</em> Pour montrer f(a) ∈ <o>f(A)</o>, on prend un voisinage quelconque W de f(a) et on doit montrer W ∩ f(A) ≠ ∅.</p><p><em>a⇒d (3).</em> f est continue en a : ∃U ∈ 𝒱<sub>a</sub> avec f(U) ⊂ W.</p><p><em>a⇒d (4).</em> Comme a ∈ <o>A</o>, tout voisinage de a rencontre A, donc U ∩ A ≠ ∅. Prenons z ∈ U ∩ A.</p><p><em>a⇒d (5).</em> Alors f(z) ∈ f(U) ⊂ W et f(z) ∈ f(A). Donc f(z) ∈ W ∩ f(A) ≠ ∅. Ainsi f(a) ∈ <o>f(A)</o>.</p><p><em>d⇒c (1).</em> Soit V un fermé de <i>F</i> et W = f<sup>−1</sup>(V). On veut W fermé, c’est-à-dire <o>W</o> ⊂ W (l’inclusion inverse est automatique).</p><p><em>d⇒c (2).</em> f(W) = f(f<sup>−1</sup>(V)) ⊂ V, donc <o>f(W)</o> ⊂ <o>V</o> = V car V est fermé.</p><p><em>d⇒c (3).</em> Soit x ∈ <o>W</o>. Par (d) : f(x) ∈ f(<o>W</o>) ⊂ <o>f(W)</o> ⊂ V. Donc x ∈ f<sup>−1</sup>(V) = W. D’où <o>W</o> = W : W est fermé.</p><p><em>c⇒b.</em> Soit U ouvert de <i>F</i>. U<sup>c</sup> est fermé, donc f<sup>−1</sup>(U<sup>c</sup>) est fermé. Or f<sup>−1</sup>(U<sup>c</sup>) = {x : f(x) ∉ U} = <i>E</i> ∖ f<sup>−1</sup>(U). Donc f<sup>−1</sup>(U) est un ouvert.</p><p><em>b⇒a (1).</em> Soit x₀ ∈ <i>E</i> et V ∈ 𝒱<sub>f(x₀)</sub>. Par définition, il existe un ouvert W′ de <i>F</i> avec f(x₀) ∈ W′ ⊂ V.</p><p><em>b⇒a (2).</em> Posons U = f<sup>−1</sup>(W′). Par (b), U est ouvert ; et x₀ ∈ U car f(x₀) ∈ W′. Donc U ∈ 𝒱<sub>x₀</sub>.</p><p><em>b⇒a (3).</em> Enfin f(U) ⊂ W′ ⊂ V. Donc f tend vers f(x₀) en x₀ : f est continue en x₀, pour tout x₀. <span class="qed">∎</span></p>`},
+{t:'thm',n:'7.2',ti:'Compact ⇒ fermé dans un séparé (détail complet)',b:`<p>Soit (<i>E</i>,τ) séparé et A ⊂ <i>E</i> compacte. Alors A est fermée.</p>`,p:`<p><em>Objectif.</em> Montrer que A<sup>c</sup> est ouvert, i.e. voisinage de chacun de ses points (th. 1.6).</p><p><em>Cas 1.</em> Si A<sup>c</sup> = ∅, alors A = <i>E</i>, fermé. Sinon on passe au cas 2.</p><p><em>Cas 2 (1).</em> Fixons x ∈ A<sup>c</sup>. Pour chaque y ∈ A on a x ≠ y.</p><p><em>Cas 2 (2).</em> <i>E</i> est séparé : il existe des ouverts O<sub>xy</sub> ∋ x et O<sub>y</sub> ∋ y tels que O<sub>xy</sub> ∩ O<sub>y</sub> = ∅.</p><p><em>Cas 2 (3).</em> La famille (O<sub>y</sub>)<sub>y∈A</sub> recouvre A (car y ∈ O<sub>y</sub>). Par compacité de A (prop. 2.1.10), on extrait y₁,…,y<sub>n</sub> avec A ⊂ O<sub>y₁</sub> ∪ … ∪ O<sub>yₙ</sub>.</p><p><em>Cas 2 (4).</em> Posons O = O<sub>xy₁</sub> ∩ … ∩ O<sub>xyₙ</sub>. Intersection <b>finie</b> d’ouverts contenant x : O est un ouvert contenant x. (C’est ici que la finitude sert.)</p><p><em>Cas 2 (5).</em> Pour chaque i, O ⊂ O<sub>xyᵢ</sub> et O<sub>xyᵢ</sub> ∩ O<sub>yᵢ</sub> = ∅, donc O ∩ O<sub>yᵢ</sub> = ∅. Alors O ∩ (⋃O<sub>yᵢ</sub>) = ∅, donc O ∩ A = ∅.</p><p><em>Conclusion.</em> O ⊂ A<sup>c</sup> avec x ∈ O : A<sup>c</sup> est voisinage de x. Ceci vaut pour tout x ∈ A<sup>c</sup>, donc A<sup>c</sup> est ouvert et A est fermé. <span class="qed">∎</span></p>`},
+{t:'thm',n:'7.3',ti:'Image d’un compact et bijection continue (détail complet)',b:`<p>(a) f continue, A compact ⇒ f(A) compact. (b) <i>E</i> compact, <i>F</i> séparé, f bijective continue ⇒ f homéomorphisme.</p>`,p:`<p><em>(a) (1).</em> Soit (U<sub>i</sub>)<sub>i∈I</sub> une famille d’ouverts de <i>F</i> avec f(A) ⊂ ⋃U<sub>i</sub>.</p><p><em>(a) (2).</em> Alors A ⊂ f<sup>−1</sup>(f(A)) ⊂ f<sup>−1</sup>(⋃U<sub>i</sub>) = ⋃f<sup>−1</sup>(U<sub>i</sub>).</p><p><em>(a) (3).</em> f est continue : chaque f<sup>−1</sup>(U<sub>i</sub>) est un ouvert de <i>E</i>. C’est un recouvrement ouvert de A.</p><p><em>(a) (4).</em> A compact : il existe I₀ fini avec A ⊂ ⋃<sub>I₀</sub> f<sup>−1</sup>(U<sub>i</sub>).</p><p><em>(a) (5).</em> Donc f(A) ⊂ f(⋃<sub>I₀</sub> f<sup>−1</sup>(U<sub>i</sub>)) ⊂ ⋃<sub>I₀</sub> U<sub>i</sub>. Sous-recouvrement fini obtenu : f(A) est compact.</p><p><em>(b) (1).</em> Il suffit de montrer que f<sup>−1</sup> est continue, i.e. (th. 7.1 c) que pour tout fermé U de <i>E</i>, (f<sup>−1</sup>)<sup>−1</sup>(U) = f(U) est fermé dans <i>F</i>.</p><p><em>(b) (2).</em> U fermé dans <i>E</i> compact : U est compact (th. 2.4). Puis f(U) est compact par (a).</p><p><em>(b) (3).</em> <i>F</i> est séparé et f(U) y est compact : f(U) est fermé (th. 7.2). Donc f<sup>−1</sup> est continue et f est un homéomorphisme. <span class="qed">∎</span></p>`},
+{t:'thm',n:'7.4',ti:'Dimension finie : normes équivalentes (détail complet)',b:`<p>Sur un 𝕂-ev <i>E</i> de dimension n, toutes les normes sont équivalentes.</p>`,p:`<p><em>Étape 1.</em> Soit (e<sub>k</sub>) une base. Tout x s’écrit x = Σa<sub>k</sub>e<sub>k</sub>. Posons p(x) = Σ|a<sub>k</sub>| : c’est une norme sur <i>E</i>. On montre que toute norme ‖·‖ est équivalente à p ; par transitivité, deux normes quelconques le sont.</p><p><em>Étape 2 : majoration.</em> ‖x‖ ≤ Σ|a<sub>k</sub>|‖e<sub>k</sub>‖ ≤ b·p(x) avec b = max‖e<sub>k</sub>‖.</p><p><em>Étape 3 : ‖·‖ est continue pour p.</em> | ‖x<sub>m</sub>‖ − ‖x‖ | ≤ ‖x<sub>m</sub>−x‖ ≤ b·p(x<sub>m</sub>−x) → 0 si x<sub>m</sub> → x pour p.</p><p><em>Étape 4 : un compact.</em> φ : (ℝⁿ,‖·‖₁) → (<i>E</i>,p), (α<sub>k</sub>) ↦ Σα<sub>k</sub>e<sub>k</sub> est continue (isométrique). La sphère M = {Σ|α<sub>k</sub>| = 1} est fermée bornée dans ℝⁿ, donc compacte. Alors K = φ(M) = {x : p(x) = 1} est compact dans (<i>E</i>,p).</p><p><em>Étape 5 : minimum.</em> ‖·‖ est continue sur le compact K : elle atteint un minimum a = ‖x₀‖ avec x₀ ∈ K. Comme x₀ ≠ 0 (p(x₀)=1), a > 0.</p><p><em>Étape 6 : minoration.</em> Pour x ≠ 0, x/p(x) ∈ K donc ‖x/p(x)‖ ≥ a, soit ‖x‖ ≥ a·p(x). Pour x = 0 c’est trivial.</p><p><em>Conclusion.</em> a·p(x) ≤ ‖x‖ ≤ b·p(x) pour tout x : les normes sont équivalentes. <span class="qed">∎</span></p>`},
+{t:'thm',n:'7.5',ti:'Bolzano-Weierstrass et compacts de ℝⁿ (détail complet)',b:`<p>(a) Toute suite bornée de ℝⁿ a une sous-suite convergente. (b) A ⊂ ℝⁿ est compacte ⇔ fermée et bornée.</p>`,p:`<p><em>(a) (1).</em> Soit (x<sub>m</sub>) bornée : ‖x<sub>m</sub>‖<sub>∞</sub> ≤ A. Donc chaque suite coordonnée (x<sub>m</sub><sup>i</sup>) vérifie |x<sub>m</sub><sup>i</sup>| ≤ A : elle est bornée dans ℝ.</p><p><em>(a) (2).</em> Dans ℝ (1<sup>re</sup> étape du cours) : il existe φ₁ strictement croissante telle que (x<sup>1</sup><sub>φ₁(m)</sub>) converge.</p><p><em>(a) (3).</em> La suite (x<sup>2</sup><sub>φ₁(m)</sub>) est bornée : il existe φ₂ avec (x<sup>2</sup><sub>φ₁∘φ₂(m)</sub>) convergente. La première coordonnée, sous-suite d’une suite convergente, converge encore.</p><p><em>(a) (4).</em> On répète n fois. Avec φ = φ₁∘φ₂∘…∘φ<sub>n</sub> (strictement croissante), chaque coordonnée de (x<sub>φ(m)</sub>) converge, donc (x<sub>φ(m)</sub>) converge dans ℝⁿ.</p><p><em>(b, ⇒) fermé.</em> Soit x ∈ <o>A</o> : ∃x<sub>m</sub> ∈ A, x<sub>m</sub> → x. A compacte : une sous-suite x<sub>φ(m)</sub> → y ∈ A. Une sous-suite de (x<sub>m</sub>) tend aussi vers x, donc x = y ∈ A (unicité). Ainsi <o>A</o> = A.</p><p><em>(b, ⇒) borné.</em> Sinon, pour tout m il existe x<sub>m</sub> ∈ A avec ‖x<sub>m</sub>‖ > m. Aucune sous-suite ne peut converger (une suite convergente est bornée) : absurde.</p><p><em>(b, ⇐).</em> A fermée bornée, (x<sub>m</sub>) ⊂ A est bornée : par (a), une sous-suite converge vers x ∈ ℝⁿ. Comme x ∈ <o>A</o> = A (A fermée), la limite est dans A : A est compacte. <span class="qed">∎</span></p>`},
+{t:'prop',n:'7.6',ti:'Intérieur et adhérence (détail complet)',b:`<p>Pour A ⊂ <i>E</i> : A° est le plus grand ouvert inclus dans A, <o>A</o> est le plus petit fermé contenant A, et (<o>A</o>)<sup>c</sup> = (A<sup>c</sup>)°.</p>`,p:`<p><em>1. A° est ouvert (1).</em> Soit a ∈ A°. Par définition A ∈ 𝒱<sub>a</sub> : il existe un ouvert W avec a ∈ W ⊂ A.</p><p><em>1. (2).</em> Soit x ∈ W quelconque. W est un ouvert contenant x et inclus dans A, donc A ∈ 𝒱<sub>x</sub>, c’est-à-dire x ∈ A°. Ainsi W ⊂ A°.</p><p><em>1. (3).</em> A° contient donc un ouvert W autour de chacun de ses points a : A° est voisinage de tous ses points, donc ouvert (th. 1.6).</p><p><em>2. Plus grand ouvert.</em> Soit U ouvert, U ⊂ A. Pour x ∈ U, U est un ouvert contenant x inclus dans A : x ∈ A°. Donc U ⊂ A°. Avec A° ouvert et A° ⊂ A, c’est le plus grand.</p><p><em>3. Complémentaire (1).</em> x ∈ (<o>A</o>)<sup>c</sup> ⇔ x n’est pas adhérent ⇔ ∃V ∈ 𝒱<sub>x</sub>, V ∩ A = ∅.</p><p><em>3. (2).</em> V ∩ A = ∅ ⇔ V ⊂ A<sup>c</sup> ⇔ A<sup>c</sup> ∈ 𝒱<sub>x</sub> (un sur-ensemble d’un voisinage est un voisinage) ⇔ x ∈ (A<sup>c</sup>)°.</p><p><em>3. (3).</em> Comme (A<sup>c</sup>)° est ouvert (point 1), son complémentaire <o>A</o> est fermé.</p><p><em>4. Plus petit fermé.</em> Soit F fermé avec A ⊂ F. Alors F<sup>c</sup> est un ouvert inclus dans A<sup>c</sup>, donc F<sup>c</sup> ⊂ (A<sup>c</sup>)° = (<o>A</o>)<sup>c</sup> (point 2). En passant au complémentaire : <o>A</o> ⊂ F. <span class="qed">∎</span></p>`},
+{t:'prop',n:'7.7',ti:'Base d’ouverts ⇔ bases de voisinages (détail complet)',b:`<p>𝒳 ⊂ τ est une base d’ouverts ⇔ ∀x, 𝒳<sub>x</sub> = {b ∈ 𝒳 : x ∈ b} est une base de voisinages de x.</p>`,p:`<p><em>(⇒) (1).</em> Soit x ∈ <i>E</i> et V ∈ 𝒱<sub>x</sub>. Il existe un ouvert W avec x ∈ W ⊂ V.</p><p><em>(⇒) (2).</em> 𝒳 est une base : W = ⋃<sub>i∈I</sub> b<sub>i</sub> avec b<sub>i</sub> ∈ 𝒳.</p><p><em>(⇒) (3).</em> x ∈ W donc x ∈ b<sub>i₀</sub> pour un i₀. Alors b<sub>i₀</sub> ∈ 𝒳<sub>x</sub> et x ∈ b<sub>i₀</sub> ⊂ W ⊂ V : 𝒳<sub>x</sub> est une base de voisinages.</p><p><em>(⇐) (1).</em> Soit O ouvert. Pour x ∈ O, O ∈ 𝒱<sub>x</sub> (un ouvert est voisinage de ses points).</p><p><em>(⇐) (2).</em> 𝒳<sub>x</sub> est une base de voisinages : il existe b<sub>x</sub> ∈ 𝒳<sub>x</sub> avec x ∈ b<sub>x</sub> ⊂ O.</p><p><em>(⇐) (3).</em> Alors ⋃<sub>x∈O</sub> b<sub>x</sub> ⊂ O, et O ⊂ ⋃<sub>x∈O</sub> b<sub>x</sub> car chaque x ∈ b<sub>x</sub>. Donc O = ⋃ b<sub>x</sub> : 𝒳 est une base d’ouverts. <span class="qed">∎</span></p>`},
+{t:'prop',n:'7.8',ti:'Singletons fermés dans un séparé (détail complet)',b:`<p>Dans un espace séparé, tout singleton {x} est fermé.</p>`,p:`<p><em>Objectif.</em> {x} fermé ⇔ {x}<sup>c</sup> ouvert ⇔ {x}<sup>c</sup> voisinage de chacun de ses points.</p><p><em>(1).</em> Soit x′ ∈ {x}<sup>c</sup>, donc x′ ≠ x.</p><p><em>(2).</em> Par séparation : il existe des ouverts W ∋ x et W′ ∋ x′ avec W ∩ W′ = ∅.</p><p><em>(3).</em> x ∈ W et W ∩ W′ = ∅ donc x ∉ W′. Donc W′ ⊂ {x}<sup>c</sup>.</p><p><em>(4).</em> W′ est un ouvert avec x′ ∈ W′ ⊂ {x}<sup>c</sup> : {x}<sup>c</sup> est un voisinage de x′, et ce pour tout x′.</p><p><em>Conclusion.</em> {x}<sup>c</sup> est ouvert, donc {x} est fermé. <span class="qed">∎</span></p>`},
+{t:'thm',n:'7.9',ti:'Unicité de la limite (détail complet)',b:`<p>Si <i>F</i> est séparé et f admet une limite en a, cette limite est unique.</p>`,p:`<p><em>(1).</em> Supposons deux limites b ≠ b′.</p><p><em>(2).</em> <i>F</i> séparé : V ∈ 𝒱<sub>b</sub> et V′ ∈ 𝒱<sub>b′</sub> avec V ∩ V′ = ∅.</p><p><em>(3).</em> f → b : ∃U ∈ 𝒱<sub>a</sub>, f(U) ⊂ V. f → b′ : ∃U′ ∈ 𝒱<sub>a</sub>, f(U′) ⊂ V′.</p><p><em>(4).</em> U ∩ U′ ∈ 𝒱<sub>a</sub> (intersection finie de voisinages), donc a ∈ U ∩ U′ et f(a) ∈ f(U ∩ U′).</p><p><em>(5).</em> Mais f(U ∩ U′) ⊂ f(U) ∩ f(U′) ⊂ V ∩ V′ = ∅. Contradiction. <span class="qed">∎</span></p>`},
+{t:'thm',n:'7.10',ti:'Applications linéaires continues (détail complet)',b:`<p>f linéaire : continue en 0 ⇔ ∃M, ∀x ∈ B(0,1), ‖f(x)‖′ ≤ M ⇔ ∃M, ∀x, ‖f(x)‖′ ≤ M‖x‖ ⇔ uniformément continue.</p>`,p:`<p><em>a⇒b (1).</em> Continuité en 0 avec ε = 1 : ∃r > 0, ‖y‖ < r ⇒ ‖f(y)‖′ < 1 (car f(0) = 0).</p><p><em>a⇒b (2).</em> Soit x ∈ B(0,1), x ≠ 0. Posons y = r·x : ‖y‖ = r‖x‖ < r, donc ‖f(y)‖′ = r‖f(x)‖′ < 1.</p><p><em>a⇒b (3).</em> D’où ‖f(x)‖′ < 1/r. On prend M = 1/r.</p><p><em>b⇒c.</em> Soit x ≠ 0. x/‖x‖ est de norme 1 : attention, on utilise la boule fermée ou on remplace x par (1−ε)x/‖x‖ puis ε → 0 ; par linéarité ‖f(x)‖′ = ‖x‖·‖f(x/‖x‖)‖′ ≤ M‖x‖.</p><p><em>c⇒d.</em> ‖f(x)−f(y)‖′ = ‖f(x−y)‖′ ≤ M‖x−y‖ : f est M-lipschitzienne, donc uniformément continue (r = ε/M).</p><p><em>d⇒a.</em> Évident. <span class="qed">∎</span></p>`}
 ]}
 ];
 const L={def:'Définition',thm:'Théorème',prop:'Proposition',ex:'Exemples',rem:'Remarques',exo:'Exercice'};
-
-const FM={
-'1.1.1':['axioms','Ouverts O₁, O₂ et leur intersection (rouge) dans E'],
-'1.1.2':['disc','Discrète : chaque point est ouvert. Grossière : seul E est ouvert'],
-'1.1.3':['axioms','Réunion et intersection d’ouverts : axiomes ii) et iii)'],
-'1.1.4':['disc','Tous les singletons ouverts ⇒ toute partie est ouverte'],
-'1.1.5':['closed','Ouvert (sans son bord) et fermé (avec son bord)'],
-'1.1.7':['nested','Intervalles emboîtés ]-1/n, 1/n[ dont l’intersection est {0}'],
-'1.1.8':['nbh','x ∈ W ⊂ U : U est un voisinage de x'],
-'1.1.11':['nbh','Un ouvert est voisinage de chacun de ses points'],
-'1.1.12':['base','Un ouvert recouvert par des ouverts de la base'],
-'1.1.14':['base','Éléments de la base contenant x : base de voisinages'],
-'1.1.15':['haus','Deux points séparés par deux voisinages disjoints'],
-'1.1.18':['haus','{x}ᶜ voisinage de tout x′ ⇒ {x} fermé'],
-'1.2.1':['inter','Intérieur (bleu), frontière (ambre), point isolé (rose)'],
-'1.2.2':['inter','Intérieur, frontière et point isolé d’une partie'],
-'1.2.3':['inter','A° ⊂ A ⊂ Ā : plus grand ouvert / plus petit fermé'],
-'1.2.4–1.2.6':['inter','∂A = Ā ∩ Ā ᶜ : la « peau » de A'],
-'1.3.1':['induced','Trace d’un ouvert de E sur A : O ∩ A'],
-'1.3.4':['induced','Ouvert dans A mais pas dans E'],
-'1.3.5':['induced','Voisinages dans A : V = W ∩ A'],
-'1.3.6':['quot','Carré → tore : identification des bords'],
-'1.3.8':['prod','Produit d’ouverts u₁ × u₂'],
-'1.4.1':['cont','Voisinage U de a envoyé dans un voisinage V de b'],
-'1.4.4':['haus','Deux limites distinctes seraient séparées par V et V′'],
-'1.4.5':['cont','f(U) ⊂ V autour de f(a)'],
-'1.4.6':['cont','Image réciproque d’un ouvert = ouvert'],
-'1.4.7':['cont','g∘f : on remonte les ouverts de H à E'],
-'1.4.8':['homeo','Déformation continue et réversible : tore ≅ tasse'],
-'1.4.9':['homeo','Un homéomorphisme échange les ouverts']};
-
-/* ===== RENDU ===== */
 const main=document.getElementById('main'),nav=document.getElementById('nav');
 C.forEach(s=>{
-  main.insertAdjacentHTML('beforeend',`<h2 id="${s.id}">${s.h}</h2>`);
-  nav.insertAdjacentHTML('beforeend',`<a href="#${s.id}" data-id="${s.id}">${s.h}</a>`);
-  s.items.forEach(it=>{
-    const f=FM[it.n],d=it.p?`<details><summary>${it.t==='exo'?'Voir la correction':'Voir la démonstration'}</summary><div class="pf">${it.p}</div></details>`:'';
-    main.insertAdjacentHTML('beforeend',`<article class="card ${it.t}${f?'':' nf'}"><div class="tx"><span class="tag">${L[it.t]} ${it.n} · ${it.ti}</span>${it.b}${d}</div>${f?`<figure class="fig"><canvas width="540" height="360" data-k="${f[0]}"></canvas><figcaption>${f[1]}</figcaption></figure>`:''}</article>`);
-  });
+ main.insertAdjacentHTML('beforeend',`<h2 id="${s.id}">${s.h}</h2>`);
+ nav.insertAdjacentHTML('beforeend',`<a href="#${s.id}">${s.h}</a>`);
+ s.items.forEach(it=>{
+  const d=it.p?`<details><summary>${it.t==='exo'?'Voir la correction':'Voir la démonstration'}</summary><div class="pf">${it.p}</div></details>`:'';
+  main.insertAdjacentHTML('beforeend',`<article class="card ${it.t}"><span class="tag">${L[it.t]} ${it.n} · ${it.ti}</span>${it.b}${d}</article>`);
+ });
 });
-
-/* ===== FIGURES 3D / 2D ===== */
-const T=0x3fd0c9,A=0xf2b84b,V=0x9b8cff,Z=0xff7a90,W=0x8d97bd,V3=THREE.Vector3;
+const bar=document.getElementById('bar'),links=[...nav.querySelectorAll('a')],heads=C.map(s=>document.getElementById(s.id));
+addEventListener('scroll',()=>{
+ bar.style.transform='scaleX('+(scrollY/Math.max(1,document.body.scrollHeight-innerHeight))+')';
+ let k=-1;heads.forEach((h,i)=>{if(h.getBoundingClientRect().top<innerHeight*.4)k=i});
+ links.forEach((a,i)=>a.classList.toggle('on',i===k));
+},{passive:true});
+const root=document.documentElement;
+try{const t=localStorage.getItem('th');if(t)root.dataset.theme=t}catch(e){}
+document.getElementById('bT').onclick=()=>{
+ const cur=root.dataset.theme||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+ const nx=cur==='light'?'dark':'light';root.dataset.theme=nx;try{localStorage.setItem('th',nx)}catch(e){}};
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const cards=[...document.querySelectorAll('.card')].map(c=>[c,norm(c.textContent)]);
+document.getElementById('q').oninput=e=>{const w=norm(e.target.value).split(/\s+/).filter(Boolean);
+ cards.forEach(([c,t])=>c.classList.toggle('hide',!w.every(x=>t.includes(x))))};
+document.querySelectorAll('#s7~.card .pf').forEach(pf=>{const ps=[...pf.querySelectorAll(':scope>p')],k=ps.length;let i=1;const b=document.createElement('div');b.className='st';b.innerHTML='<button data-a="-1">‹ Précédent</button><span></span><button data-a="1">Étape suivante ›</button><button data-a="0">Tout voir</button>';pf.prepend(b);const sh=()=>{ps.forEach((p,j)=>{p.style.display=j<i?'':'none';p.classList.toggle('cur',j===i-1)});b.children[1].textContent='Étape '+i+' / '+k};b.onclick=e=>{const a=e.target.dataset.a;if(a===undefined)return;i=a==='0'?k:Math.max(1,Math.min(k,i+ +a));sh()};sh()});
+(function(){const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const sc=document.createElement('canvas');sc.id='stars';document.body.prepend(sc);const x=sc.getContext('2d');let W,H,S=[];
+const rs=()=>{W=sc.width=innerWidth;H=sc.height=innerHeight;S=Array.from({length:Math.round(W*H/9000)},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.9+.1,t:Math.random()*6}))};addEventListener('resize',rs);rs();
+(function f(t){requestAnimationFrame(f);if(document.hidden)return;x.clearRect(0,0,W,H);x.fillStyle='#9fe8e4';S.forEach(s=>{const y=((s.y-scrollY*.25*s.z)%H+H)%H;x.globalAlpha=still?.7:.35+.5*Math.sin(t*.002*s.z+s.t);x.beginPath();x.arc(s.x,y,s.z*1.4,0,6.283);x.fill()})})(0);
+if(!window.THREE)return;const cv=document.getElementById('hc');
+const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const Sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);cam.position.z=7;
+const tor=new THREE.Mesh(new THREE.TorusGeometry(1.9,.7,28,64),new THREE.MeshBasicMaterial({color:0x3fd0c9,wireframe:true,transparent:true,opacity:.35}));
+const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.1,.22,160,16,2,3),new THREE.MeshBasicMaterial({color:0xf2b84b,wireframe:true,transparent:true,opacity:.55}));
+const n=600,p=new Float32Array(n*3);for(let i=0;i<n;i++){const r=3+Math.random()*3,a=Math.random()*6.283,b=Math.acos(2*Math.random()-1);p.set([r*Math.sin(b)*Math.cos(a),r*Math.sin(b)*Math.sin(a),r*Math.cos(b)],i*3)}
+const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));const pts=new THREE.Points(g,new THREE.PointsMaterial({color:0x9b8cff,size:.04}));
+Sc.add(tor,knot,pts);let mx=0,my=0,tx=0,ty=0;addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+const size=()=>{const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};addEventListener('resize',size);size();
+(function loop(t){requestAnimationFrame(loop);if(scrollY>innerHeight)return;tx+=(mx-tx)*.05;ty+=(my-ty)*.05;const s=still?0:t*.0003;tor.rotation.set(1+ty*1.5+s,tx*2+s*1.3,0);knot.rotation.set(s*2+ty,s*3+tx*2,0);pts.rotation.y=s*.6+tx;R.render(Sc,cam)})(0)})();
+(function(){if(!window.THREE)return;
+const T=0x3fd0c9,A=0xf2b84b,V=0x9b8cff,Z=0xff7a90,W=0x8d97bd,V3=THREE.Vector3,still=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const M=(c,o,w)=>new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:o,wireframe:!!w,depthWrite:false});
 const P=(g,x,y,z)=>(g.position.set(x,y,z),g);
 const ball=(r,x,y,z,c,o=.2,w=1)=>{const g=new THREE.Group(),s=new THREE.SphereGeometry(r,24,16);g.add(new THREE.Mesh(s,M(c,o)));if(w)g.add(new THREE.Mesh(s,M(c,.28,1)));return P(g,x,y,z)};
@@ -326,513 +214,70 @@ const dot=(x,y,z,c,r=.09)=>P(new THREE.Mesh(new THREE.SphereGeometry(r,12,8),new
 const box=(w,h,d,x,y,z,c,o=.15)=>{const g=new THREE.Group(),b=new THREE.BoxGeometry(w,h,d);g.add(new THREE.Mesh(b,M(c,o)),new THREE.LineSegments(new THREE.EdgesGeometry(b),new THREE.LineBasicMaterial({color:c})));return P(g,x,y,z)};
 const lin=(a,c)=>new THREE.Line(new THREE.BufferGeometry().setFromPoints(a.map(p=>new V3(...p))),new THREE.LineBasicMaterial({color:c}));
 const ring=(r,x,y,z,c)=>{const a=[];for(let i=0;i<=48;i++)a.push([x+r*Math.cos(i/48*6.283),y+r*Math.sin(i/48*6.283),z]);return lin(a,c)};
-
 const SC={
 axioms:g=>g.add(box(3.4,2.4,2.4,0,0,0,W,.05),ball(.95,-.55,0,0,T),ball(.95,.55,0,0,A),ball(.4,0,0,0,Z,.6,0)),
 disc:g=>{for(let i=0;i<9;i++)g.add(dot(-2+(i%3)*.5,(Math.floor(i/3)-1)*.5,0,T,.1));g.add(ball(1,1.5,0,0,V,.2))},
 closed:g=>g.add(ball(.85,-1.2,0,0,T,.1,0),ball(.85,1.2,0,0,A,.3,1),ring(.85,1.2,0,0,A)),
-// FIX 1.1.7 : Intervalles 2D horizontales emboîtées
-nested:g=>{
-  const H = 0.06; // épaisseur des lignes
-  // ]-1, 1[
-  g.add(box(2.4, H, 0.05, 0, 0.9, 0, V, 0.4));
-  // ]-1/2, 1/2[
-  g.add(box(1.6, H, 0.05, 0, 0.6, 0, V, 0.4));
-  // ]-1/3, 1/3[
-  g.add(box(1.2, H, 0.05, 0, 0.3, 0, V, 0.4));
-  // ]-1/4, 1/4[
-  g.add(box(0.9, H, 0.05, 0, 0, 0, V, 0.4));
-  // Point 0
-  g.add(dot(0, -0.4, 0, A, 0.12));
-  // ligne verticale reliant les centres
-  g.add(lin([[0,0.9,0],[0,-0.4,0]], 0x26305a));
-},
 nbh:g=>g.add(ball(1.4,0,0,0,V,.08),ball(.6,.25,0,0,T,.25),dot(.25,0,0,A)),
-base:g=>{g.add(ball(1.5,0,0,0,V,.05));[[.6,.3,0],[-.6,.4,.2],[0,-.7,.3],[.7,-.4,-.2],[-.5,-.4,-.4],[0,.2,-.7],[0,.1,.8]].forEach(p=>g.add(ball(.5,...p,T,.15)))},
 haus:g=>g.add(dot(-1.3,0,0,T),dot(1.3,0,0,A),ball(.9,-1.3,0,0,T),ball(.9,1.3,0,0,A)),
 inter:g=>g.add(ball(1.2,0,0,0,T,.22,0),new THREE.Mesh(new THREE.SphereGeometry(1.25,28,18),M(A,.55,1)),dot(2.2,.2,0,Z),ball(.3,2.2,.2,0,Z,.2,0)),
-induced:g=>g.add(ball(1.5,0,0,0,V,.07),new THREE.Mesh(new THREE.PlaneGeometry(3.4,3.4),new THREE.MeshBasicMaterial({color:T,transparent:true,opacity:.18,side:2,depthWrite:false})),ball(.8,.35,.3,0,A,.2),ring(.8,.35,.3,0,A),ring(1.5,0,0,0,V)),
-quot:g=>g.add(P(new THREE.Mesh(new THREE.PlaneGeometry(1.8,1.8,6,6),M(T,.3,1)),-1.8,0,0),P(new THREE.Mesh(new THREE.TorusGeometry(.8,.32,16,32),M(A,.35,1)),1.5,0,0),lin([[-.6,.3,0],[0,1,0],[.4,.5,0]],W)),
+induced:g=>g.add(ball(1.5,0,0,0,V,.07),new THREE.Mesh(new THREE.PlaneGeometry(3.4,3.4),new THREE.MeshBasicMaterial({color:T,transparent:true,opacity:.18,side:2,depthWrite:false})),ball(.8,.35,.3,0,A,.2),ring(.8,.35,.3,0,A)),
 prod:g=>g.add(box(1.8,1.3,.12,0,0,0,A,.2),box(1.8,.08,.08,0,-1.2,0,T,.5),box(.08,1.3,.08,-1.4,0,0,V,.5)),
 cont:g=>g.add(ball(1.2,-1.9,0,0,V,.06),ball(.5,-1.8,.1,0,T,.3),dot(-1.8,.1,0,A),ball(1.2,1.9,0,0,V,.06),ball(.8,1.9,.1,0,Z,.2),dot(1.9,.1,0,A),lin(new THREE.QuadraticBezierCurve3(new V3(-1.8,.1,0),new V3(0,1.8,0),new V3(1.9,.1,0)).getPoints(30).map(v=>[v.x,v.y,v.z]),W)),
-homeo:g=>{const geo=new THREE.TorusGeometry(1.1,.45,24,48),o=geo.attributes.position.array.slice();g.add(new THREE.Mesh(geo,M(A,.4,1)));g.tick=t=>{const p=geo.attributes.position.array;for(let i=0;i<p.length;i+=3){const x=o[i],y=o[i+1],z=o[i+2];p[i]=x*(1+.25*Math.sin(t+y));p[i+1]=y*(1+.25*Math.cos(t+x));p[i+2]=z*(1+.3*Math.sin(t*1.3+x))}geo.attributes.position.needsUpdate=true}}
-};
-
-const ANN={
-axioms:[[0,'E (ensemble)','L’espace entier : toujours dans τ (axiome i).',[0,1.4,0]],[1,'Ouvert O₁','Un élément de τ.',[-1.2,.9,0]],[2,'Ouvert O₂','Un autre élément de τ.',[1.2,.9,0]],[3,'O₁ ∩ O₂','Axiome ii) : l’intersection de deux ouverts est un ouvert.',[0,-.5,0]]],
-disc:[[[0,8],'Singleton {x}','Topologie discrète : chaque point {x} est un ouvert.',[0,.3,0]],[9,'E (grossière)','Topologie grossière : seuls ∅ et E sont ouverts.',[0,1.15,0]]],
-closed:[[0,'Ouvert','Ne contient pas son bord : chaque point a un voisinage dedans.',[0,1,0]],[1,'Fermé','Contient son bord ; son complémentaire est ouvert.',[0,1,0]]],
-nested:[[0,'Ouvert ]−1,1[','Premier ouvert de la suite emboîtée.',[0,1.3,0]],[2,']−1/3, 1/3[','Quand n grandit, l’ouvert rétrécit.',[0,.4,0]],[4,'Point 0','L’intersection infinie vaut {0} : un fermé, pas un ouvert.',[0,-.6,0]]],
-nbh:[[0,'U : voisinage','U contient un ouvert W autour de x.',[0,1.5,0]],[1,'W : ouvert','Ouvert avec x ∈ W ⊂ U.',[.6,.9,0]],[2,'Point x','Le point étudié.',[0,-.3,0]]],
-base:[[0,'Ouvert O','Un ouvert quelconque de τ.',[0,1.6,0]],[[1,7],'Élément de base b','O est une réunion de tels b.',[0,.7,0]]],
-haus:[[0,'Point x','Premier point.',[0,-.4,0]],[1,'Point x′','Second point, x ≠ x′.',[0,-.4,0]],[2,'Voisinage W','Voisinage de x.',[0,1.1,0]],[3,'Voisinage W′','Voisinage de x′ avec W ∩ W′ = ∅.',[0,1.1,0]]],
-inter:[[0,'Intérieur A°','Points dont A est un voisinage.',[0,0,0]],[1,'Frontière ∂A','Adhérents à A mais non intérieurs.',[0,1.45,0]],[2,'Point isolé','Un voisinage ne rencontre A qu’en ce point.',[0,-.35,0]],[3,'Voisinage','Petite boule ne contenant que ce point de A.',[0,.55,0]]],
-induced:[[0,'E','Espace ambiant.',[0,1.7,0]],[1,'Sous-espace A','Le plan A, muni de la topologie induite.',[1.3,-1.7,0]],[2,'Ouvert O','Ouvert de E ; sa trace O ∩ A est ouverte dans A.',[0,1,0]]],
-quot:[[0,'Carré E','Espace de départ.',[0,1.1,0]],[1,'Tore E/ℛ','Bords opposés identifiés ; q est la surjection canonique.',[0,1,0]]],
-prod:[[0,'u₁ × u₂','Ouvert de la topologie produit.',[0,.9,0]],[1,'u₁ ouvert de E₁','Premier facteur.',[0,-.3,0]],[2,'u₂ ouvert de E₂','Second facteur.',[-.5,0,0]]],
-cont:[[0,'E','Espace de départ.',[0,1.4,0]],[1,'U : voisinage de a','Voisinage choisi dans E.',[0,.7,0]],[2,'Point a','Le point étudié.',[0,-.3,0]],[3,'F','Espace d’arrivée.',[0,1.4,0]],[4,'V : voisinage de f(a)','Voisinage imposé dans F.',[0,1,0]],[5,'f(a)','Image du point a.',[0,-.3,0]]],
-homeo:[[0,'Tore déformé','f et f⁻¹ continues : la forme change sans couper ni recoller.',[0,1.9,0]]]};
-
-(function(){
-  if(!window.THREE)return;
-  const R2=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
-  const cam=new THREE.PerspectiveCamera(45,1.5,.1,60),ray=new THREE.Raycaster(),act=new Set();
-  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?act.add(e.target._f):act.delete(e.target._f)));
-  const setc=f=>{cam.position.set(0,f.d*.12,f.d);cam.lookAt(0,0,0);cam.updateMatrixWorld()};
-  const clamp=v=>Math.max(3,Math.min(12,v));
-  function toggle(fg,f){
-    if(fg.classList.contains('big')){fg.classList.remove('big');fg._ph.replaceWith(fg);f.cv.width=540;f.cv.height=360;document.body.style.overflow=''}
-    else{fg._ph=document.createElement('span');fg.replaceWith(fg._ph);document.body.append(fg);fg.classList.add('big');f.cv.width=1080;f.cv.height=720;document.body.style.overflow='hidden'}
-  }
-  addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelector('.fig.big [data-z=f]')?.click()});
-  document.querySelectorAll('canvas[data-k]').forEach(cv=>{
-    const k=cv.dataset.k,g=new THREE.Group(),s=new THREE.Scene(),fg=cv.parentElement;SC[k](g);s.add(g);
-    (ANN[k]||[]).forEach(([i,n,d,o])=>{const r=Array.isArray(i)?i:[i,i];for(let j=r[0];j<=r[1];j++){const c=g.children[j];if(c)c.userData={n,d,o,lab:j===r[0]}}});
-    g.children.forEach(c=>{c.userData.sz=new THREE.Box3().setFromObject(c).getSize(new V3()).length()});
-    const f={cv,s,g,c:cv.getContext('2d'),ry:Math.random()*6,rx:.25,d:6.4,auto:!still,h:null};cv._f=f;
-    fg.insertAdjacentHTML('beforeend','<div class="tb"><button data-z="1" title="Zoom +">+</button><button data-z="-1" title="Zoom −">−</button><button data-z="r" title="Rotation auto">⟲</button><button data-z="f" title="Plein écran">⤢</button></div><div class="tip"></div>');
-    const tip=fg.querySelector('.tip');
-    fg.querySelector('.tb').onclick=e=>{const z=e.target.dataset.z;if(!z)return;if(z==='f')toggle(fg,f);else if(z==='r')f.auto=!f.auto;else f.d=clamp(f.d-z)};
-    let dn=null;
-    cv.addEventListener('pointerdown',e=>{dn=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId);f.auto=false});
-    cv.addEventListener('pointerup',()=>dn=null);
-    cv.addEventListener('dblclick',()=>{f.d=6.4;f.rx=.25});
-    cv.addEventListener('pointerleave',()=>{f.h=null;tip.style.display='none'});
-    cv.addEventListener('wheel',e=>{if(fg.classList.contains('big')){e.preventDefault();f.d=clamp(f.d+e.deltaY*.005)}},{passive:false});
-    cv.addEventListener('pointermove',e=>{
-      if(dn){f.ry+=(e.clientX-dn[0])*.01;f.rx=Math.max(-1.4,Math.min(1.4,f.rx+(e.clientY-dn[1])*.01));dn=[e.clientX,e.clientY];return}
-      const r=cv.getBoundingClientRect();setc(f);ray.setFromCamera({x:(e.clientX-r.left)/r.width*2-1,y:-((e.clientY-r.top)/r.height)*2+1},cam);
-      let best=null;
-      ray.intersectObjects(g.children,true).forEach(h=>{let o=h.object;while(o.parent!==g)o=o.parent;if(o.userData.n&&(!best||o.userData.sz<best.userData.sz))best=o});
-      f.h=best;tip.style.display=best?'block':'none';if(best)tip.innerHTML='<b>'+best.userData.n+'</b>'+best.userData.d;
-    });
-    io.observe(cv);
-  });
-  (function lp(t){requestAnimationFrame(lp);act.forEach(f=>{
-    const W=f.cv.width,H=f.cv.height,k=W/540,c=f.c;
-    if(R2.domElement.width!==W)R2.setSize(W,H,false);
-    if(f.auto)f.ry+=.006;
-    f.g.rotation.set(f.rx,f.ry,0);
-    if(f.g.tick&&!still)f.g.tick(t*.001);
-    f.g.children.forEach(o=>{const u=o===f.h?1.12:1;o.scale.setScalar(o.scale.x+(u-o.scale.x)*.2)});
-    setc(f);R2.render(f.s,cam);c.clearRect(0,0,W,H);c.drawImage(R2.domElement,0,0);
-    c.font=`${12*k}px 'Space Grotesk',sans-serif`;c.textBaseline='middle';c.textAlign='center';
-    f.g.children.forEach(o=>{const u=o.userData;if(!u.lab)return;
-      const v=o.localToWorld(new V3(...(u.o||[0,0,0]))).project(cam),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H,w=c.measureText(u.n).width+12*k,hv=o===f.h;
-      c.fillStyle=hv?'#f2b84b':'rgba(9,13,26,.88)';c.fillRect(x-w/2,y-9*k,w,18*k);
-      c.strokeStyle='#3fd0c9';c.strokeRect(x-w/2,y-9*k,w,18*k);
-      c.fillStyle=hv?'#111':'#dfe4f5';c.fillText(u.n,x,y)});
-  })})(0);
-})();
-
-/* ===== DÉMOS PAS À PAS ===== */
-document.querySelectorAll('.pf').forEach(pf=>{
-  const ps=[...pf.querySelectorAll(':scope>p')],k=ps.length;let i=1;
-  const bar=document.createElement('div');bar.className='st';
-  bar.innerHTML='<button data-a="-1">‹ Précédent</button><span></span><button data-a="1">Étape suivante ›</button><button data-a="0">Tout voir</button>';
-  pf.prepend(bar);
-  const show=()=>{ps.forEach((p,j)=>{p.style.display=j<i?'':'none';p.classList.toggle('cur',j===i-1)});bar.children[1].textContent='Étape '+i+' / '+k};
-  bar.onclick=e=>{const a=e.target.dataset.a;if(a===undefined)return;i=a==='0'?k:Math.max(1,Math.min(k,i+ +a));show()};
-  show();
-});
-
-/* ===== TILT CARTES ===== */
-if(!matchMedia('(prefers-reduced-motion:reduce)').matches)
-document.querySelectorAll('.card').forEach(c=>{
-  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    c.style.transform=`perspective(900px) rotateY(${x*5}deg) rotateX(${-y*5}deg)`});
-  c.addEventListener('mouseleave',()=>c.style.transform='');
-});
-
-/* ===== PROGRESSION ===== */
-const bar=document.getElementById('bar'),links=[...nav.querySelectorAll('a')],heads=C.map(s=>document.getElementById(s.id));
-addEventListener('scroll',()=>{
-  bar.style.transform='scaleX('+(scrollY/(document.body.scrollHeight-innerHeight))+')';
-  let k=-1;heads.forEach((h,i)=>{if(h.getBoundingClientRect().top<innerHeight*.4)k=i});
-  links.forEach((a,i)=>a.classList.toggle('on',i===k));
-},{passive:true});
-
-/* ===== HERO 3D ===== */
-(function(){
-  const cv=document.getElementById('c');
-  if(!window.THREE){return}
-  const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
-  R.setPixelRatio(Math.min(devicePixelRatio,2));
-  const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);cam.position.z=7;
-  const G=new THREE.Group();S.add(G);
-  const tor=new THREE.Mesh(new THREE.TorusGeometry(1.9,.7,28,64),new THREE.MeshBasicMaterial({color:0x3fd0c9,wireframe:true,transparent:true,opacity:.35}));
-  const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.1,.22,160,16,2,3),new THREE.MeshBasicMaterial({color:0xf2b84b,wireframe:true,transparent:true,opacity:.55}));
-  G.add(tor,knot);
-  const n=700,p=new Float32Array(n*3);
-  for(let i=0;i<n;i++){const r=3+Math.random()*3,a=Math.random()*6.283,b=Math.acos(2*Math.random()-1);
-    p.set([r*Math.sin(b)*Math.cos(a),r*Math.sin(b)*Math.sin(a),r*Math.cos(b)],i*3)}
-  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));
-  const pts=new THREE.Points(g,new THREE.PointsMaterial({color:0x9b8cff,size:.04}));S.add(pts);
-  let mx=0,my=0,tx=0,ty=0;
-  addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-  function size(){const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();G.position.x=w>800?2.3:0;G.scale.setScalar(w>800?1:.7)}
-  addEventListener('resize',size);size();
-  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  (function loop(t){
-    requestAnimationFrame(loop);
-    if(scrollY>innerHeight)return;
-    tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
-    const s=still?0:t*.0003;
-    tor.rotation.set(1+ty*1.5+s,tx*2+s*1.3,0);
-    knot.rotation.set(s*2+ty,s*3+tx*2,0);
-    pts.rotation.y=s*.6+tx;
-    R.render(S,cam);
-  })(0);
-})();
-
-/* ===== FEATURES v2 ===== */
-(function(){
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const root=document.documentElement,B=document.body;
-const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const isLight=()=>root.dataset.theme==='light';
-
-/* 1. Thème */
-try{if(localStorage.getItem('th')==='light')root.dataset.theme='light'}catch(e){}
-const tools=document.createElement('div');tools.id='tools';
-tools.innerHTML='<button id="bK" title="Rechercher">🔍 Rechercher<kbd>Ctrl K</kbd></button><button id="bT" title="Clair / sombre">◐</button><button id="bP" title="Imprimer / PDF">🖨 PDF</button>';
-B.append(tools);
-$('#bT').onclick=()=>{const l=isLight();l?delete root.dataset.theme:root.dataset.theme='light';try{localStorage.setItem('th',l?'dark':'light')}catch(e){}};
-$('#bP').onclick=()=>print();
-addEventListener('beforeprint',()=>$$('details').forEach(d=>{d._o=d.open;d.open=true}));
-addEventListener('afterprint',()=>$$('details').forEach(d=>d.open=!!d._o));
-
-/* 2. Ctrl+K */
-const idx=$$('.card').map(c=>{
-  const tag=$('.tag',c).textContent,t=$('.tx',c).cloneNode(true);
-  $$('details,.tag',t).forEach(d=>d.remove());
-  const txt=t.textContent.replace(/\s+/g,' ').trim();
-  return{c,tag,txt,n:norm(tag+' '+txt)};
-});
-const pal=document.createElement('div');pal.id='pal';
-pal.innerHTML='<div class="bx"><input placeholder="Chercher une définition, un théorème…" autocomplete="off"><ul></ul><div class="ft">↑↓ naviguer · Entrée ouvrir · Échap fermer</div></div>';
-B.append(pal);
-const inp=$('input',pal),ul=$('ul',pal);let sel=0,res=[];
-const find=q=>{const k=norm(q).split(/\s+/).filter(Boolean);if(!k.length)return idx.slice(0,8);
-  return idx.map(o=>{let s=0;for(const w of k){if(!o.n.includes(w))return null;s+=norm(o.tag).includes(w)?5:1}return[s,o]}).filter(Boolean).sort((a,b)=>b[0]-a[0]).slice(0,8).map(x=>x[1])};
-const draw=()=>{res=find(inp.value);sel=Math.min(sel,Math.max(0,res.length-1));
-  ul.innerHTML=res.length?res.map((o,i)=>`<li class="${i===sel?'sel':''}" data-i="${i}"><b>${esc(o.tag)}</b><span>${esc(o.txt.slice(0,90))}…</span></li>`).join(''):'<li><span>Aucun résultat</span></li>'};
-const openP=()=>{pal.classList.add('on');inp.value='';sel=0;draw();inp.focus()};
-const closeP=()=>pal.classList.remove('on');
-const go=i=>{const o=res[i];if(!o)return;closeP();o.c.classList.add('in','flash');o.c.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>o.c.classList.remove('flash'),1900)};
-$('#bK').onclick=openP;
-inp.oninput=()=>{sel=0;draw()};
-ul.onclick=e=>{const l=e.target.closest('li[data-i]');if(l)go(+l.dataset.i)};
-pal.onclick=e=>{if(e.target===pal)closeP()};
-addEventListener('keydown',e=>{
-  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.classList.contains('on')?closeP():openP();return}
-  if(!pal.classList.contains('on'))return;
-  if(e.key==='Escape')closeP();
-  else if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(res.length-1,sel+1);draw()}
-  else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);draw()}
-  else if(e.key==='Enter'){e.preventDefault();go(sel)}
-});
-
-/* 3. Glossaire */
-const SV={
- open:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="22" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3"/><circle cx="42" cy="32" r="2.5" fill="currentColor"/></svg>',
- closed:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="22" fill="currentColor" fill-opacity=".18" stroke="currentColor" stroke-width="2.4"/><circle cx="42" cy="32" r="2.5" fill="currentColor"/></svg>',
- nbh:'<svg viewBox="0 0 84 64"><circle cx="42" cy="32" r="28" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-width="1.2"/><circle cx="46" cy="30" r="13" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-dasharray="3 3"/><circle cx="46" cy="30" r="2.5" fill="currentColor"/></svg>',
- sep:'<svg viewBox="0 0 84 64"><circle cx="22" cy="32" r="16" fill="currentColor" fill-opacity=".2" stroke="currentColor"/><circle cx="62" cy="32" r="16" fill="currentColor" fill-opacity=".2" stroke="currentColor"/><circle cx="22" cy="32" r="2.5" fill="currentColor"/><circle cx="62" cy="32" r="2.5" fill="currentColor"/></svg>',
- homeo:'<svg viewBox="0 0 84 64"><ellipse cx="42" cy="32" rx="34" ry="22" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.6"/><ellipse cx="42" cy="32" rx="12" ry="7" fill="var(--panel)" stroke="currentColor" stroke-width="1.6"/></svg>'};
-const GL=[
- {src:'voisinages?',t:'Voisinage',d:'U est un voisinage de x s’il existe un ouvert W tel que x ∈ W ⊂ U.',s:'nbh'},
- {src:'ouverts?',t:'Ouvert',d:'Élément de la topologie τ. Un ouvert est voisinage de chacun de ses points.',s:'open'},
- {src:'ferm[ée]s?',t:'Fermé',d:'Partie dont le complémentaire est ouvert : elle contient son bord.',s:'closed'},
- {src:'adh[ée]rence|adh[ée]rent[es]?',t:'Adhérence',d:'Ā : le plus petit fermé contenant A. Un point est adhérent si tout voisinage rencontre A.',s:'closed'},
- {src:'int[ée]rieur',t:'Intérieur',d:'A° : le plus grand ouvert contenu dans A.',s:'open'},
- {src:'fronti[èe]re',t:'Frontière',d:'∂A = Ā ∖ A° : les points « au bord » de A.',s:'closed'},
- {src:'topologies?',t:'Topologie',d:'Famille τ de parties de E contenant ∅ et E, stable par réunion quelconque et intersection finie.',s:'open'},
- {src:'s[ée]par[ée]s?|Hausdorff',t:'Espace séparé',d:'Deux points distincts ont des voisinages disjoints.',s:'sep'},
- {src:'hom[ée]omorphisme',t:'Homéomorphisme',d:'Bijection continue de réciproque continue : même forme topologique.',s:'homeo'}];
-GL.forEach(g=>g.re=new RegExp('^(?:'+g.src+')$','iu'));
-const ALL=new RegExp('(?<![\\p{L}-])(?:'+GL.map(g=>g.src).join('|')+')(?![\\p{L}])','giu');
-$$('.card').forEach(card=>{
-  const used=new Set(),nodes=[],w=document.createTreeWalker($('.tx',card),NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('.tag,summary,.st,.gl,button')?2:1});
-  while(w.nextNode())nodes.push(w.currentNode);
-  nodes.forEach(n=>{let ch=false;
-    const out=esc(n.nodeValue).replace(ALL,m=>{const gi=GL.findIndex(g=>g.re.test(m));if(gi<0||used.has(gi))return m;used.add(gi);ch=true;return`<span class="gl" data-g="${gi}">${m}</span>`});
-    if(ch){const t=document.createElement('template');t.innerHTML=out;n.replaceWith(t.content)}});
-});
-const gt=document.createElement('div');gt.id='gtip';B.append(gt);
-document.addEventListener('mouseover',e=>{
-  const s=e.target.closest&&e.target.closest('.gl');
-  if(!s){gt.classList.remove('on');return}
-  const g=GL[s.dataset.g];gt.innerHTML=SV[g.s]+'<b>'+g.t+'</b>'+g.d;
-  const r=s.getBoundingClientRect();gt.style.left=Math.min(innerWidth-300,Math.max(10,r.left))+'px';gt.style.top=(r.bottom+10)+'px';
-  if(r.bottom+10+gt.offsetHeight>innerHeight-10)gt.style.top=(r.top-10-gt.offsetHeight)+'px';
-  gt.classList.add('on')});
-
-/* 4. KaTeX */
-const U={'∈':'\\in ','∉':'\\notin ','⊂':'\\subset ','≥':'\\geq ','≤':'\\leq ','∪':'\\cup ','∩':'\\cap ','∖':'\\setminus ','∅':'\\varnothing ','−':'-','⋃':'\\bigcup ','⋂':'\\bigcap '};
-const tex=h=>h.replace(/<sup>(.*?)<\/sup>/g,'^{$1}').replace(/<sub>(.*?)<\/sub>/g,'_{$1}').replace(/<[^>]+>/g,'').replace(/[∈∉⊂≥≤∪∩∖∅−⋃⋂]/g,c=>U[c]);
-const K=t=>{try{return katex.renderToString(t,{throwOnError:false})}catch(e){return t}};
-const ks=document.createElement('script');
-ks.src='https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js';
-ks.onload=()=>$$('.tx p,.tx li').forEach(el=>{
-  if(el.closest('.tag,.st')||el.querySelector('.st'))return;
-  const o=el.innerHTML;
-  const h=o.replace(/<o>([\s\S]*?)<\/o>/g,(m,x)=>K('\\overline{'+tex(x)+'}'))
-    .replace(/([⋃⋂])<sub>([^<]*)<\/sub>/g,(m,s,x)=>K(tex(s)+'_{'+tex(x)+'}'))
-    .replace(/(?:<i>)?([A-FUVWf])(?:<\/i>)?<sup>(−1|c)<\/sup>/g,(m,a,b)=>K(a+'^{'+tex(b)+'}'))
-    .replace(/(?<!\w)([A-Z])°/g,(m,a)=>K(a+'^{\\circ}'))
-    .replace(/(−?)1\/n/g,(m,s)=>K((s?'-':'')+'\\frac{1}{n}'));
-  if(h!==o)el.innerHTML=h});
-document.head.append(ks);
-
-/* 5. Morph 3D */
-const NAMES=['sphere','torus','knot','mobius'];
-const PAL=[[0x3fd0c9,0x9b8cff,0xf2b84b,0xff7a90],[0x0b9a93,0x6552e0,0xb57300,0xd1355a]];
-let morph=null,mEl=null;
-if(window.THREE){
-  const cv=mEl=document.createElement('canvas');cv.id='morph';B.append(cv);
-  const R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});R.setPixelRatio(1);
-  const cam=new THREE.PerspectiveCamera(45,1,.1,50);cam.position.z=6.4;
-  const V=THREE.Vector3,N=72,M2=24;
-  const geo=new THREE.PlaneGeometry(1,1,N,M2),pos=geo.attributes.position,cnt=pos.count;
-  const F={
-   sphere:(u,v)=>{const a=u*6.2832,t=v*Math.PI,r=1.9;return[r*Math.sin(t)*Math.cos(a),r*Math.cos(t),r*Math.sin(t)*Math.sin(a)]},
-   torus:(u,v)=>{const a=u*6.2832,b=v*6.2832,Rr=1.7+.65*Math.cos(b);return[Rr*Math.cos(a),.65*Math.sin(b),Rr*Math.sin(a)]},
-   knot:(u,v)=>{const c=p=>new V(Math.sin(p)+2*Math.sin(2*p),Math.cos(p)-2*Math.cos(2*p),-Math.sin(3*p)).multiplyScalar(.6),
-     a=u*6.2832,e=.01,p0=c(a-e),p1=c(a),p2=c(a+e),T2=p2.clone().sub(p0).normalize(),
-     Nn=p2.clone().add(p0).sub(p1.clone().multiplyScalar(2)).normalize(),Bn=new V().crossVectors(T2,Nn),b=v*6.2832,r=.33,
-     q=p1.clone().add(Nn.multiplyScalar(r*Math.cos(b))).add(Bn.multiplyScalar(r*Math.sin(b)));return[q.x,q.y,q.z]},
-   mobius:(u,v)=>{const a=u*6.2832,s=(v-.5)*1.3,Rr=1.7+s*Math.cos(a/2);return[Rr*Math.cos(a),s*Math.sin(a/2),Rr*Math.sin(a)]}
-  };
-  const TG={};NAMES.forEach(k=>{const a=new Float32Array(cnt*3);for(let i=0;i<cnt;i++)a.set(F[k]((i%(N+1))/N,((i/(N+1))|0)/M2),i*3);TG[k]=a});
-  pos.array.set(TG.knot);
-  const mat=new THREE.MeshBasicMaterial({color:0x3fd0c9,wireframe:true,transparent:true,opacity:.5}),mesh=new THREE.Mesh(geo,mat),S=new THREE.Scene();S.add(mesh);
-  let k=-1,mx=0,my=0;const tc=new THREE.Color();
-  addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
-  let fr=0;
-  (function lp(){requestAnimationFrame(lp);
-    if(++fr%2)return;
-    const w=cv.clientWidth|0,h=cv.clientHeight|0;if(!w)return;
-    if(cv._w!==w){cv._w=w;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
-    const tg=TG[k<0?'knot':NAMES[k]],a=pos.array;
-    for(let i=0;i<a.length;i++)a[i]+=(tg[i]-a[i])*.07;pos.needsUpdate=true;
-    tc.set(PAL[isLight()?1:0][k<0?0:k]);mat.color.lerp(tc,.06);
-    mesh.rotation.set(.5+my*.8,(still?0:performance.now()*.0004)+mx*1.5,0);
-    R.render(S,cam)})();
-  morph={to:n=>{k=n}};
-}
-
-/* 6. Thème par section */
-const SEC=[['s1','var(--teal)'],['s2','var(--vio)'],['s3','var(--amber)'],['s4','var(--rose)']];
-const heads2=SEC.map(s=>document.getElementById(s[0]));let cur=-2;
-const onS=()=>{let k=-1;heads2.forEach((h,i)=>{if(h&&h.getBoundingClientRect().top<innerHeight*.4)k=i});
-  if(k!==cur){cur=k;root.style.setProperty('--th',k<0?'var(--teal)':SEC[k][1]);morph&&morph.to(k)}
-  mEl&&mEl.classList.toggle('dock',scrollY>innerHeight*.55)};
-addEventListener('scroll',onS,{passive:true});onS();
-
-/* 7. Loader */
-(function(){
-  const ld=document.createElement('div');ld.id='ld';ld.innerHTML='<canvas width="600" height="600"></canvas>';B.append(ld);
-  B.style.overflow='hidden';
-  let done=false;const end=()=>{if(done)return;done=true;ld.classList.add('out');setTimeout(()=>{ld.remove();B.style.overflow=''},1500)};
-  ld.onclick=end;
-  if(still){end();return}
-  const x=$('canvas',ld).getContext('2d'),o=document.createElement('canvas');o.width=o.height=200;
-  const ox=o.getContext('2d');ox.fillStyle='#fff';ox.font='bold 190px Georgia,serif';ox.textAlign='center';ox.textBaseline='middle';ox.fillText('τ',100,108);
-  const d=ox.getImageData(0,0,200,200).data,Pp=[];
-  for(let y=0;y<200;y+=3)for(let i=0;i<200;i+=3)if(d[(y*200+i)*4+3]>128){const a=Math.random()*6.2832,r=320+Math.random()*400;
-    Pp.push({tx:(i-100)*1.9,ty:(y-100)*1.9,tz:(Math.random()-.5)*50,sx:Math.cos(a)*r,sy:Math.sin(a)*r,sz:(Math.random()-.5)*500,c:i/200})}
-  const t0=performance.now();
-  (function f(t){if(done)return;requestAnimationFrame(f);
-    const e=t-t0,p=Math.min(1,e/1900),q=1-Math.pow(1-p,3),th=(1-q)*12.566+(e>2300?(e-2300)*.0001:0);
-    x.clearRect(0,0,600,600);const cs=Math.cos(th),sn=Math.sin(th);
-    Pp.forEach(a=>{const X=a.sx+(a.tx-a.sx)*q,Y=a.sy+(a.ty-a.sy)*q,Z2=a.sz+(a.tz-a.sz)*q,
-      rx=X*cs-Z2*sn,rz=X*sn+Z2*cs,s=520/(520+rz);
-      x.fillStyle=`hsl(${175-a.c*135},80%,${60+(e>1900?10:0)}%)`;x.globalAlpha=Math.min(1,.25+q);
-      x.beginPath();x.arc(300+rx*s,300+Y*s,2.3*s,0,6.2832);x.fill()});
-    x.globalAlpha=1;
-    if(e>2600)end()})(t0);
-})();
-
-/* 8. Univers */
-(function(){
-  document.documentElement.classList.add('js');
-  const cv=document.createElement('canvas');cv.id='stars';B.prepend(cv);
-  ['n1','n2','n3'].forEach(k=>{const d=document.createElement('div');d.className='neb '+k;B.prepend(d)});
-  const c=cv.getContext('2d');let W,H,S=[],mx=0,my=0,sh=null;
-  const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;S=Array.from({length:Math.round(W*H/7000)},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.9+.1,t:Math.random()*6,h:['#fff','#9fe8e4','#ffd98a','#b9b0ff'][Math.random()*4|0]}))};
-  addEventListener('resize',rs);rs();
-  addEventListener('mousemove',e=>{mx=e.clientX/W-.5;my=e.clientY/H-.5});
-  (function f(t){requestAnimationFrame(f);
-    if(document.hidden||t-(f.l||0)<40)return;f.l=t;
-    c.clearRect(0,0,W,H);
-    S.forEach(s=>{const x=((s.x-mx*50*s.z)%W+W)%W,y=((s.y-scrollY*.3*s.z-my*50*s.z)%H+H)%H;
-      c.globalAlpha=still?.8:.4+.5*Math.sin(t*.002*s.z+s.t);c.fillStyle=s.h;c.beginPath();c.arc(x,y,s.z*1.5,0,6.283);c.fill()});
-    c.globalAlpha=1;
-    if(!still&&!sh&&Math.random()<.004)sh={x:Math.random()*W*.8,y:Math.random()*H*.4,l:0};
-    if(sh){const g=c.createLinearGradient(sh.x,sh.y,sh.x-90,sh.y-40);g.addColorStop(0,'#fff');g.addColorStop(1,'transparent');
-      c.strokeStyle=g;c.lineWidth=2;c.beginPath();c.moveTo(sh.x,sh.y);c.lineTo(sh.x-90,sh.y-40);c.stroke();
-      sh.x+=14;sh.y+=6;if(++sh.l>70)sh=null}
-  })(0);
-  if(matchMedia('(pointer:fine)').matches){
-    const g=document.createElement('div');g.id='glow';B.append(g);let gx=0,gy=0,tx=0,ty=0;
-    addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
-    (function l(){gx+=(tx-gx)*.12;gy+=(ty-gy)*.12;g.style.transform=`translate(${gx-210}px,${gy-210}px)`;requestAnimationFrame(l)})();
-  }
-  document.addEventListener('mousemove',e=>{const k=e.target.closest&&e.target.closest('.card');
-    if(k){const r=k.getBoundingClientRect();k.style.setProperty('--mx',e.clientX-r.left+'px');k.style.setProperty('--my',e.clientY-r.top+'px')}});
-  const hero=document.getElementById('hero'),hc=hero.querySelector('.hc');
-  hero.insertAdjacentHTML('beforeend','<div class="mouse"><i></i></div>');
-  addEventListener('scroll',()=>{const p=Math.min(1,scrollY/innerHeight);hc.style.transform=`translateY(${scrollY*.3}px) scale(${1-p*.12})`;hc.style.opacity=1-p*1.3},{passive:true});
-  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}}),{threshold:.06});
-  document.querySelectorAll('.card').forEach(k=>io2.observe(k));
-})();
-})();
-</script>
-
-<!-- ============================================================= -->
-<!-- GRAPHE 3D                                                     -->
-<!-- ============================================================= -->
-<script>
-(function(){
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const B=document.body;
-const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-(function(){
-  if(!window.THREE)return;
-  const GRAPH=document.createElement('div');GRAPH.id='graph';
-  GRAPH.innerHTML='<div class="box"><button class="close" title="Fermer (Esc)">✕</button><div class="tip">Clique sur un nœud pour aller au théorème · Glisse pour tourner</div><div class="info"></div><canvas></canvas></div>';
-  B.append(GRAPH);
-  const cv=$('canvas',GRAPH),info=$('.info',GRAPH);
-  const NODES=[
-    {id:'1.1.1',t:'Topologie',type:'def',sec:'s1'},{id:'1.1.2',t:'Exemples',type:'ex',sec:'s1'},
-    {id:'1.1.5',t:'Fermé',type:'def',sec:'s1'},{id:'1.1.8',t:'Voisinage',type:'def',sec:'s1'},
-    {id:'1.1.11',t:'Caractérisation ouverts',type:'thm',sec:'s1'},{id:'1.1.12',t:'Base d\'ouverts',type:'def',sec:'s1'},
-    {id:'1.1.14',t:'Base ⇔ voisinages',type:'prop',sec:'s1'},{id:'1.1.15',t:'Séparé',type:'def',sec:'s1'},
-    {id:'1.1.18',t:'Singletons fermés',type:'prop',sec:'s1'},
-    {id:'1.2.1',t:'Intérieur/Adhérence',type:'def',sec:'s2'},{id:'1.2.2',t:'Exemples',type:'ex',sec:'s2'},
-    {id:'1.2.3',t:'Propriétés A°/Ā',type:'prop',sec:'s2'},{id:'1.2.4',t:'Autres propriétés',type:'prop',sec:'s2'},
-    {id:'1.3.1',t:'Topologie induite',type:'prop',sec:'s3'},{id:'1.3.4',t:'Ouvert de A pas de E',type:'ex',sec:'s3'},
-    {id:'1.3.5',t:'Voisinages A',type:'prop',sec:'s3'},{id:'1.3.6',t:'Topologie quotient',type:'def',sec:'s3'},
-    {id:'1.3.8',t:'Topologie produit',type:'def',sec:'s3'},
-    {id:'1.4.1',t:'Limite',type:'def',sec:'s4'},{id:'1.4.4',t:'Unicité limite',type:'thm',sec:'s4'},
-    {id:'1.4.5',t:'Continuité',type:'def',sec:'s4'},{id:'1.4.6',t:'Caractérisations',type:'thm',sec:'s4'},
-    {id:'1.4.7',t:'Composition',type:'prop',sec:'s4'},{id:'1.4.8',t:'Homéomorphisme',type:'def',sec:'s4'},
-    {id:'1.4.9',t:'Exercices',type:'exo',sec:'s4'}
-  ];
-  const LINKS=[
-    ['1.1.1','1.1.5'],['1.1.1','1.1.8'],['1.1.1','1.1.12'],['1.1.1','1.1.15'],
-    ['1.1.8','1.1.11'],['1.1.11','1.1.18'],['1.1.8','1.1.14'],['1.1.12','1.1.14'],
-    ['1.1.1','1.2.1'],['1.1.8','1.2.1'],['1.2.1','1.2.3'],['1.2.3','1.2.4'],
-    ['1.1.1','1.3.1'],['1.1.1','1.3.6'],['1.1.1','1.3.8'],
-    ['1.1.8','1.4.1'],['1.4.1','1.4.4'],['1.1.15','1.4.4'],['1.4.1','1.4.5'],
-    ['1.4.5','1.4.6'],['1.4.6','1.4.7'],['1.4.6','1.4.8'],['1.4.6','1.4.9'],
-    ['1.2.1','1.4.6']
-  ];
-  const S=new THREE.Scene();
-  const cam=new THREE.PerspectiveCamera(50,1,0.1,200);cam.position.set(0,0,22);
-  const R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
-  R.setPixelRatio(Math.min(devicePixelRatio,2));
-  const nodes={};
-  const typeCol={def:0x3fd0c9,thm:0xf2b84b,prop:0x9b8cff,ex:0xff7a90,exo:0xff7a90};
-  NODES.forEach((n,i)=>{
-    const group=(n.sec==='s1'?0:n.sec==='s2'?1:n.sec==='s3'?2:3);
-    const angle=(i/NODES.length)*Math.PI*2;
-    const r=7+Math.sin(i*1.7)*1.5;
-    const x=Math.cos(angle)*r,y=Math.sin(angle)*r*0.6,z=Math.sin(angle)*r*0.5+(group-1.5)*2;
-    n.pos=new THREE.Vector3(x,y,z);
-    n.typeCol=typeCol[n.type];
-    const sphere=new THREE.Mesh(new THREE.SphereGeometry(n.type==='thm'?0.55:0.42,20,16),new THREE.MeshBasicMaterial({color:n.typeCol,transparent:true,opacity:0.85}));
-    sphere.position.copy(n.pos);
-    sphere.userData={node:n};
-    S.add(sphere);
-    n.mesh=sphere;
-    const ringG=new THREE.Mesh(new THREE.SphereGeometry(n.type==='thm'?0.75:0.6,20,16),new THREE.MeshBasicMaterial({color:n.typeCol,wireframe:true,transparent:true,opacity:0.15}));
-    ringG.position.copy(n.pos);S.add(ringG);n.ring=ringG;
-    nodes[n.id]=n;
-  });
-  const lines=[];
-  LINKS.forEach(([a,b])=>{
-    const na=nodes[a],nb=nodes[b];if(!na||!nb)return;
-    const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(6),3));
-    const mat=new THREE.LineBasicMaterial({color:0x3fd0c9,transparent:true,opacity:0.18});
-    const line=new THREE.Line(geo,mat);S.add(line);
-    lines.push({a:na,b:nb,line});
-  });
-  const n=400,p=new Float32Array(n*3);
-  for(let i=0;i<n;i++){p[i*3]=(Math.random()-0.5)*60;p[i*3+1]=(Math.random()-0.5)*40;p[i*3+2]=(Math.random()-0.5)*40}
-  const starGeo=new THREE.BufferGeometry();starGeo.setAttribute('position',new THREE.BufferAttribute(p,3));
-  S.add(new THREE.Points(starGeo,new THREE.PointsMaterial({color:0x9b8cff,size:0.06,transparent:true,opacity:0.5})));
-  let mx=0,my=0,tx=0,ty=0;
-  const ray=new THREE.Raycaster();
-  let hovered=null;
-  cv.addEventListener('mousemove',e=>{
-    const r=cv.getBoundingClientRect();
-    mx=(e.clientX-r.left)/r.width-0.5;my=(e.clientY-r.top)/r.height-0.5;
-    ray.setFromCamera({x:mx*2,y:-my*2},cam);
-    const hits=ray.intersectObjects(Object.values(nodes).map(n=>n.mesh));
-    const newHover=hits[0]?hits[0].object.userData.node:null;
-    if(newHover!==hovered){
-      hovered=newHover;
-      Object.values(nodes).forEach(n=>{n.mesh.scale.setScalar(n===hovered?1.6:1);n.ring.scale.setScalar(n===hovered?1.5:1)});
-      if(hovered){info.innerHTML=`<b>${hovered.type.toUpperCase()} ${hovered.id}</b> — ${hovered.t}`;info.classList.add('on');cv.style.cursor='pointer'}
-      else{info.classList.remove('on');cv.style.cursor='grab'}
-    }
-  });
-  cv.addEventListener('click',e=>{
-    if(!hovered)return;
-    GRAPH.classList.remove('on');
-    const card=$$('.card').find(c=>$('.tag',c)?.textContent.includes(hovered.id));
-    if(card){card.classList.add('flash');card.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>card.classList.remove('flash'),2200)}
-  });
-  const resize=()=>{const w=cv.clientWidth,h=cv.clientHeight;if(!w)return;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};
-  addEventListener('resize',resize);
-  new MutationObserver(()=>{if(GRAPH.classList.contains('on'))setTimeout(resize,50)}).observe(GRAPH,{attributes:true,attributeFilter:['class']});
-  let rotY=0;
-  (function loop(){
-    requestAnimationFrame(loop);
-    if(!GRAPH.classList.contains('on'))return;
-    tx+=(mx*2-tx)*0.05;ty+=(my*2-ty)*0.05;
-    if(!still)rotY+=0.0015;
-    const total=rotY+tx;
-    Object.values(nodes).forEach(n=>{
-      const c=Math.cos(total),s=Math.sin(total);
-      const x=n.pos.x*c-n.pos.z*s,z=n.pos.x*s+n.pos.z*c;
-      n.mesh.position.set(x,n.pos.y+ty,z);n.ring.position.set(x,n.pos.y+ty,z);
-    });
-    lines.forEach(({a,b,line})=>{
-      const p=line.geometry.attributes.position;
-      p.setXYZ(0,a.mesh.position.x,a.mesh.position.y,a.mesh.position.z);
-      p.setXYZ(1,b.mesh.position.x,b.mesh.position.y,b.mesh.position.z);
-      p.needsUpdate=true;
-    });
-    cam.position.x=Math.sin(total*0.3)*1;cam.position.y=ty*3;cam.lookAt(0,0,0);
-    R.render(S,cam);
-  })();
-  $('.close',GRAPH).onclick=()=>GRAPH.classList.remove('on');
-  GRAPH.addEventListener('click',e=>{if(e.target===GRAPH)GRAPH.classList.remove('on')});
-  addEventListener('keydown',e=>{if(e.key==='Escape')GRAPH.classList.remove('on')});
-  window._openGraph=()=>{GRAPH.classList.add('on');setTimeout(resize,60)};
-})();
-
-(function(){
-  let tools=$('#tools');
-  if(!tools){tools=document.createElement('div');tools.id='tools';tools.style.cssText='position:fixed;top:12px;right:14px;z-index:40;display:flex;gap:6px;flex-wrap:wrap';B.append(tools)}
-  if($('#bGraph'))return;
-  const btn=document.createElement('button');btn.id='bGraph';btn.textContent='🌐 Graphe';
-  btn.style.cssText='height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);color:var(--th);cursor:pointer;font:500 14px "Space Grotesk",sans-serif';
-  btn.onclick=window._openGraph;tools.append(btn);
-})();
-
-addEventListener('keydown',e=>{
-  if(e.target.matches('input,textarea'))return;
-  if(e.key==='g'&&!e.ctrlKey&&!e.metaKey&&window._openGraph){window._openGraph();e.preventDefault()}
-});
-})();
+homeo:g=>{const geo=new THREE.TorusGeometry(1.1,.45,24,48),o=geo.attributes.position.array.slice();g.add(new THREE.Mesh(geo,M(A,.4,1)));g.tick=t=>{const p=geo.attributes.position.array;for(let i=0;i<p.length;i+=3){const x=o[i],y=o[i+1],z=o[i+2];p[i]=x*(1+.25*Math.sin(t+y));p[i+1]=y*(1+.25*Math.cos(t+x));p[i+2]=z*(1+.3*Math.sin(t*1.3+x))}geo.attributes.position.needsUpdate=true}},
+compact:g=>g.add(ball(1.5,0,0,0,V,.1,1),ring(1.5,0,0,0,T),dot(0,0,0,A,.1)),
+connexe:g=>g.add(box(2.5,.8,.2,0,0,0,V,.2),lin([[-1.2,0,0],[1.2,0,0]],T)),
+norm:g=>g.add(ball(1.2,0,0,0,T,.2,1),ball(1.2,0,0,0,A,.1,0),ring(1.2,0,0,0,A)),
+diff:g=>{const a=new THREE.Mesh(new THREE.PlaneGeometry(3,3),M(W,.2,1)),b=new THREE.Mesh(new THREE.PlaneGeometry(3,3),M(T,.3,1));b.rotation.x=Math.PI/4;g.add(a,b)}};
+const FM={'1.1':['axioms','Ouverts O₁, O₂ et leur intersection (rouge)'],'1.2':['disc','Discrète : chaque point est ouvert'],'1.4':['closed','Ouvert (sans bord) et fermé (avec bord)'],'1.6':['nbh','x ∈ W ⊂ U : U voisinage de x'],'1.9':['haus','Deux points séparés par des voisinages disjoints'],'1.11':['inter','Intérieur, frontière, point isolé'],'1.12':['inter','A° ⊂ A ⊂ Ā'],'1.13':['induced','Trace d’un ouvert : O ∩ A'],'1.14':['prod','Produit d’ouverts u₁ × u₂'],'1.15':['cont','f(U) ⊂ V autour de f(a)'],'1.17':['cont','Image réciproque d’un ouvert = ouvert'],'1.18':['homeo','Homéomorphisme : déformation réversible'],'2.1':['compact','Recouvrement ouvert'],'2.3':['compact','Compact = fermé dans un séparé'],'2.5':['compact','Image d’un compact'],'2.8':['connexe','Pas de partition en deux ouverts'],'2.11':['connexe','Chemin continu reliant deux points'],'3.1':['norm','Boule unité d’une norme'],'3.6':['norm','Équivalence des normes'],'3.7':['norm','Boules et sphères'],'3.8':['norm','Topologie de la norme'],'5.1':['cont','Limite : voisinage U envoyé dans V'],'6.1':['diff','Dérivée directionnelle'],'6.6':['diff','Plan tangent : f(a+h) ≈ f(a)+dₐf(h)'],'6.10':['homeo','Diffféomorphisme local']};
+FM['6.6'][1]='Plan tangent : f(a+h) ≈ f(a)+dₐf(h)';FM['6.10'][1]='Difféomorphisme local';
+Object.assign(FM,{'7.1':['cont','Image réciproque d’un ouvert = ouvert'],'7.2':['compact','Compact dans un séparé : fermé'],'7.3':['compact','Image d’un compact par une continue'],'7.4':['norm','Boule unité et équivalence des normes'],'7.5':['compact','Bolzano-Weierstrass : fermé borné'],'7.6':['inter','Intérieur, frontière, adhérence'],'7.7':['nbh','Base de voisinages de x'],'7.8':['haus','Deux points séparés : {x}ᶜ ouvert'],'7.9':['haus','Deux limites seraient séparées'],'7.10':['cont','Linéaire continue : f(U) ⊂ V']});
+const R2=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});R2.setSize(540,360,false);
+const cam=new THREE.PerspectiveCamera(45,1.5,.1,60),act=new Set();
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?act.add(e.target._f):act.delete(e.target._f)));
+document.querySelectorAll('.card').forEach(c=>{const m=c.querySelector('.tag').textContent.match(/ (\d+\.\d+) ·/),f=m&&(FM[m[1]]||[{1:'nbh',2:'compact',3:'norm',4:'inter',5:'cont',6:'diff'}[m[1].split('.')[0]],'Illustration 3D : tourne-la avec la souris']);if(!f||!f[0])return;
+const tx=document.createElement('div');tx.className='tx';while(c.firstChild)tx.append(c.firstChild);
+const fg=document.createElement('figure');fg.className='fig';fg.innerHTML='<canvas width="540" height="360"></canvas><figcaption>'+f[1]+'</figcaption>';c.append(tx,fg);c.classList.add('hasfig');
+const cv=fg.firstChild,g=new THREE.Group(),s=new THREE.Scene();SC[f[0]](g);s.add(g);
+const st={cv,s,g,c:cv.getContext('2d'),ry:Math.random()*6,rx:.25,d:6.4,auto:!still};cv._f=st;let dn=null;
+cv.addEventListener('pointerdown',e=>{dn=[e.clientX,e.clientY];cv.setPointerCapture(e.pointerId);st.auto=false});
+cv.addEventListener('pointerup',()=>dn=null);cv.addEventListener('dblclick',()=>{st.d=6.4;st.rx=.25;st.auto=true});
+cv.addEventListener('wheel',e=>{if(e.shiftKey){e.preventDefault();st.d=Math.max(3,Math.min(12,st.d+e.deltaY*.005))}},{passive:false});
+cv.addEventListener('pointermove',e=>{if(!dn)return;st.ry+=(e.clientX-dn[0])*.01;st.rx=Math.max(-1.4,Math.min(1.4,st.rx+(e.clientY-dn[1])*.01));dn=[e.clientX,e.clientY]});
+io.observe(cv)});
+(function lp(t){requestAnimationFrame(lp);act.forEach(f=>{if(f.auto)f.ry+=.006;f.g.rotation.set(f.rx,f.ry,0);if(f.g.tick&&!still)f.g.tick(t*.001);cam.position.set(0,f.d*.12,f.d);cam.lookAt(0,0,0);R2.render(f.s,cam);f.c.clearRect(0,0,540,360);f.c.drawImage(R2.domElement,0,0)})})(0)})();
+(function(){if(!window.THREE)return;const cv=document.getElementById('sp'),still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const R=new THREE.WebGLRenderer({canvas:cv,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));R.setClearColor(0x02030a,1);
+const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,400);cam.position.z=9;
+const mk=(w,h,fn)=>{const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);return t};
+const rnd=(a,b)=>a+Math.random()*(b-a);
+/* nebuleuses */
+const neb=(cols,sx,sy,x,y,z)=>{const t=mk(512,512,(g,w,h)=>{for(let i=0;i<70;i++){const px=rnd(.2,.8)*w,py=rnd(.2,.8)*h,r=rnd(40,170),c=cols[i%cols.length];const gr=g.createRadialGradient(px,py,0,px,py,r);gr.addColorStop(0,'rgba('+c+',.16)');gr.addColorStop(1,'rgba('+c+',0)');g.fillStyle=gr;g.fillRect(0,0,w,h)}});
+const s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true}));s.scale.set(sx,sy,1);s.position.set(x,y,z);S.add(s);return s};
+neb(['90,60,200','40,120,220','200,70,160'],70,50,-6,4,-40);neb(['30,170,170','60,90,220','240,170,70'],60,45,14,-6,-30);neb(['170,70,200','60,60,160'],50,40,-14,-10,-25);
+/* etoiles : 3 couches de profondeur */
+const layers=[];[[2600,.9,60,-90],[1400,1.4,40,-40],[500,2.3,25,-8]].forEach(([n,sz,sp,z0])=>{const p=new Float32Array(n*3),c=new Float32Array(n*3);for(let i=0;i<n;i++){p.set([rnd(-sp,sp)*1.6,rnd(-sp,sp)*1.0,z0+rnd(-sp*.4,sp*.4)],i*3);const h=Math.random(),col=h<.6?[1,1,1]:h<.8?[.65,.85,1]:h<.93?[1,.88,.6]:[.85,.7,1];c.set(col,i*3)}
+const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(c,3));
+const pt=new THREE.Points(g,new THREE.PointsMaterial({size:sz,vertexColors:true,sizeAttenuation:false,transparent:true,opacity:.95,blending:THREE.AdditiveBlending,depthWrite:false}));S.add(pt);layers.push(pt)});
+/* planete */
+const P=new THREE.Group(),tex=mk(1024,512,(g,w,h)=>{const bands=['#c9a073','#e2c79b','#a97c50','#d8b88a','#8a5f3c','#e8d3ac'];let y=0;while(y<h){const bh=rnd(10,46);g.fillStyle=bands[Math.random()*bands.length|0];g.fillRect(0,y,w,bh);y+=bh}
+for(let i=0;i<5000;i++){g.fillStyle='rgba('+(Math.random()<.5?'255,240,210':'60,35,15')+','+rnd(.02,.07)+')';g.beginPath();g.ellipse(rnd(0,w),rnd(0,h),rnd(10,60),rnd(1,4),0,0,6.283);g.fill()}
+g.fillStyle='rgba(170,70,40,.55)';g.beginPath();g.ellipse(w*.62,h*.62,60,26,0,0,6.283);g.fill()});
+const pl=new THREE.Mesh(new THREE.SphereGeometry(1.7,96,64),new THREE.MeshPhongMaterial({map:tex,shininess:6}));P.add(pl);
+const atm=new THREE.Mesh(new THREE.SphereGeometry(1.78,64,48),new THREE.MeshBasicMaterial({color:0x7fb2ff,transparent:true,opacity:.12,side:THREE.BackSide,blending:THREE.AdditiveBlending,depthWrite:false}));P.add(atm);
+const rt=mk(512,8,(g,w)=>{const gr=g.createLinearGradient(0,0,w,0);[0,.15,.3,.5,.7,.85,1].forEach((s,i)=>gr.addColorStop(s,'rgba(230,205,160,'+[.0,.55,.2,.7,.35,.6,0][i]+')'));g.fillStyle=gr;g.fillRect(0,0,w,8)});
+const rg=new THREE.RingGeometry(2.3,3.7,160),pa=rg.attributes.position,uv=rg.attributes.uv,v=new THREE.Vector3();for(let i=0;i<pa.count;i++){v.fromBufferAttribute(pa,i);uv.setXY(i,(v.length()-2.3)/1.4,.5)}
+const ringM=new THREE.Mesh(rg,new THREE.MeshBasicMaterial({map:rt,side:2,transparent:true,depthWrite:false}));ringM.rotation.x=1.25;ringM.rotation.y=.25;P.add(ringM);
+const moon=new THREE.Mesh(new THREE.SphereGeometry(.28,32,24),new THREE.MeshPhongMaterial({color:0xb9b9c4,shininess:3}));P.add(moon);
+const sun=new THREE.DirectionalLight(0xfff1d6,2.1);sun.position.set(-6,3,5);S.add(sun,new THREE.AmbientLight(0x1a2240,.9));
+P.position.set(4.2,-.7,0);S.add(P);
+let mx=0,my=0,tx=0,ty=0;addEventListener('mousemove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+const size=()=>{const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();const wide=w>800;P.position.set(wide?4.2:0,wide?-.7:-2.6,0);P.scale.setScalar(wide?1:.7)};addEventListener('resize',size);size();
+(function loop(t){requestAnimationFrame(loop);if(scrollY>innerHeight*1.1)return;tx+=(mx-tx)*.04;ty+=(my-ty)*.04;const s=still?0:t*.001;
+pl.rotation.y=s*.12;ringM.rotation.z=s*.01;moon.position.set(Math.cos(s*.35)*3.1,Math.sin(s*.2)*.5,Math.sin(s*.35)*3.1);
+layers.forEach((l,i)=>{l.position.x=-tx*(i+1)*1.6;l.position.y=ty*(i+1)*1.1;l.rotation.z=s*.002*(3-i)});
+cam.position.x=tx*1.6;cam.position.y=-ty*1.0;cam.position.z=9-Math.min(scrollY,innerHeight)/innerHeight*3;cam.lookAt(0,0,0);R.render(S,cam)})(0)})();
+addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>d.open=true));
 </script>
 </body>
 </html>
